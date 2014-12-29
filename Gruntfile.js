@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 	// Project configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-
+		config: grunt.file.readJSON('config.json'),
 		uglify: {
 			options: {
 				banner: '<%= meta.banner %>\n'
@@ -71,17 +71,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		zip: {
-			'reveal-js-presentation.zip': [
-				'index.html',
-				'css/**',
-				'js/**',
-				'lib/**',
-				'images/**',
-				'plugin/**'
-			]
-		},
-
 		watch: {
 			main: {
 				files: [ 'Gruntfile.js', 'js/reveal.js', 'css/reveal.css', 'index.html' ],
@@ -94,7 +83,55 @@ module.exports = function(grunt) {
 				files: [ 'css/theme/source/*.scss', 'css/theme/template/*.scss' ],
 				tasks: 'themes'
 			}
-		}
+		},
+		    aws_s3:{
+          production:{
+            options: {
+              accessKeyId: '<%= config.AWSAccessKeyId %>', 
+              secretAccessKey: '<%= config.AWSSecretKey %>', 
+              bucket:'pyro-cdn',
+              uploadConcurrency: 2
+            },
+            files:[
+              {'action': 'upload', expand: true, cwd: 'dist/', src: ['pyro.min.js'], dest: '<%= pkg.version %>'}, 
+              {'action': 'upload', expand: true, cwd: 'dev/', src: ['pyro.js'], dest: '<%= pkg.version %>'},
+            ]
+          },
+          staging:{
+            options: {
+              accessKeyId: '<%= config.AWSAccessKeyId %>',
+              secretAccessKey: '<%= config.AWSSecretKey %>', 
+              bucket:'pyro-cdn',
+              uploadConcurrency: 2
+            },
+            files:[
+              {'action': 'upload', expand: true, cwd: 'dist/', src: ['pyro.min.js'], dest: 'staging/<%= pkg.version %>'}, 
+              {'action': 'upload', expand: true, cwd: 'dev/', src: ['pyro.js'], dest: 'staging/<%= pkg.version %>'}
+            ]
+          },
+          docs:{
+            options: {
+              accessKeyId: '<%= config.AWSAccessKeyId %>', // Use the variables
+              secretAccessKey: '<%= config.AWSSecretKey %>', // You can also use env variables
+              bucket:'pyro-labs',
+              uploadConcurrency: 50, // 50 simultaneous uploads
+            },
+            files:[
+              {'action': 'upload', expand: true, cwd: 'dist/docs', src: ['**'], dest: 'docs/<%= pkg.version %>', differential:true}
+            ]
+          },
+          stageDocs:{
+            options: {
+              accessKeyId: '<%= config.AWSAccessKeyId %>', // Use the variables
+              secretAccessKey: '<%= config.AWSSecretKey %>', // You can also use env variables
+              bucket:'pyro-labs',
+              uploadConcurrency: 50, // 50 simultaneous uploads
+            },
+            files:[
+              {'action': 'upload', expand: true, cwd: 'dist/docs', src: ['**'], dest: 'docs/staging/<%= pkg.version %>', differential:true}
+            ]
+          }
+        }
 
 	});
 
