@@ -6,7 +6,7 @@ angular.module('portfolioApp')
     $scope.projects = [
         {
            
-          content:'<h2 class="name">Prescott Prue</h2><p>Arrow to the right for projects</p>'
+          content:'<h2 class="name">Prescott Prue</h2><h4>Project Portfolio</h4><small style="margin-top:20%;">Arrow to the right for projects</small>'
         },
         {
           name:'Basilar', 
