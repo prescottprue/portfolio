@@ -65,14 +65,15 @@ module.exports = function(grunt) {
 			server: {
 				options: {
 					port: '<%= config.port %>',
-					base: './dev/'
+					base: './dev/',
+					livereload:true
 				}
 			}
 		},
 
 		watch: {
 			main: {
-				files: [ 'Gruntfile.js', 'js/reveal.js', 'css/reveal.css', 'index.html' ],
+				files: [ 'Gruntfile.js', 'dev/js/reveal.js', 'dev/styles/main.css', 'dev/index.html', 'dev/js/app.js', 'dev/js/app-controller.js' ],
 				tasks: 'default',
 				options:{
 					reload:true

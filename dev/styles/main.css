@@ -1,18 +1,26 @@
+
+.color1 { background: #dcdcdd; }
+.color2 { background: #c5c3c6; }
+.color3 { background: #46494c; }
+.color4 { background: #4c5c68; }
+.color5 { background: #1985a1; }
+
 .reveal .reveal_section {
   position: relative;
 }
 .caption {
   position: fixed; 
-  bottom: 0px;
+  bottom: 30px;
   right:50px;
-	background-color: rgba(0, 0, 0, 0.5);
-  text-align:center;
-  width:40%;
+	background-color: rgba(76,92,104, .7);
+  width:35%;
+  height:150px;
   font-family:'Open Sans' !important;
-  color:#eeeeee;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  color:#c5c3c6;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   padding:15px;
   z-index:90;
+  font-size:.8em;
 }
 .caption a {
   color: #666;
@@ -23,6 +31,8 @@
 .caption .title {
 	padding-bottom: 0px;
 	margin-bottom:0px;
+  font-size:1.5em;
+  color:#DCDCDD;
 }
 h1, h2, h3, h4{
 	font-family:'Open Sans' !important;
@@ -30,4 +40,7 @@ h1, h2, h3, h4{
 .name {
 	font-family: 'Open Sans';
 	font-weight:200;
+}
+.reveal .progress span{
+  background:#1985a1 !important;
 }

@@ -5,11 +5,12 @@ angular.module('portfolioApp')
 
     $scope.projects = [
         {
-           
-          content:'<h2 class="name">Prescott Prue</h2><h4>Project Portfolio</h4><small style="margin-top:20%;">Arrow to the right for projects</small>'
+          background:'#46494c', 
+          content:'<h2 class="name" style="color:#DCDCDD">Scott Prue</h2><h4>Project Portfolio</h4><p style="margin-top:20%;"><small style="color:#C5C3C6">Arrow keys to navigate</small><br><small style="color:#C5C3C6"> ESC for overview</small></p>'
         },
         {
-          name:'Basilar', 
+          name:'Basilar',
+          background:'#46494c',
           pages:[
             {
               image:{url:'img/Basilar/Basilar-Logo.png', style:'width:500px; border-style:none; background-color:white;'}, 
@@ -50,6 +51,7 @@ angular.module('portfolioApp')
         },
         {
           name:'Heathub', 
+          background:'#46494c',
           pages:[
             {
               image:{url:'img/HeartHub/HeartHubLogo.png', style:'width:500px; border-style:none; background-color:white;'}, 

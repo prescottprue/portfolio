@@ -7,7 +7,11 @@ angular.module('portfolioApp', [])
     link: function(scope, elem, attrs) {
         elem.addClass('slides');
           for (var i = 0; i < scope.projects.length; i++) {
-            var section = angular.element("<section>");
+            var elementString = "<section>"
+            if(scope.projects[i].hasOwnProperty('background')){
+              elementString = '<section data-background="'+scope.projects[i].background +'">';
+            }
+            var section = angular.element(elementString);
             var steps = scope.projects[i].pages;
             // Project doesn't contain pages
             if(!scope.projects[i].hasOwnProperty('pages')){
