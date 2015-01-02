@@ -10,15 +10,19 @@ angular.module('portfolioApp', [])
             var section = angular.element("<section>");
             var steps = scope.projects[i].pages;
             if(typeof steps == 'undefined'){
-              var content = angular.element("<h4>").html(scope.projects[i].intro);
+              var content = angular.element(scope.projects[i].intro);
               section.append(content);
             }
             else if (steps.length == 1) {
-              var content = angular.element("<h2>").html(steps[0].caption);
+              var content = angular.element("<h2>").html(scope.projects[i].name);
               section.append(content);
             } else {
               for (var j = 0; j < steps.length; j++) {
-                var subSection = angular.element('<section class="reveal_section" data-background="'+ steps[j].image.url+'">');
+                var elementHtmlString = '<section class="reveal_section">'
+                if(steps[j].hasOwnProperty('image')){
+                  elementHtmlString = '<section class="reveal_section" data-background="'+ steps[j].image.url+'">'
+                }
+                var subSection = angular.element(elementHtmlString);
                 // var content = angular.element("<h1>").html(steps[j].caption);
                 // subSection.append(caption);
                 section.append(subSection);
@@ -28,6 +32,7 @@ angular.module('portfolioApp', [])
           }
           Reveal.initialize({
             loop: false,
+            controls:false,
             transition: Reveal.getQueryHash().transition || 'none'
           });
 
