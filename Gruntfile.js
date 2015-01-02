@@ -1,6 +1,5 @@
 /* global module:false */
 module.exports = function(grunt) {
-	var port = grunt.option('port') || 8000;
 	// Project configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -65,8 +64,8 @@ module.exports = function(grunt) {
 		connect: {
 			server: {
 				options: {
-					port: port,
-					base: '.'
+					port: '<%= config.port %>',
+					base: './dev/'
 				}
 			}
 		},
@@ -84,73 +83,58 @@ module.exports = function(grunt) {
 				tasks: 'themes'
 			}
 		},
-		    aws_s3:{
-          production:{
-            options: {
-              accessKeyId: '<%= config.AWSAccessKeyId %>', 
-              secretAccessKey: '<%= config.AWSSecretKey %>', 
-              bucket:'pyro-cdn',
-              uploadConcurrency: 2
-            },
-            files:[
-              {'action': 'upload', expand: true, cwd: 'dist/', src: ['pyro.min.js'], dest: '<%= pkg.version %>'}, 
-              {'action': 'upload', expand: true, cwd: 'dev/', src: ['pyro.js'], dest: '<%= pkg.version %>'},
-            ]
-          },
-          staging:{
-            options: {
-              accessKeyId: '<%= config.AWSAccessKeyId %>',
-              secretAccessKey: '<%= config.AWSSecretKey %>', 
-              bucket:'pyro-cdn',
-              uploadConcurrency: 2
-            },
-            files:[
-              {'action': 'upload', expand: true, cwd: 'dist/', src: ['pyro.min.js'], dest: 'staging/<%= pkg.version %>'}, 
-              {'action': 'upload', expand: true, cwd: 'dev/', src: ['pyro.js'], dest: 'staging/<%= pkg.version %>'}
-            ]
-          },
-          docs:{
-            options: {
-              accessKeyId: '<%= config.AWSAccessKeyId %>', // Use the variables
-              secretAccessKey: '<%= config.AWSSecretKey %>', // You can also use env variables
-              bucket:'pyro-labs',
-              uploadConcurrency: 50, // 50 simultaneous uploads
-            },
-            files:[
-              {'action': 'upload', expand: true, cwd: 'dist/docs', src: ['**'], dest: 'docs/<%= pkg.version %>', differential:true}
-            ]
-          },
-          stageDocs:{
-            options: {
-              accessKeyId: '<%= config.AWSAccessKeyId %>', // Use the variables
-              secretAccessKey: '<%= config.AWSSecretKey %>', // You can also use env variables
-              bucket:'pyro-labs',
-              uploadConcurrency: 50, // 50 simultaneous uploads
-            },
-            files:[
-              {'action': 'upload', expand: true, cwd: 'dist/docs', src: ['**'], dest: 'docs/staging/<%= pkg.version %>', differential:true}
-            ]
-          }
-        }
+    aws_s3:{
+      production:{
+        options: {
+          accessKeyId: '<%= config.AWSAccessKeyId %>', 
+          secretAccessKey: '<%= config.AWSSecretKey %>', 
+          bucket:'prescottprue.com',
+          uploadConcurrency: 30,
+          region:'us-west-2'
+        },
+        files:[
+          {'action': 'upload', expand: true, cwd: 'dist/', src: ['**'], dest: ''}, 
+          {'action': 'upload', expand: true, cwd: 'dist/', src: ['**'], dest: '<%= pkg.version %>'},
+        ]
+      },
+      staging:{
+        options: {
+          accessKeyId: '<%= config.AWSAccessKeyId %>',
+          secretAccessKey: '<%= config.AWSSecretKey %>', 
+          bucket:'prescottprue.com',
+          uploadConcurrency: 30,
+          region:'us-west-2'
+        },
+        files:[
+          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''}, 
+          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: 'staging/<%= pkg.version %>'}
+        ]
+      }
+    }
 
 	});
 
 	// Dependencies
-	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
-	grunt.loadNpmTasks( 'grunt-contrib-sass' );
 	grunt.loadNpmTasks( 'grunt-contrib-connect' );
-
+  grunt.loadNpmTasks('grunt-aws-s3');
+  
+  grunt.loadNpmTasks('grunt-contrib-compass');
 	// Default task
-	grunt.registerTask( 'default', [ 'jshint', 'cssmin', 'uglify' ] );
+	grunt.registerTask( 'default', ['connect', 'watch'] );
 
 	// Theme task
 	grunt.registerTask( 'themes', [ 'sass' ] );
 
 	// Serve presentation locally
 	grunt.registerTask( 'serve', [ 'connect', 'watch' ] );
+  
+  grunt.registerTask( 'stage', [ 'aws_s3:staging' ] );
+  
+  grunt.registerTask( 'release', [ 'aws_s3:production' ] );
+
 
 	// Run tests
 	grunt.registerTask( 'test', [ 'jshint' ] );
