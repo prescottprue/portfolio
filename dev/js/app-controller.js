@@ -12,13 +12,21 @@ angular.module('portfolioApp')
           name:'Basilar', 
           pages:[
             {
-              image:{url:'img/Basilar/Basilar-Logo.png'}, 
+              image:{url:'img/Basilar/Basilar-Logo.png', style:'width:500px; border-style:none; background-color:white;'}, 
               caption:'While DJing in college I felt that there must be a better way to interface with the djing software than was on the market. Using my experience with parametric modeling my team and I began to build a web based platform to allow DJs the ability to design their controller withina simple drag and drop interface. After completeing their designs the user would be able to share their designs or order the controller direclty from Basilar.',
               subCaption:'Go down to view the first controller design'
             },
             {
               image:{url:'img/Basilar/First-Lighting.jpg'}, 
               caption:'This design is based on a layout I concived while DJing so it was lovingly named the "Pruvit" controller.'
+            },
+            {
+              image:{url:'img/Basilar/Exposed-Controller.png'}, 
+              caption:'Spacing of circuitry components is automatically accounted for and wireing is routed to avoid being pinched/cut when being serviced. Modularized design of these components allows users to easy order and replace parts themselves instead of waiting weeks for a factory repair.'
+            },
+            {
+              image:{url:'img/Basilar/Stress-Test.png'}, 
+              caption:'Automated stress testing of support structures is imperative to guarantee control hardware remains intact. Deflection was minimized and directed to areas that do not contain connection hardware.'
             }
           ]
         },
@@ -49,7 +57,7 @@ angular.module('portfolioApp')
             },
             {
               image:{url:'img/HeartHub/HeartHubDemo.png'}, 
-              caption:"Hearthub was a project my team worked on at the MIT Hacking Medcine Grandhack event. It is a standardized platform/API for medical devices within hospitals. Our API is being designed to provide medical device developers an easy method for sharing their device's data directly with the hospital. The data provided by these developers is organized and provided to the hospital by our platform."
+              caption:"The HeartHub Dashboard gives hospitals an overview of their data with important metrics from all plugins/devices. Clicking on a metric brings you to the detailed breakdown on the devices/module which produced that data. For example we can click on the hand washing sanatizing statistics to view details on the devices that produced this data (click down arrow to see detail page)."
             },
             {
               image:{url:'img/HeartHub/HeartHubAnalytics.png'}, 
