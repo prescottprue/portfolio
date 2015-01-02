@@ -110,7 +110,38 @@ module.exports = function(grunt) {
           {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: 'staging/<%= pkg.version %>'}
         ]
       }
-    }
+    },
+    uglify: {
+	    dist: {
+	      files: [{
+	          expand: true,
+	          cwd: 'dev/js',
+	          src: '**/*.js',
+	          dest: 'dist/js'
+	      }]
+	    }
+	  },
+	  htmlmin: {                                     // Task
+	    dist: {                                      // Target
+	      options: {                                 // Target options
+	        removeComments: true,
+	        collapseWhitespace: true
+	      },
+	      files: {                                   // Dictionary of files
+	        'dist/index.html': 'dev/index.html'   // 'destination': 'source'
+	      }
+	    },
+	  },
+	  cssmin: {
+		  target: {
+		    files: [{
+		      expand: true,
+		      cwd: 'dev/styles',
+		      src: ['**/*.css', '!**/*.min.css'],
+		      dest: 'dist/styles',
+		    }]
+		  }
+		}
 
 	});
 
@@ -120,8 +151,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-contrib-connect' );
   grunt.loadNpmTasks('grunt-aws-s3');
-  
-  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  // grunt.loadNpmTasks('grunt-contrib-compass');
 	// Default task
 	grunt.registerTask( 'default', ['connect', 'watch'] );
 
@@ -130,10 +163,13 @@ module.exports = function(grunt) {
 
 	// Serve presentation locally
 	grunt.registerTask( 'serve', [ 'connect', 'watch' ] );
+	
+	grunt.registerTask( 'build', [ 'uglify:dist', 'htmlmin:dist', 'cssmin' ] );
+
   
-  grunt.registerTask( 'stage', [ 'aws_s3:staging' ] );
+  grunt.registerTask( 'stage', [ 'htmlmin:dist', 'cssmin', 'uglify:dist', 'aws_s3:staging' ] );
   
-  grunt.registerTask( 'release', [ 'aws_s3:production' ] );
+  grunt.registerTask( 'release', [ 'aws_s3:production', 'uglify:dist' ] );
 
 
 	// Run tests
