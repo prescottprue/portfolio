@@ -46,56 +46,64 @@ angular.module('slideshow', ['firebase'])
     }
   }
 }])
-.directive('reveal', function() {
+/**Reveal Directive
+ * @description Requires projects scope variable that is the following format
+ * projects:[
+ *  {
+ *    name:"Project Name",
+ *    background:"url/image.html",
+ *    pages:[
+        {}
+      ]
+ *  }
+ * ]
+ */
+.directive('slideshow', function() {
   return {
     scope: {
       projects: '=slideshow'
     },
     link: function(scope, elem, attrs) {
       elem.addClass('slides');
-      scope.$watch('projects', function(newVal){
-        if(newVal){
-          // Loop through array of projects
-          for (var i = 0; i < scope.projects.length; i++) {
-            if(typeof scope.projects[i] == 'object'){
-              var elementString = "<section>";
-              // Add background to element if it exists
-              if(scope.projects[i].hasOwnProperty('background')){
-                elementString = '<section data-background="'+ scope.projects[i].background +'">';
+      // Watch scope for projects variable to load
+      scope.$watch('projects', function(projects){
+        if(projects){                                         // Check for projects val existance
+          for (var i = 0; i < projects.length; i++) {         // Loop through array of projects
+            if(typeof projects[i] == 'object'){               // Check that item is a project object
+              var elementString = "<section>";                // Create element
+              if(projects[i].hasOwnProperty('background')){   // Check for background
+                elementString = '<section data-background="'+ projects[i].background +'">'; // Add background to element if it exists
               }
-              var section = angular.element(elementString);
-              var steps = scope.projects[i].pages;
-              // Project doesn't contain pages
-              if(!scope.projects[i].hasOwnProperty('pages')){
-                var content = angular.element(scope.projects[i].content);
-                section.append(content);
+              var section = angular.element(elementString);   // Section element
+              var steps = projects[i].pages;                  // Pages param as steps var
+              if(!projects[i].hasOwnProperty('pages')){       // Project doesn't contain pages
+                var content = angular.element(projects[i].content);    // Content element
+                section.append(content);                      // Content ELement to section
               }
-              //if there is only one step
-              else if (steps.length == 1) {
-                var content = angular.element("<h2>").html(scope.projects[i].name);
-                section.append(content);
+              else if (steps.length == 1) {                   // Check if there is only one step
+                var content = angular.element("<h2>").html(projects[i].name);      //Project Name element
+                section.append(content);                      // Project Name Element to section
               } else {
-                for (var j = 0; j < steps.length; j++) {
-                  var elementHtmlString = '<section class="reveal_section">'
+                for (var j = 0; j < steps.length; j++) {      // Loop through pages
+                  var elementHtmlString = '<section class="reveal_section">';
                   var subSection = null;
-                  if(steps[j].hasOwnProperty('image')){
-                    if(!steps[j].image.hasOwnProperty('style')){
-                      elementHtmlString = '<section class="reveal_section" data-background="'+ steps[j].image.url+'">'
+                  if(steps[j].hasOwnProperty('image')){       //Check for image in page
+                    if(!steps[j].image.hasOwnProperty('style')){  //No Background styling
+                      elementHtmlString = '<section class="reveal_section" data-background="'+ steps[j].image.url+'">'//Background url from page
                       subSection = angular.element(elementHtmlString);
-                    } else {
-                      elementHtmlString = '<section class="reveal_section">'
+                    } else {                                  //Background styling exists
+                      elementHtmlString = '<section class="reveal_section">';
                       subSection = angular.element(elementHtmlString);
-                      subSection.append('<img style="'+steps[j].image.style+'" src="'+ steps[j].image.url +'">')
+                      subSection.append('<img style="'+steps[j].image.style+'" src="'+ steps[j].image.url +'">'); //Append image to subsection
                     }
                   }
                   // var content = angular.element("<h1>").html(steps[j].caption);
                   // subSection.append(caption);
-                  section.append(subSection);
+                  section.append(subSection);//Add subsection to section element
                 }
               }
-              elem.append(section);
+              elem.append(section);                         //Append section to element
             }
-
           }
           // Setup Reveal
           Reveal.initialize({
@@ -103,10 +111,6 @@ angular.module('slideshow', ['firebase'])
             controls:false,
             transition: Reveal.getQueryHash().transition || 'none'
           });
-
-
-
-
         }
       }, true);
 

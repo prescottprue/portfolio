@@ -65,8 +65,7 @@ module.exports = function(grunt) {
 			server: {
 				options: {
 					port: '<%= config.port %>',
-					base: './dev/',
-					livereload:true
+					base: './dev/'
 				}
 			}
 		},
@@ -74,10 +73,7 @@ module.exports = function(grunt) {
 		watch: {
 			main: {
 				files: [ 'Gruntfile.js', 'dev/js/reveal.js', 'dev/styles/main.css', 'dev/index.html', 'dev/js/app.js', 'dev/js/app-controller.js' ],
-				tasks: 'default',
-				options:{
-					reload:true
-				}
+				tasks: 'default'
 			},
 			theme: {
 				files: [ 'css/theme/source/*.scss', 'css/theme/template/*.scss' ],
@@ -87,27 +83,27 @@ module.exports = function(grunt) {
     aws_s3:{
       production:{
         options: {
-          accessKeyId: '<%= config.AWSAccessKeyId %>', 
-          secretAccessKey: '<%= config.AWSSecretKey %>', 
+          accessKeyId: '<%= config.AWSAccessKeyId %>',
+          secretAccessKey: '<%= config.AWSSecretKey %>',
           bucket:'prescottprue.com',
           uploadConcurrency: 30,
           region:'us-west-2'
         },
         files:[
-          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''}, 
+          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''},
           // {'action': 'upload', expand: true, cwd: 'dist/', src: ['**'], dest: '<%= pkg.version %>'},
         ]
       },
       staging:{
         options: {
           accessKeyId: '<%= config.AWSAccessKeyId %>',
-          secretAccessKey: '<%= config.AWSSecretKey %>', 
+          secretAccessKey: '<%= config.AWSSecretKey %>',
           bucket:'prescottprue.com',
           uploadConcurrency: 30,
           region:'us-west-2'
         },
         files:[
-          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''}, 
+          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''},
           {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: 'staging/<%= pkg.version %>'}
         ]
       }
@@ -164,12 +160,12 @@ module.exports = function(grunt) {
 
 	// Serve presentation locally
 	grunt.registerTask( 'serve', [ 'connect', 'watch' ] );
-	
+
 	grunt.registerTask( 'build', [ 'uglify:dist', 'htmlmin:dist', 'cssmin' ] );
 
-  
+
   grunt.registerTask( 'stage', [ 'htmlmin:dist', 'cssmin', 'uglify:dist', 'aws_s3:staging' ] );
-  
+
   grunt.registerTask( 'release', [ 'aws_s3:production', 'uglify:dist' ] );
 
 
