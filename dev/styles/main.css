@@ -44,6 +44,24 @@ h1, h2, h3, h4{
 .reveal .progress span{
   background:#1985a1 !important;
 }
+.home{
+  bottom:30%;
+  left:0%;
+  width:100%;
+  position:fixed;
+  font-size:1.2em;
+  z-index:10;
+  text-align:center;
+  color:#C5C3C6;
+}
+.home .directions {
+  font-size:1.5em;
+  margin-bottom:45px;
+}
+.home .key-icons {
+  color: #1985a1;
+  font-size:1em !important;
+}
 .social{
   bottom:10%;
   left:0%;
@@ -72,7 +90,7 @@ h1, h2, h3, h4{
   color:#4875B4;
 }
 .social .fa-github:hover {
-  color:black;
+  color:#4183c4;
 }
 .social .fa-envelope:hover {
   color:#1985a1;

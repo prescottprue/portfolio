@@ -1,11 +1,18 @@
-angular.module('portfolioApp', [])
-.directive('slideshow', function() {
+angular.module('portfolioApp', ['picardy.fontawesome'])
+// .directive('slide', function(){
+//   return{
+//     template:'<section class="reveal_section"></section>',
+//     link:function(){
+//
+//     }
+//   }
+// })
+.directive('portfolio', function() {
   return {
     scope: {
-      projects: '=slideshow'
+      projects: '=projects'
     },
     link: function(scope, elem, attrs) {
-      elem.addClass('slides');
       for (var i = 0; i < scope.projects.length; i++) {
         var section = angular.element("<section>");
         if(scope.projects[i].hasOwnProperty('background')){ //Project has background
@@ -50,7 +57,7 @@ angular.module('portfolioApp', [])
             }
           }
         }
-        elem.append(section); //Append Project to slides
+        elem.parent().append(section); //Append Project to slides
       }
       Reveal.initialize({
         loop: false,

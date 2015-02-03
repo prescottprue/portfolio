@@ -8,7 +8,7 @@ angular.module('portfolioApp')
         {
           // contentUrl:'views/home.html'
           name:'Home',
-          content:'<h2 class="name" style="color:#DCDCDD">Scott Prue</h2><h4>Project Portfolio</h4><p style="margin-top:20%;"><small style="color:#C5C3C6">Arrow keys to navigate</small><br><small style="color:#C5C3C6"> ESC for overview</small></p>'
+          content:'<div style="height:400px;"><h2 class="name" style="color:#DCDCDD">Scott Prue</h2><h4>Project Portfolio</h4></div>'
         },
         {
           name:'Basilar',
