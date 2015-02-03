@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Professional portfolio site built with revealjs",
   "devDependencies": {
     "grunt": "~0.4.5",

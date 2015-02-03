@@ -1,7 +1,8 @@
 angular.module('portfolioApp')
   .controller('MainCtrl', function($scope){
     console.log('Main controller');
-    $scope.currentSlide = {name:'Home', pages:[{caption:'Click site'}]};
+    $scope.current = {}
+    $scope.current.project = {name:'Home', pages:[{caption:'Click site'}]};
 
     $scope.projects = [
         {
@@ -71,11 +72,11 @@ angular.module('portfolioApp')
       ];
     Reveal.addEventListener( 'slidechanged', function( event ) {
         // event.previousSlide, event.currentSlide, event.indexh, event.indexv
-        var projectData = $scope.projects[event.indexh];
-        if(projectData.hasOwnProperty('pages') && projectData.pages.length){
-          projectData.slide = projectData.pages[event.indexv];
+        $scope.current.project = $scope.projects[event.indexh];
+        $scope.current.slide = $scope.projects[event.indexh];
+        if($scope.current.project.hasOwnProperty('pages') && $scope.current.project.pages.length){
+          $scope.current.slide = $scope.current.project.pages[event.indexv];
         }
-        $scope.currentSlide = projectData;
         console.log('currentSlide:', $scope.currentSlide);
         $scope.$apply();
     } );

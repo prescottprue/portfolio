@@ -34,20 +34,25 @@
 			<div slideshow="projects">
 			</div>
 		</div>
-		<article class="caption glass" ng-show="currentSlide.slide">
-			<span class="title">{{currentSlide.project.name}}</span><br>
+		<article class="caption glass" ng-show="current.project.name != 'Home'">
+			<span class="title">{{current.project.name}}</span><br>
 			<p>
-				{{currentSlide.slide.caption || 'Go to the right for projects'}}
+				{{current.slide.caption || 'Go to the right for projects'}}
 			</p>
 		</article>
-		<div class="social" ng-show="currentSlide.name == 'Home'">
+		<div class="social" ng-show="current.project.name == 'Home'">
 			<!-- <iframe src="https://ghbtns.com/github-btn.html?user=prescottprue&type=follow&count=false&size=large" frameborder="0" scrolling="0" width="260px" height="30px" style="padding:none;"></iframe> -->
-			<span style="left:0px;">
+			<span style="">
 				<a href="https://github.com/prescottprue" style="">
 					<i class="fa fa-github icon-social" style=""></i>
 				</a>
 			</span>
-			<span style="right: 0px; ">
+			<span style="">
+				<a href="mailto:prescottprue@gmail.com" style="">
+					<i class="fa fa-envelope" style=""></i>
+				</a>
+			</span>
+			<span style="">
 				<a href="https://www.linkedin.com/in/prescottprue">
 					<i class="fa fa-linkedin-square icon-social"></i>
 				</a>
