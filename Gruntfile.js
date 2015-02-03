@@ -87,27 +87,27 @@ module.exports = function(grunt) {
     aws_s3:{
       production:{
         options: {
-          accessKeyId: '<%= config.AWSAccessKeyId %>', 
-          secretAccessKey: '<%= config.AWSSecretKey %>', 
+          accessKeyId: '<%= config.AWSAccessKeyId %>',
+          secretAccessKey: '<%= config.AWSSecretKey %>',
           bucket:'prescottprue.com',
           uploadConcurrency: 30,
           region:'us-west-2'
         },
         files:[
-          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''}, 
+          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''},
           // {'action': 'upload', expand: true, cwd: 'dist/', src: ['**'], dest: '<%= pkg.version %>'},
         ]
       },
       staging:{
         options: {
           accessKeyId: '<%= config.AWSAccessKeyId %>',
-          secretAccessKey: '<%= config.AWSSecretKey %>', 
+          secretAccessKey: '<%= config.AWSSecretKey %>',
           bucket:'prescottprue.com',
           uploadConcurrency: 30,
           region:'us-west-2'
         },
         files:[
-          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''}, 
+          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''},
           {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: 'staging/<%= pkg.version %>'}
         ]
       }
@@ -164,12 +164,12 @@ module.exports = function(grunt) {
 
 	// Serve presentation locally
 	grunt.registerTask( 'serve', [ 'connect', 'watch' ] );
-	
+
 	grunt.registerTask( 'build', [ 'uglify:dist', 'htmlmin:dist', 'cssmin' ] );
 
-  
+
   grunt.registerTask( 'stage', [ 'htmlmin:dist', 'cssmin', 'uglify:dist', 'aws_s3:staging' ] );
-  
+
   grunt.registerTask( 'release', [ 'aws_s3:production', 'uglify:dist' ] );
 
 

@@ -5,51 +5,58 @@ angular.module('portfolioApp', [])
       projects: '=slideshow'
     },
     link: function(scope, elem, attrs) {
-        elem.addClass('slides');
-          for (var i = 0; i < scope.projects.length; i++) {
-            var elementString = "<section>"
-            if(scope.projects[i].hasOwnProperty('background')){
-              elementString = '<section data-background="'+scope.projects[i].background +'">';
-            }
-            var section = angular.element(elementString);
-            var steps = scope.projects[i].pages;
-            // Project doesn't contain pages
-            if(!scope.projects[i].hasOwnProperty('pages')){
-              var content = angular.element(scope.projects[i].content);
-              section.append(content);
-            }
-            //if there is only one step
-            else if (steps.length == 1) {
-              var content = angular.element("<h2>").html(scope.projects[i].name);
-              section.append(content);
-            } else {
-              for (var j = 0; j < steps.length; j++) {
-                var elementHtmlString = '<section class="reveal_section">'
-                var subSection = null;
-                if(steps[j].hasOwnProperty('image')){
-                  if(!steps[j].image.hasOwnProperty('style')){
-                    elementHtmlString = '<section class="reveal_section" data-background="'+ steps[j].image.url+'">'
-                    subSection = angular.element(elementHtmlString);
-                  } else {
-                    elementHtmlString = '<section class="reveal_section">'
-                    subSection = angular.element(elementHtmlString);
-                    subSection.append('<img style="'+steps[j].image.style+'" src="'+ steps[j].image.url +'">')
-                  }
-                }
-                // var content = angular.element("<h1>").html(steps[j].caption);
-                // subSection.append(caption);
-                section.append(subSection);
+      elem.addClass('slides');
+      for (var i = 0; i < scope.projects.length; i++) {
+        var section = angular.element("<section>");
+        if(scope.projects[i].hasOwnProperty('background')){ //Project has background
+          section.attr('data-background', scope.projects[i].background);
+        }
+        //Include content from url if there are not pages
+        if(scope.projects[i].hasOwnProperty('contentUrl') && !scope.projects[i].hasOwnProperty('pages')){ //content url exists and pages dont
+          console.log('loading from url:', scope.projects[i].contentUrl);
+          section.addClass('reveal_section');
+          var contentElement = angular.element('<div>');
+          contentElement.attr('ng-include', scope.projects[i].contentUrl);
+          console.log('element:', contentElement);
+          section.append(contentElement);
+        }
+        //Include content from content param (in html) if there are not pages
+        if (scope.projects[i].hasOwnProperty('content') && !scope.projects[i].hasOwnProperty('pages')){ //content not pages
+          var content = angular.element(scope.projects[i].content);
+          section.append(content);
+        }
+        //Build Project pages
+        if(scope.projects[i].hasOwnProperty('pages')){ // Project contains pages
+          var pages = scope.projects[i].pages;
+          if (pages.length == 1) { //There is only one page
+            var content = angular.element("<h2>").html(scope.projects[i].name); //Project Name Element
+            section.append(content);
+          } else { //There are multiple pages
+            for (var j = 0; j < pages.length; j++) { //Loop through pages
+              var subSection = angular.element('<section>');
+              subSection.addClass('reveal_section');
+              if(pages[j].hasOwnProperty('background')) { //Page has background
+                subSection.attr('data-background', pages[j].background);
               }
+              if(pages[j].hasOwnProperty('image')) { //Page has image
+                var img = angular.element('<img>');
+                img.attr('src', pages[j].image.url);
+                if(pages[j].image.hasOwnProperty('style')){
+                  img.attr('style', pages[j].image.style);
+                  subSection.append(img);
+                }
+              }
+              section.append(subSection); //Append page to project
             }
-            elem.append(section);
           }
-          Reveal.initialize({
-            loop: false,
-            controls:false,
-            transition: Reveal.getQueryHash().transition || 'none'
-          });
-
-     
+        }
+        elem.append(section); //Append Project to slides
+      }
+      Reveal.initialize({
+        loop: false,
+        controls:false,
+        transition: Reveal.getQueryHash().transition || 'none'
+      });
     }
-  };
-});
+  }
+})
