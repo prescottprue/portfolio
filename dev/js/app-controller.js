@@ -3,13 +3,18 @@ angular.module('portfolioApp')
     console.log('Main controller');
     $scope.current = {}
     $scope.current.project = {name:'Home', pages:[{caption:'Click site'}]};
-
+    var self = this;
+     // list of `state` value/display objects
+     self.selectedItem  = null;
+     self.searchText    = null;
+     self.isDisabled    = false;
+     $scope.searchText = '';
     $scope.projects = [
-        {
-          // contentUrl:'views/home.html'
-          name:'Home',
-          content:'<div style="height:400px;"><h2 class="name" style="color:#DCDCDD">Scott Prue</h2><h4>Project Portfolio</h4></div>'
-        },
+        // {
+        //   // contentUrl:'views/home.html'
+        //   name:'Home',
+        //   content:'<div style="height:400px;"><h2 class="name" style="color:#DCDCDD">Scott Prue</h2><h4>Project Portfolio</h4></div>'
+        // },
         {
           name:'Basilar',
           background:'#46494c',
@@ -52,7 +57,7 @@ angular.module('portfolioApp')
           ]
         },
         {
-          name:'Heathub',
+          name:'Hearthub',
           background:'#46494c',
           pages:[
             {
@@ -70,14 +75,4 @@ angular.module('portfolioApp')
           ]
         },
       ];
-    Reveal.addEventListener( 'slidechanged', function( event ) {
-        // event.previousSlide, event.currentSlide, event.indexh, event.indexv
-        $scope.current.project = $scope.projects[event.indexh];
-        $scope.current.slide = $scope.projects[event.indexh];
-        if($scope.current.project.hasOwnProperty('pages') && $scope.current.project.pages.length){
-          $scope.current.slide = $scope.current.project.pages[event.indexv];
-        }
-        console.log('currentSlide:', $scope.currentSlide);
-        $scope.$apply();
-    } );
   })

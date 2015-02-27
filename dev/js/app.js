@@ -1,4 +1,4 @@
-angular.module('portfolioApp', ['picardy.fontawesome'])
+angular.module('portfolioApp', ['picardy.fontawesome', 'ngMaterial'])
 // .directive('slide', function(){
 //   return{
 //     template:'<section class="reveal_section"></section>',
@@ -66,4 +66,19 @@ angular.module('portfolioApp', ['picardy.fontawesome'])
       });
     }
   }
+})
+.filter('searchName', function($window){
+  return function (items, query) {
+    var filtered = [];
+    var letterMatch = new RegExp(query, 'i');
+    var filtered = $window._.filter(items, function(item){
+      if (letterMatch.test(item.name.substring(0, query.length))) {
+          return true;
+      }
+      return false;
+    })
+
+
+    return filtered;
+  };
 })
