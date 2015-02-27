@@ -8,7 +8,7 @@ angular.module('portfolioApp')
      self.selectedItem  = null;
      self.searchText    = null;
      self.isDisabled    = false;
-     $scope.searchText = '';
+     $scope.searchText = null;
      $scope.projects = projectService.projects;
       $scope.openProject = function(name, ev){
         $scope.project = projectService.setCurrentProject({name:name});

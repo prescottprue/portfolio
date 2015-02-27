@@ -9,6 +9,7 @@ angular.module('portfolioApp')
       {
         name:'Basilar',
         background:'#46494c',
+        tags:['engineering'],
         pages:[
           {
             image:{url:'img/Basilar/Basilar-Logo.png', style:'width:500px; border-style:none; background-color:white;'},

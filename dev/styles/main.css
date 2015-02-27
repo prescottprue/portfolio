@@ -1,3 +1,11 @@
+.gap {
+  height:50px !important;
+}
+.tags section .md-button {
+    display: block;
+    margin: 1em !important;
+    line-height: 25px;
+    }
 /*
 .color1 { background: #dcdcdd; }
 .color2 { background: #c5c3c6; }
