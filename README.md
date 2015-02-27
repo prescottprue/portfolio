@@ -1,6 +1,10 @@
 # Personal Portfolio Page
 
-This is a portfolio page that includes my personal projects and is build with [reveal.js](https://github.com/hakimel/reveal.js).
+This application, which is available at [prescottprue.com](http://prescottprue.com) is a portfolio page that includes my personal projects.
+
+## Development
+
+  Run `grunt` to start a server locally.
 
 ## Projects
 

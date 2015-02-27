@@ -167,7 +167,6 @@ module.exports = function(grunt) {
 
 	grunt.registerTask( 'build', [ 'uglify:dist', 'htmlmin:dist', 'cssmin' ] );
 
-
   grunt.registerTask( 'stage', [ 'htmlmin:dist', 'cssmin', 'uglify:dist', 'aws_s3:staging' ] );
 
   grunt.registerTask( 'release', [ 'aws_s3:production', 'uglify:dist' ] );
