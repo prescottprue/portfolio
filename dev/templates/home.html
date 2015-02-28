@@ -1,41 +1,44 @@
-<md-content class="md-padding" layout-align="center center">
-  <md-grid-list
-      md-cols-gt-md="8" md-cols-sm="1" md-cols-md="5"
-      md-row-height-gt-md="1:1" md-row-height="16:9"
-      md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
-    <md-grid-tile
-        ng-repeat="project in projects | searchTags:searchText"
-        md-colspan-gt-sm="2"
-        md-rowspan-gt-sm="2">
-        <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center" ng-click="openProject(project.name)">
-          <img ng-src="{{project['pages'][1].background}}" alt="{{project.name}}" style="width:100%; height:auto;"/>
-      </md-whiteframe>
-    </md-grid-tile>
-  </md-grid-list>
-</md-content>
-<md-content class="md-padding" layout="column" layout-align="cetner center" >
-    <md-whiteframe class="md-whiteframe-z1" layout="column" layout-align="center center">
-      <md-subheader class="md-primary">Common Tags</md-subheader>
+<md-content class="md-padding no-background" layout="column" layout-align="cetner center" >
+      <md-subheader class="md-primary" style="background:none;">Common Tags (Click to add)</md-subheader>
         <section class="tags" layout="row" layout-fill layout-sm="column" layout-align="center center" flex >
           <div layout="row" layout-sm="column" layout-align="space-around" flex>
-            <md-button class="md-raised">Engineering</md-button>
-            <md-button class="md-raised">Programming</md-button>
-            <md-button class="md-raised">Javascript</md-button>
-            <md-button class="md-raised">Volenteering</md-button>
+            <md-button class="md-primary md-default-theme" ng-click="addTag('engineering')">Engineering</md-button>
+            <md-button class="md-primary md-default-theme" ng-click="addTag('programming')">Programming</md-button>
+            <md-button class="md-primary md-default-theme" ng-click="addTag('javascript')">Javascript</md-button>
+            <md-button class="md-primary md-default-theme" ng-click="addTag('volunteering')">Volunteering</md-button>
           </div>
           <!-- <md-button ng-disabled="true" class="md-primary">Disabled</md-button> -->
         </section>
-    </md-whiteframe>
-  </md-content>
 
-  <md-content class="lg-padding" layout="column" style="min-height:200px;">
-    </br>
-    <md-autocomplete
-        md-search-text="searchText"
-        md-items="project in projects | searchTags:searchText"
-        md-item-text="project.name"
-        placeholder="Search to filter projects">
-      <span md-highlight-text="searchText">{{project.name}}</span>
-    </md-autocomplete>
-    </br>
-  </md-content>
+
+
+</br>
+<md-autocomplete
+    md-search-text="searchText"
+    md-items="project in projects | searchTags:searchText"
+    md-item-text="project.name"
+    placeholder="Search to filter projects">
+  <span md-highlight-text="searchText">{{project.name}}</span>
+</md-autocomplete>
+</br>
+</br>
+</br>
+
+  <md-grid-list
+    md-cols-gt-md="8" md-cols-sm="2" md-cols-md="4"
+    md-row-height-gt-md="16:12" md-row-height="16:10"
+    md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
+    <md-grid-tile
+        ng-repeat="project in projects | searchTags:searchText"
+        md-rowspan-sm="2"
+        md-colspan-sm="2"
+        md-colspan-gt-sm="2"
+        md-rowspan-gt-sm="2">
+        <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center" ng-click="openProject(project.name)">
+          <div>
+            <img ng-src="{{project['pages'][1].background}}" alt="{{project.name}}" style="width:100%;"/>
+          </div>
+        </md-whiteframe>
+    </md-grid-tile>
+  </md-grid-list>
+</md-content>

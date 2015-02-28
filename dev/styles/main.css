@@ -2,10 +2,17 @@
   height:50px !important;
 }
 .tags section .md-button {
-    display: block;
-    margin: 1em !important;
-    line-height: 25px;
-    }
+  display: block;
+  margin: 1em !important;
+  line-height: 25px;
+}
+.no-background {
+  background-color:none;
+  background: none !important;
+}
+.background-fill {
+  background:rgb(97, 97, 97);
+}
 /*
 .color1 { background: #dcdcdd; }
 .color2 { background: #c5c3c6; }

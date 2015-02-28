@@ -2,14 +2,12 @@
 <md-dialog aria-label="{{project.name}}">
   <md-content>
     <md-subheader class="md-sticky-no-effect">{{project.name}}</md-subheader>
-    <div ng-repeat="page in project.pages">
 
-      <img style="margin: auto; max-width: 100%;" src="{{page.background || page.image.url}}">
+      <img style="margin: auto; max-width: 100%;" src="{{project.pages[0].background || project.pages[0].image.url}}">
       <p>
-        {{page.caption}}
+        {{project.pages[0].caption}}
       </p>
       <div class="gap"></div>
-    </div>
 
   </md-content>
   <div class="md-actions" layout="row">

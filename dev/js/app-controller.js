@@ -23,7 +23,7 @@ angular.module('portfolioApp')
         // );
         $mdDialog.show({
           controller: DialogController,
-          templateUrl: 'templates/project.html',
+          templateUrl: 'templates/project-dialog.html',
           targetEvent: ev,
         }).then(function(answer) {
           $scope.alert = 'You said the information was "' + answer + '".';
@@ -31,8 +31,20 @@ angular.module('portfolioApp')
           $scope.alert = 'You cancelled the dialog.';
         });
       };
-      $scope.closeProject = function(){
+      $scope.closeProject = function (){
         $scope.currentProject = null;
+      };
+      $scope.addTag = function (tag){
+        if($scope.searchText){
+          var tagArray = $scope.searchText.split(",");
+          tagArray = _.without(tagArray, "", " ");
+          console.log('tagArray:', tagArray);
+          tagArray.push(tag);
+          console.log('with push:', tagArray);
+          $scope.searchText = tagArray.join(",")
+        } else {
+          $scope.searchText = tag + ','
+        }
       };
   })
 

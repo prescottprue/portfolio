@@ -9,12 +9,11 @@ angular.module('portfolioApp')
       {
         name:'Basilar',
         background:'#46494c',
-        tags:['engineering'],
+        tags:['engineering', 'modeling', 'programming', 'parametric'],
         pages:[
           {
             image:{url:'img/Basilar/Basilar-Logo.png', style:'width:500px; border-style:none; background-color:white;'},
             caption:'DJs and Live producers need the interface to their music software to be as fluid as possible. Standardized controllers, such as what is currently availble on the market, cause this interface to fall short. Basilar was started to allow artists to choose what they need in their controller to best interact with their media. Using our simple drag and drop interface users can create their own controller layout. After picking a design the user would be able to share their designs or order the controller direclty from Basilar.',
-            subCaption:'Go down to view the first controller design'
           },
           {
             background:'img/Basilar/First-Lighting.jpg',
@@ -33,6 +32,7 @@ angular.module('portfolioApp')
 
       {
         name:'Pyro',
+        tags:['engineering', 'programming', 'nodejs', 'angularjs', 'javascript'],
         pages:[
           {
             background:'img/Pyro/Pyro-Home.png',
@@ -51,6 +51,7 @@ angular.module('portfolioApp')
       {
         name:'Hearthub',
         background:'#46494c',
+        tags:['engineering', 'programming', 'nodejs', 'angularjs', 'javascript', 'api', 'healthcare', 'hackathon'],
         pages:[
           {
             image:{url:'img/HeartHub/HeartHubLogo.png', style:'width:500px; border-style:none; background-color:white;'},
@@ -63,6 +64,54 @@ angular.module('portfolioApp')
           {
             background:'img/HeartHub/HeartHubAnalytics.png',
             caption:"Easily visualization of data for the hospitals in which these devices are installed are imperative. Realtime analytics was included in HeartHub from the start to provide important data as it is updated such as radiation warings and wireless medical devices."
+          },
+        ]
+      },
+      {
+        name:'Escollate',
+        tags:['engineering', 'programming', 'nodejs', 'angularjs', 'javascript', 'smallbizdev', 'hackathon'],
+        links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
+        pages:[
+          {
+            image:{url:'img/Escollate/HoldingCheck.png', style:'width:500px; border-style:none; background-color:white;'},
+            caption:'Escollate is a cross-platform mobile application that allows small business owners to solve complex financial problems by combining the power of real-time data with the wisdom of a collaborative community. By connecting Escollate with their Quickbooks accounts, our customers can view, track, and visualize the financial performance and financial health of their small businesses through an elegant Dashboard. For each of these metrics (such as revenue growth, gross profit growth, EBIDTA growth, net income growth, gross margin, and EBIDTA margin), small business owners see how their company compares to the rest of the market. Unlike existing financial summary solutions, Escollate also provides an anonymous social platform where users can ask questions about their finances, the state of their business, or anything else that may need clarification by like-minded small business owners. By tapping the "Ask a Question" link for a Dashboard item, the user can publish a question about a specific metric with just a few clicks. By marrying a simple, yet powerful user experience for tracking and understanding financial data with social network of informed supporters, Escollate gives small business owners "Strength in Numbers".'
+
+          },
+          {
+            background:'img/Escollate/HoldingCheck.png',
+            caption:'Escollate is a cross-platform mobile application that allows small business owners to solve complex financial problems by combining the power of real-time data with the wisdom of a collaborative community. By connecting Escollate with their Quickbooks accounts, our customers can view, track, and visualize the financial performance and financial health of their small businesses through an elegant Dashboard. For each of these metrics (such as revenue growth, gross profit growth, EBIDTA growth, net income growth, gross margin, and EBIDTA margin), small business owners see how their company compares to the rest of the market. Unlike existing financial summary solutions, Escollate also provides an anonymous social platform where users can ask questions about their finances, the state of their business, or anything else that may need clarification by like-minded small business owners. By tapping the "Ask a Question" link for a Dashboard item, the user can publish a question about a specific metric with just a few clicks. By marrying a simple, yet powerful user experience for tracking and understanding financial data with social network of informed supporters, Escollate gives small business owners "Strength in Numbers".'
+          },
+        ]
+      },
+      {
+        name:'S.P.H.S Computer Science Club',
+        tags:['engineering', 'programming', 'volunteering', 'javascript', 'teaching'],
+        links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
+        pages:[
+          {
+            image:{url:'img/Escollate/HoldingCheck.png', style:'width:500px; border-style:none; background-color:white;'},
+            caption:'Escollate is a cross-platform mobile application that allows small business owners to solve complex financial problems by combining the power of real-time data with the wisdom of a collaborative community. By connecting Escollate with their Quickbooks accounts, our customers can view, track, and visualize the financial performance and financial health of their small businesses through an elegant Dashboard. For each of these metrics (such as revenue growth, gross profit growth, EBIDTA growth, net income growth, gross margin, and EBIDTA margin), small business owners see how their company compares to the rest of the market. Unlike existing financial summary solutions, Escollate also provides an anonymous social platform where users can ask questions about their finances, the state of their business, or anything else that may need clarification by like-minded small business owners. By tapping the "Ask a Question" link for a Dashboard item, the user can publish a question about a specific metric with just a few clicks. By marrying a simple, yet powerful user experience for tracking and understanding financial data with social network of informed supporters, Escollate gives small business owners "Strength in Numbers".'
+
+          },
+          {
+            background:'img/SPHS-CS/FirstHackathon.jpg',
+            caption:'Escollate is a cross-platform mobile application that allows small business owners to solve complex financial problems by combining the power of real-time data with the wisdom of a collaborative community. By connecting Escollate with their Quickbooks accounts, our customers can view, track, and visualize the financial performance and financial health of their small businesses through an elegant Dashboard. For each of these metrics (such as revenue growth, gross profit growth, EBIDTA growth, net income growth, gross margin, and EBIDTA margin), small business owners see how their company compares to the rest of the market. Unlike existing financial summary solutions, Escollate also provides an anonymous social platform where users can ask questions about their finances, the state of their business, or anything else that may need clarification by like-minded small business owners. By tapping the "Ask a Question" link for a Dashboard item, the user can publish a question about a specific metric with just a few clicks. By marrying a simple, yet powerful user experience for tracking and understanding financial data with social network of informed supporters, Escollate gives small business owners "Strength in Numbers".'
+          },
+        ]
+      },
+      {
+        name:'Wakeboarding Tower',
+        tags:['engineering', 'modeling', 'welding'],
+        links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
+        pages:[
+          {
+            image:{url:'img/Escollate/HoldingCheck.png', style:'width:500px; border-style:none; background-color:white;'},
+            caption:'Escollate is a cross-platform mobile application that allows small business owners to solve complex financial problems by combining the power of real-time data with the wisdom of a collaborative community. By connecting Escollate with their Quickbooks accounts, our customers can view, track, and visualize the financial performance and financial health of their small businesses through an elegant Dashboard. For each of these metrics (such as revenue growth, gross profit growth, EBIDTA growth, net income growth, gross margin, and EBIDTA margin), small business owners see how their company compares to the rest of the market. Unlike existing financial summary solutions, Escollate also provides an anonymous social platform where users can ask questions about their finances, the state of their business, or anything else that may need clarification by like-minded small business owners. By tapping the "Ask a Question" link for a Dashboard item, the user can publish a question about a specific metric with just a few clicks. By marrying a simple, yet powerful user experience for tracking and understanding financial data with social network of informed supporters, Escollate gives small business owners "Strength in Numbers".'
+
+          },
+          {
+            background:'img/Escollate/HoldingCheck.png',
+            caption:'Escollate is a cross-platform mobile application that allows small business owners to solve complex financial problems by combining the power of real-time data with the wisdom of a collaborative community. By connecting Escollate with their Quickbooks accounts, our customers can view, track, and visualize the financial performance and financial health of their small businesses through an elegant Dashboard. For each of these metrics (such as revenue growth, gross profit growth, EBIDTA growth, net income growth, gross margin, and EBIDTA margin), small business owners see how their company compares to the rest of the market. Unlike existing financial summary solutions, Escollate also provides an anonymous social platform where users can ask questions about their finances, the state of their business, or anything else that may need clarification by like-minded small business owners. By tapping the "Ask a Question" link for a Dashboard item, the user can publish a question about a specific metric with just a few clicks. By marrying a simple, yet powerful user experience for tracking and understanding financial data with social network of informed supporters, Escollate gives small business owners "Strength in Numbers".'
           },
         ]
       }
