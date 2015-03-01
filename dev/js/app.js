@@ -1,4 +1,4 @@
-angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial'])
+angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial', 'firebase'])
 .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider){
   $stateProvider
   .state('projects', {
@@ -27,15 +27,16 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial']
   };
 })
 .filter('searchTags', function($window){
-  /**
+  /** Check item parameters for a given tag
    * @params {Object} item Item to search tags of
    * @params {String} tagsStr tags seperated by ", "
    * @returns {Boolean} whether or not the item contains a tag
    */
-  function checkItemForTag(item, tagStr){
+  function checkItemForTag(item, tagStr) {
     if(tagStr == "" || tagStr == " ") return true;
     var letterMatch = new RegExp(tagStr, 'i');
     if(_.has(item, "tags") && _.isArray(item.tags)) {
+      // _.some finds if item contains tag
       var containsTag = _.some(item.tags, function(tag){
         return letterMatch.test(tag.substring(0, tagStr.length));
       });
@@ -43,6 +44,7 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial']
     }
     return false;
   }
+
   return function (items, query) {
     if(query && _.isString(query)){
       var tagsArray = query.split(",");
@@ -60,5 +62,49 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial']
     }
     //Query is null
     return items;
+  };
+})
+/** Returns the tags of the item that matche the query
+ * @params {Array} items Item to search tags of
+ * @params {String} tagsStr tags seperated by ", "
+ * @returns {Boolean} whether or not the item contains a tag
+ */
+.filter('matchingTags', function(){
+
+  /** Returns the tags of the item that matche the query
+   * @params {Object} item Item to search tags of
+   * @params {String} tagsStr tags seperated by ", "
+   * @returns {Boolean} whether or not the item contains a tag
+   */
+  function matchingTags(itemTags, qStr) {
+    if(!itemTags || !qStr || qStr == "" || qStr == " ") return [];
+    var letterMatch = new RegExp(qStr, 'i');
+    if(_.isArray(itemTags)) {
+      // _.some finds if item contains tag
+      var matchingTags = _.filter(itemTags, function(tag){
+        return letterMatch.test(tag.substring(0, qStr.length));
+      });
+      console.log('returning matching tags:', matchingTags);
+      return matchingTags;
+    }
+    console.log('item tags is not an array', itemTags);
+    return [];
+  }
+  return function (itemTags, query) {
+    console.log('itemTags:', itemTags, query);
+    if(query && _.isString(query)){
+      var qTagsArray = query.split(",");
+        if(qTagsArray.length > 1) {
+          //multiple tags
+          //_.some would show projects that contain any of the tags
+          return _.filter(qTagsArray, function(tag){
+            return matchingTags(itemTags, tag);
+          }).join(", ");
+        }
+        //Single tag
+        return matchingTags(itemTags, query).join(", ");
+    }
+    //Query is null
+    return null;
   };
 })

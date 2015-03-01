@@ -1,11 +1,6 @@
 angular.module('portfolioApp')
-.factory('projectService', function($q, $rootScope){
+.factory('projectService', function($q, $rootScope, Project){
   var projectsArray = [
-      // {
-      //   // contentUrl:'views/home.html'
-      //   name:'Home',
-      //   content:'<div style="height:400px;"><h2 class="name" style="color:#DCDCDD">Scott Prue</h2><h4>Project Portfolio</h4></div>'
-      // },
       {
         name:'Basilar',
         background:'#46494c',
@@ -70,7 +65,10 @@ angular.module('portfolioApp')
       {
         name:'Escollate',
         tags:['engineering', 'programming', 'nodejs', 'angularjs', 'javascript', 'smallbizdev', 'hackathon'],
-        links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
+        links:[
+          {name:'Challenge Post', link:'http://challengepost.com/software/escollate'},
+          {name:'GitHub', link:'https://github.com/prescottprue/escollate'}
+        ],
         pages:[
           {
             image:{url:'img/Escollate/HoldingCheck.png', style:'width:500px; border-style:none; background-color:white;'},
@@ -89,12 +87,12 @@ angular.module('portfolioApp')
         links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
         pages:[
           {
-            image:{url:'img/Escollate/HoldingCheck.png', style:'width:500px; border-style:none; background-color:white;'},
+            image:{url:'img/SPHS-CS/FirstHackathon.png', style:'width:500px; border-style:none; background-color:white;'},
             caption:'Escollate is a cross-platform mobile application that allows small business owners to solve complex financial problems by combining the power of real-time data with the wisdom of a collaborative community. By connecting Escollate with their Quickbooks accounts, our customers can view, track, and visualize the financial performance and financial health of their small businesses through an elegant Dashboard. For each of these metrics (such as revenue growth, gross profit growth, EBIDTA growth, net income growth, gross margin, and EBIDTA margin), small business owners see how their company compares to the rest of the market. Unlike existing financial summary solutions, Escollate also provides an anonymous social platform where users can ask questions about their finances, the state of their business, or anything else that may need clarification by like-minded small business owners. By tapping the "Ask a Question" link for a Dashboard item, the user can publish a question about a specific metric with just a few clicks. By marrying a simple, yet powerful user experience for tracking and understanding financial data with social network of informed supporters, Escollate gives small business owners "Strength in Numbers".'
 
           },
           {
-            background:'img/SPHS-CS/FirstHackathon.jpg',
+            background:'img/SPHS-CS/FirstHackathon.png',
             caption:'Escollate is a cross-platform mobile application that allows small business owners to solve complex financial problems by combining the power of real-time data with the wisdom of a collaborative community. By connecting Escollate with their Quickbooks accounts, our customers can view, track, and visualize the financial performance and financial health of their small businesses through an elegant Dashboard. For each of these metrics (such as revenue growth, gross profit growth, EBIDTA growth, net income growth, gross margin, and EBIDTA margin), small business owners see how their company compares to the rest of the market. Unlike existing financial summary solutions, Escollate also provides an anonymous social platform where users can ask questions about their finances, the state of their business, or anything else that may need clarification by like-minded small business owners. By tapping the "Ask a Question" link for a Dashboard item, the user can publish a question about a specific metric with just a few clicks. By marrying a simple, yet powerful user experience for tracking and understanding financial data with social network of informed supporters, Escollate gives small business owners "Strength in Numbers".'
           },
         ]
@@ -118,7 +116,11 @@ angular.module('portfolioApp')
     ];
     var currentProject = null;
   return {
-    projects: projectsArray,
+    projects: function(){
+      return _.map(projectsArray, function(projectData){
+        return Project(projectData);
+      });
+    },
     getProject: function(params){
       return _.findWhere(this.projects, params);
     },
@@ -132,3 +134,152 @@ angular.module('portfolioApp')
     }
   }
 })
+.factory('Project', function(){
+  return function (projectData){
+    /** Returns the tags of the item that matche the query
+     * @params {Object} item Item to search tags of
+     * @params {String} tagsStr tags seperated by ", "
+     * @returns {Boolean} whether or not the item contains a tag
+     */
+    function matchingTags(itemTags, qStr) {
+      if(!itemTags || !qStr || qStr == "" || qStr == " ") return [];
+      var letterMatch = new RegExp(qStr, 'i');
+      if(_.isArray(itemTags)) {
+        // _.some finds if item contains tag
+        var matchingTags = _.filter(itemTags, function(tag){
+          return letterMatch.test(tag.substring(0, qStr.length));
+        });
+        console.log('returning matching tags:', matchingTags);
+        return matchingTags;
+      }
+      console.log('item tags is not an array', itemTags);
+      return [];
+    }
+    function Project(dataObj) {
+      var self = dataObj;
+
+      self.matchingTagsArray = function(query){
+        /** Returns the tags of the item that matche the query
+         * @params {Object} item Item to search tags of
+         * @params {String} tagsStr tags seperated by ", "
+         * @returns {Boolean} whether or not the item contains a tag
+         */
+         var self = this;
+         if(query && _.isString(query)){
+           var qTagsArray = query.split(",");
+             if(qTagsArray.length > 1) {
+               qTagsArray = _.without(qTagsArray, "", " ");
+               //multiple tags
+               //_.some would show projects that contain any of the tags
+               return _.filter(qTagsArray, function(tag){
+                 return matchingTags(self.tags, tag);
+               });
+             }
+             //Single tag
+             return matchingTags(self.tags, query);
+         }
+         //Query is null
+         return null;
+      }
+      self.matchingTagsString = function(query){
+        var self = this;
+        if(query && _.isString(query)){
+          var qTagsArray = query.split(",");
+
+            if(qTagsArray.length > 1) {
+              qTagsArray = _.without(qTagsArray, "", " ");
+
+              //multiple tags
+              //_.some would show projects that contain any of the tags
+              return _.filter(qTagsArray, function(tag){
+                return matchingTags(self.tags, tag);
+              }).join(", ");
+            }
+            //Single tag
+            return matchingTags(self.tags, query).join(", ");
+        }
+        //Query is null
+        return null;
+      }
+      return self;
+    }
+    // Project.prototype.matchingTags = function(qStr){
+    //   /** Returns the tags of the item that matche the query
+    //    * @params {Object} item Item to search tags of
+    //    * @params {String} tagsStr tags seperated by ", "
+    //    * @returns {Boolean} whether or not the item contains a tag
+    //    */
+    //    var self = this;
+    //     if(!qStr || qStr == "" || qStr == " ") return [];
+    //     var letterMatch = new RegExp(qStr, 'i');
+    //     if(_.has(self, "tags") && _.isArray(self.tags)) {
+    //       // _.some finds if item contains tag
+    //       var matchingTags = _.filter(self.tags, function(tag){
+    //         return letterMatch.test(tag.substring(0, qStr.length));
+    //       });
+    //       console.log('returning matching tags:', matchingTags);
+    //       return matchingTags;
+    //     }
+    //     console.log('item tags is not an array', self.tags);
+    //     return [];
+    // }
+    return Project(projectData);
+  }
+})
+
+// .factory('Project',function(){
+// 	function Project(dataObj) {
+//       if(_.isObject(dataObj)){
+//         _.each(_.keys(dataObj), function(key){
+//           this[key] = dataObj[key];
+//         }, this);
+//         console.log('project object:', this);
+//       }
+//     }
+//     Project.prototype.matchingTags = function(qStr){
+//       /** Returns the tags of the item that matche the query
+//        * @params {Object} item Item to search tags of
+//        * @params {String} tagsStr tags seperated by ", "
+//        * @returns {Boolean} whether or not the item contains a tag
+//        */
+//        var self = this;
+//         if(!qStr || qStr == "" || qStr == " ") return [];
+//         var letterMatch = new RegExp(qStr, 'i');
+//         if(_.has(self, "tags") && _.isArray(self.tags)) {
+//           // _.some finds if item contains tag
+//           var matchingTags = _.filter(self.tags, function(tag){
+//             return letterMatch.test(tag.substring(0, qStr.length));
+//           });
+//           console.log('returning matching tags:', matchingTags);
+//           return matchingTags;
+//         }
+//         console.log('item tags is not an array', self.tags);
+//         return [];
+//     }
+// 		return Project;
+// })
+// .factory('ProjectArray', function($firebase, $FirebaseArray){
+// 	return function(list){
+// 		return $firebase(list, {arrayFactory:ProjectArrayFactory()}).$asArray();
+// 	}
+// })
+// .factory('ProjectObject', function($firebase, ProjectObjectFactory){
+// 	return function(list){
+// 		// query for objects created by user
+// 		var query = pyroMaster.mainRef.child(list).orderByChild('author').equalTo(auth.uid);
+// 		return $firebase(query, {arrayFactory:ProjectObjectFactory()}).$asObject();
+// 	}
+// })
+// .factory('ProjectObject', function($firebase, ProjectObjectFactory){
+// 	return function(list){
+// 		// query for objects created by user
+// 		var auth = pyroMaster.getAuth();
+// 		console.log('pyroMaster:', pyroMaster);
+// 		var query = pyroMaster.mainRef.child(list).orderByChild('author').equalTo(auth.uid);
+// 		return $firebase(query, {arrayFactory:ProjectObjectFactory()}).$asObject();
+// 	}
+// })
+// .factory('af', function($firebase){
+//   return $firebase('https://')
+//
+// })

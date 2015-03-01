@@ -9,7 +9,7 @@ angular.module('portfolioApp')
      self.searchText    = null;
      self.isDisabled    = false;
      $scope.searchText = null;
-     $scope.projects = projectService.projects;
+     $scope.projects = projectService.projects();
       $scope.openProject = function(name, ev){
         $scope.project = projectService.setCurrentProject({name:name});
         // $state.go('')
@@ -37,11 +37,14 @@ angular.module('portfolioApp')
       $scope.addTag = function (tag){
         if($scope.searchText){
           var tagArray = $scope.searchText.split(",");
-          tagArray = _.without(tagArray, "", " ");
-          console.log('tagArray:', tagArray);
-          tagArray.push(tag);
-          console.log('with push:', tagArray);
-          $scope.searchText = tagArray.join(",")
+          if(tagArray.length > 1) {
+            tagArray = _.without(tagArray, "", " ");
+            console.log('tagArray:', tagArray);
+            tagArray.push(tag);
+            console.log('with push:', tagArray);
+            $scope.searchText = tagArray.join(",");
+          }
+
         } else {
           $scope.searchText = tag + ','
         }
