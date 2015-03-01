@@ -28,7 +28,7 @@
     <md-list>
       <md-item ng-repeat="page in project.pages">
         <md-item-content>
-          <div class="md-tile-content">
+          <div class="md-tile-content" layout="column">
             <img style="margin: auto; max-width: 100%;" src="{{page.background || page.image.url}}">
             <p>
               {{page.caption}}

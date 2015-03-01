@@ -109,13 +109,47 @@ angular.module('portfolioApp')
         // links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
         pages:[
           {
-            image:{url:'img/Escollate/HoldingCheck.png', style:'width:500px; border-style:none; background-color:white;'},
-            caption:'Escollate is a cross-platform mobile application that allows small business owners to solve complex financial problems by combining the power of real-time data with the wisdom of a collaborative community. By connecting Escollate with their Quickbooks accounts, our customers can view, track, and visualize the financial performance and financial health of their small businesses through an elegant Dashboard. For each of these metrics (such as revenue growth, gross profit growth, EBIDTA growth, net income growth, gross margin, and EBIDTA margin), small business owners see how their company compares to the rest of the market. Unlike existing financial summary solutions, Escollate also provides an anonymous social platform where users can ask questions about their finances, the state of their business, or anything else that may need clarification by like-minded small business owners. By tapping the "Ask a Question" link for a Dashboard item, the user can publish a question about a specific metric with just a few clicks. By marrying a simple, yet powerful user experience for tracking and understanding financial data with social network of informed supporters, Escollate gives small business owners "Strength in Numbers".'
+            image:{url:'img/WakeboardTower/TowerFinished.jpg', style:'width:500px; border-style:none; background-color:white;'},
+            caption:'Tower details 1'
 
           },
           {
-            background:'img/Escollate/HoldingCheck.png',
-            caption:'Escollate is a cross-platform mobile application that allows small business owners to solve complex financial problems by combining the power of real-time data with the wisdom of a collaborative community. By connecting Escollate with their Quickbooks accounts, our customers can view, track, and visualize the financial performance and financial health of their small businesses through an elegant Dashboard. For each of these metrics (such as revenue growth, gross profit growth, EBIDTA growth, net income growth, gross margin, and EBIDTA margin), small business owners see how their company compares to the rest of the market. Unlike existing financial summary solutions, Escollate also provides an anonymous social platform where users can ask questions about their finances, the state of their business, or anything else that may need clarification by like-minded small business owners. By tapping the "Ask a Question" link for a Dashboard item, the user can publish a question about a specific metric with just a few clicks. By marrying a simple, yet powerful user experience for tracking and understanding financial data with social network of informed supporters, Escollate gives small business owners "Strength in Numbers".'
+            background:'img/WakeboardTower/TowerDesign.png',
+            caption:'Tower details 2'
+          },
+        ]
+      },
+      {
+        name:'Gate Designer',
+        url: 'gate_designer',
+        tags:['engineering', 'modeling', 'waco', 'parametric'],
+        // links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
+        pages:[
+          {
+            image:{url:'img/GateDesigner/GateGUI.png', style:'width:500px; border-style:none; background-color:white;'},
+            caption:'Gate designer details 1'
+
+          },
+          {
+            background:'img/GateDesigner/GateGUI.png',
+            caption:'Gate designer details 2'
+          },
+        ]
+      },
+      {
+        name:'Kyper',
+        url: 'kyper',
+        tags:['cms', 'nodejs', 'javascript'],
+        // links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
+        pages:[
+          {
+            image:{url:'img/Kyper/cms1.png', style:'width:500px; border-style:none; background-color:white;'},
+            caption:'Kyper Details 1'
+
+          },
+          {
+            background:'img/Kyper/cms1.png',
+            caption:'Kyper Details 2'
           },
         ]
       }
