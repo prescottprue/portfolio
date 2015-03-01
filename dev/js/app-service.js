@@ -116,10 +116,41 @@ angular.module('portfolioApp')
     ];
     var currentProject = null;
   return {
-    projects: function(){
-      return _.map(projectsArray, function(projectData){
-        return Project(projectData);
-      });
+    // projects: function(){
+    //   return _.map(projectsArray, function(projectData){
+    //     return Project(projectData);
+    //   });
+    // },
+    projects: projectsArray,
+    findMatchingTags:function(itemTags, qStr){
+      function matchingTags(itemTags, qStr) {
+        if(!itemTags || !qStr || qStr == "" || qStr == " ") return [];
+        var letterMatch = new RegExp(qStr, 'i');
+        if(_.isArray(itemTags)) {
+          // _.some finds if item contains tag
+          var matchingTags = _.filter(itemTags, function(tag){
+            return letterMatch.test(tag.substring(0, qStr.length));
+          });
+          console.log('returning matching tags:', matchingTags);
+          return matchingTags;
+        }
+        console.log('item tags is not an array', itemTags);
+        return [];
+      }
+      if(qStr && _.isString(qStr)){
+        var qTagsArray = qStr.split(",");
+          if(qTagsArray.length > 1) {
+            //multiple tags
+            //_.some would show projects that contain any of the tags
+            return _.map(qTagsArray, function(tag){
+              return matchingTags(itemTags, tag);
+            }).join(", ");
+          }
+          //Single tag
+          return matchingTags(itemTags, qStr).join(", ");
+      }
+      //Query is null
+      return null;
     },
     getProject: function(params){
       return _.findWhere(this.projects, params);
@@ -191,7 +222,7 @@ angular.module('portfolioApp')
 
               //multiple tags
               //_.some would show projects that contain any of the tags
-              return _.filter(qTagsArray, function(tag){
+              return _.map(qTagsArray, function(tag){
                 return matchingTags(self.tags, tag);
               }).join(", ");
             }

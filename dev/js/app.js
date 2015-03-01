@@ -69,42 +69,62 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial',
  * @params {String} tagsStr tags seperated by ", "
  * @returns {Boolean} whether or not the item contains a tag
  */
-.filter('matchingTags', function(){
-
-  /** Returns the tags of the item that matche the query
-   * @params {Object} item Item to search tags of
-   * @params {String} tagsStr tags seperated by ", "
-   * @returns {Boolean} whether or not the item contains a tag
-   */
-  function matchingTags(itemTags, qStr) {
-    if(!itemTags || !qStr || qStr == "" || qStr == " ") return [];
-    var letterMatch = new RegExp(qStr, 'i');
-    if(_.isArray(itemTags)) {
-      // _.some finds if item contains tag
-      var matchingTags = _.filter(itemTags, function(tag){
-        return letterMatch.test(tag.substring(0, qStr.length));
+// .filter('matchingTags', function(){
+//   /** Returns the tags of the item that matche the query
+//    * @params {Object} item Item to search tags of
+//    * @params {String} tagsStr tags seperated by ", "
+//    * @returns {Boolean} whether or not the item contains a tag
+//    */
+//   function matchingTags(itemTags, qStr) {
+//     if(!itemTags || !qStr || qStr == "" || qStr == " ") return [];
+//     var letterMatch = new RegExp(qStr, 'i');
+//     if(_.isArray(itemTags)) {
+//       // _.some finds if item contains tag
+//       var matchingTags = _.filter(itemTags, function(tag){
+//         return letterMatch.test(tag.substring(0, qStr.length));
+//       });
+//       console.log('returning matching tags:', matchingTags);
+//       return matchingTags;
+//     }
+//     console.log('item tags is not an array', itemTags);
+//     return [];
+//   }
+//   return function (itemTags, query) {
+//     console.log('itemTags:', itemTags, query);
+//     if(query && _.isString(query)){
+//       var qTagsArray = query.split(",");
+//         if(qTagsArray.length > 1) {
+//           //multiple tags
+//           //_.some would show projects that contain any of the tags
+//           return _.filter(qTagsArray, function(tag){
+//             return matchingTags(itemTags, tag);
+//           }).join(", ");
+//         }
+//         //Single tag
+//         return matchingTags(itemTags, query).join(", ");
+//     }
+//     //Query is null
+//     return null;
+//   };
+// })
+.directive('projectInfo', function(){
+  return {
+    template:'<span md-highlight-text="searchText" style="padding-right:5px;">{{project.name}}</span><span md-highlight-text="searchText" style="font-size:.8em;" ng-repeat="tag in matchingTags track by $index">{{tag}}</span>',
+    controller: function($scope, $filter, projectService,$timeout){
+      var wait = parseInt($scope.delay, 10) || 0;
+      $scope.$watch('searchText', function(newVal, oldVal){
+        $timeout(function(){
+          if(angular.isDefined($scope.tags)){
+            $scope.matchingTags = projectService.findMatchingTags($scope.tags, newVal);
+            console.log('matching tags:', $scope.matchingTags);
+          }
+        });
       });
-      console.log('returning matching tags:', matchingTags);
-      return matchingTags;
+    },
+    scope:{
+      searchText: '=searchText',
+      tags: '=tags',
+      project:'=project'
     }
-    console.log('item tags is not an array', itemTags);
-    return [];
   }
-  return function (itemTags, query) {
-    console.log('itemTags:', itemTags, query);
-    if(query && _.isString(query)){
-      var qTagsArray = query.split(",");
-        if(qTagsArray.length > 1) {
-          //multiple tags
-          //_.some would show projects that contain any of the tags
-          return _.filter(qTagsArray, function(tag){
-            return matchingTags(itemTags, tag);
-          }).join(", ");
-        }
-        //Single tag
-        return matchingTags(itemTags, query).join(", ");
-    }
-    //Query is null
-    return null;
-  };
 })

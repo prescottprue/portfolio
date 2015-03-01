@@ -11,13 +11,15 @@
   </section>
   </br>
   <md-autocomplete
-      md-search-text="searchText"
-      md-items="project in projects | searchTags:searchText"
+      md-search-text="data.searchText"
+      md-items="project in projects | searchTags:data.searchText"
       md-item-text="project.name"
       placeholder="Search to filter projects">
-    <span md-highlight-text="searchText">{{project.name}}</span>
+    <!-- <span md-highlight-text="data.searchText">{{project.name}}</span> -->
     <!-- <span md-highlight-text="searchText" style="font-size:.8em;">{{project.matchingTagsString(searchText)}}</span> -->
-    <span md-highlight-text="searchText" style="font-size:.8em;">{{project.tags | matchingTags:searchText}}</span>
+    <!-- <span md-highlight-text="data.searchText" style="font-size:.8em;">{{project.tags | matchingTags:data.searchText}}</span> -->
+    <!-- <span md-highlight-text="searchText" style="font-size:.8em;" ng-repeat="tag in project.tags | matchingTags:searchText">{{tag}}</span> -->
+    <div project-info search-text="data.searchText" tags="project.tags" project="project"></div>
 
   </md-autocomplete>
   </br>

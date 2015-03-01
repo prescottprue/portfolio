@@ -5,11 +5,11 @@ angular.module('portfolioApp')
     $scope.current.project = {name:'Home', pages:[{caption:'Click site'}]};
     var self = this;
      // list of `state` value/display objects
-     self.selectedItem  = null;
-     self.searchText    = null;
-     self.isDisabled    = false;
-     $scope.searchText = null;
-     $scope.projects = projectService.projects();
+     $scope.data = {searchText:null};
+     $scope.projects = projectService.projects;
+     $scope.$watch('data.searchText', function(newValue, oldValue){
+       $scope.projects
+     });
       $scope.openProject = function(name, ev){
         $scope.project = projectService.setCurrentProject({name:name});
         // $state.go('')
@@ -35,18 +35,18 @@ angular.module('portfolioApp')
         $scope.currentProject = null;
       };
       $scope.addTag = function (tag){
-        if($scope.searchText){
-          var tagArray = $scope.searchText.split(",");
+        if($scope.data.searchText){
+          var tagArray = $scope.data.searchText.split(",");
           if(tagArray.length > 1) {
             tagArray = _.without(tagArray, "", " ");
             console.log('tagArray:', tagArray);
             tagArray.push(tag);
             console.log('with push:', tagArray);
-            $scope.searchText = tagArray.join(",");
+            $scope.data.searchText = tagArray.join(",");
           }
 
         } else {
-          $scope.searchText = tag + ','
+          $scope.data.searchText = tag + ','
         }
       };
   })
