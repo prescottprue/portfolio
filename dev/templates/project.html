@@ -1,24 +1,40 @@
-
-<md-dialog aria-label="{{project.name}}">
-  <md-content>
-    <md-subheader class="md-sticky-no-effect">{{project.name}}</md-subheader>
-    <div ng-repeat="page in project.pages">
-
-      <img style="margin: auto; max-width: 100%;" src="{{page.background || page.image.url}}">
-      <p>
-        {{page.caption}}
-      </p>
-      <div class="gap"></div>
-    </div>
-
-  </md-content>
-  <div class="md-actions" layout="row">
-    <span flex></span>
-    <md-button ng-click="answer('not useful')">
-     View Project Page
-    </md-button>
-    <md-button ng-click="answer('useful')" class="md-primary">
-      Close
-    </md-button>
+<md-toolbar class="md-warn">
+  <div class="md-toolbar-tools">
+    <span class="md-flex">{{project.name}}</span>
   </div>
-</md-dialog>
+</md-toolbar>
+<section layout="row" flex>
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+    <md-content class="md-padding">
+      <md-button ng-click="close()" class="md-primary" hide-gt-md>
+        Close Sidenav Left
+      </md-button>
+      <div hide-md show-gt-md ng-repeat="page in project.pages">
+        {{page}}
+      </div>
+      <md-button  ng-click="close()" class="md-primary" hide-gt-md>
+        Close Sidenav Left
+      </md-button>
+      <p hide-md show-gt-md>
+
+      </p>
+    </md-content>
+  </md-sidenav>
+  <md-content flex class="md-padding">
+    <div layout="column" layout-fill layout-align="center center">
+    <md-list>
+      <md-item ng-repeat="page in project.pages">
+        <md-item-content>
+          <div class="md-tile-content">
+            <img style="margin: auto; max-width: 100%;" src="{{page.background || page.image.url}}">
+            <p>
+              {{page.caption}}
+            </p>
+          </div>
+          <md-divider ng-if="!$last"></md-divider>
+        </md-item-content>
+      </md-item>
+    </md-list>
+  </div>
+  </md-content>
+</section>

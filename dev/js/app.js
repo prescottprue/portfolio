@@ -6,10 +6,15 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial',
     templateUrl: 'templates/home.html',
     controller:'MainCtrl'
   })
+  .state('project', {
+    url: '/:pName',
+    templateUrl: 'templates/project.html',
+    controller:'ProjectCtrl'
+  })
   $urlRouterProvider.otherwise("/");
   $mdThemingProvider.theme('default')
      .primaryPalette('blue')
-     .accentPalette('grey');
+     .accentPalette('pink');
 })
 .filter('searchName', function($window){
   return function (items, query) {
@@ -110,13 +115,12 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial',
 .directive('projectInfo', function(){
   return {
     template:'<span md-highlight-text="searchText" style="padding-right:5px;">{{project.name}}</span><span md-highlight-text="searchText" style="font-size:.8em;" ng-repeat="tag in matchingTags track by $index">{{tag}}</span>',
-    controller: function($scope, $filter, projectService,$timeout){
-      var wait = parseInt($scope.delay, 10) || 0;
+    controller: function($scope, projectService,$timeout){
       $scope.$watch('searchText', function(newVal, oldVal){
         $timeout(function(){
           if(angular.isDefined($scope.tags)){
             $scope.matchingTags = projectService.findMatchingTags($scope.tags, newVal);
-            console.log('matching tags:', $scope.matchingTags);
+            // console.log('matching tags:', $scope.matchingTags);
           }
         });
       });

@@ -1,9 +1,10 @@
 angular.module('portfolioApp')
-.factory('projectService', function($q, $rootScope, Project){
+.factory('projectService', function($q, $rootScope, Project, $firebase){
+
   var projectsArray = [
       {
         name:'Basilar',
-        background:'#46494c',
+        url:'Basilar',
         tags:['engineering', 'modeling', 'programming', 'parametric'],
         pages:[
           {
@@ -45,7 +46,6 @@ angular.module('portfolioApp')
       },
       {
         name:'Hearthub',
-        background:'#46494c',
         tags:['engineering', 'programming', 'nodejs', 'angularjs', 'javascript', 'api', 'healthcare', 'hackathon'],
         pages:[
           {
@@ -83,6 +83,7 @@ angular.module('portfolioApp')
       },
       {
         name:'S.P.H.S Computer Science Club',
+        url:'sphscs',
         tags:['engineering', 'programming', 'volunteering', 'javascript', 'teaching'],
         links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
         pages:[
@@ -99,6 +100,7 @@ angular.module('portfolioApp')
       },
       {
         name:'Wakeboarding Tower',
+        url: 'tower',
         tags:['engineering', 'modeling', 'welding'],
         links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
         pages:[
@@ -131,10 +133,10 @@ angular.module('portfolioApp')
           var matchingTags = _.filter(itemTags, function(tag){
             return letterMatch.test(tag.substring(0, qStr.length));
           });
-          console.log('returning matching tags:', matchingTags);
+          // console.log('returning matching tags:', matchingTags);
           return matchingTags;
         }
-        console.log('item tags is not an array', itemTags);
+        console.warn('item tags is not an array', itemTags);
         return [];
       }
       if(qStr && _.isString(qStr)){
@@ -160,8 +162,10 @@ angular.module('portfolioApp')
       return currentProject = _.findWhere(this.projects, params);
     },
     getCurrentProject:function(params){
-      console.log('getting project:', currentProject);
-      return currentProject;
+      if(currentProject){
+        return currentProject;
+      }
+      return currentProject = _.findWhere(this.projects, params);
     }
   }
 })
@@ -257,38 +261,6 @@ angular.module('portfolioApp')
     return Project(projectData);
   }
 })
-
-// .factory('Project',function(){
-// 	function Project(dataObj) {
-//       if(_.isObject(dataObj)){
-//         _.each(_.keys(dataObj), function(key){
-//           this[key] = dataObj[key];
-//         }, this);
-//         console.log('project object:', this);
-//       }
-//     }
-//     Project.prototype.matchingTags = function(qStr){
-//       /** Returns the tags of the item that matche the query
-//        * @params {Object} item Item to search tags of
-//        * @params {String} tagsStr tags seperated by ", "
-//        * @returns {Boolean} whether or not the item contains a tag
-//        */
-//        var self = this;
-//         if(!qStr || qStr == "" || qStr == " ") return [];
-//         var letterMatch = new RegExp(qStr, 'i');
-//         if(_.has(self, "tags") && _.isArray(self.tags)) {
-//           // _.some finds if item contains tag
-//           var matchingTags = _.filter(self.tags, function(tag){
-//             return letterMatch.test(tag.substring(0, qStr.length));
-//           });
-//           console.log('returning matching tags:', matchingTags);
-//           return matchingTags;
-//         }
-//         console.log('item tags is not an array', self.tags);
-//         return [];
-//     }
-// 		return Project;
-// })
 // .factory('ProjectArray', function($firebase, $FirebaseArray){
 // 	return function(list){
 // 		return $firebase(list, {arrayFactory:ProjectArrayFactory()}).$asArray();

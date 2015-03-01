@@ -1,8 +1,6 @@
 angular.module('portfolioApp')
   .controller('MainCtrl', function($scope, $mdDialog, projectService){
     console.log('Main controller');
-    $scope.current = {}
-    $scope.current.project = {name:'Home', pages:[{caption:'Click site'}]};
     var self = this;
      // list of `state` value/display objects
      $scope.data = {searchText:null};
@@ -10,6 +8,7 @@ angular.module('portfolioApp')
      $scope.$watch('data.searchText', function(newValue, oldValue){
        $scope.projects
      });
+     $scope.commonTags = ['engineering', 'programming', 'javascript', 'volunteering'];
       $scope.openProject = function(name, ev){
         $scope.project = projectService.setCurrentProject({name:name});
         // $state.go('')
@@ -25,10 +24,10 @@ angular.module('portfolioApp')
           controller: DialogController,
           templateUrl: 'templates/project-dialog.html',
           targetEvent: ev,
-        }).then(function(answer) {
-          $scope.alert = 'You said the information was "' + answer + '".';
+        }).then(function() {
+
         }, function() {
-          $scope.alert = 'You cancelled the dialog.';
+
         });
       };
       $scope.closeProject = function (){
@@ -53,20 +52,18 @@ angular.module('portfolioApp')
 
   .controller('ProjectCtrl', function($scope, $mdDialog, $stateParams, projectService){
     console.log('Project controller');
-      $scope.closeProject = function(){
-        $scope.currentProject = null;
-      };
-  })
-  function DialogController($scope, $mdDialog, projectService) {
-
     $scope.project = projectService.getCurrentProject();
+  })
+  function DialogController($scope, $mdDialog, projectService, $state, $stateParams) {
+    $scope.project = projectService.getCurrentProject({name:$stateParams.pName});
     $scope.hide = function() {
       $mdDialog.hide();
     };
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
-    $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
+    $scope.detail = function(projectData) {
+      $state.go('project', {pName:$scope.project.url || $scope.project.name.toLowerCase()});
+      $mdDialog.hide();
     };
   }

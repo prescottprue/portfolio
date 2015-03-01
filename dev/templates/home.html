@@ -1,30 +1,39 @@
-<md-content class="md-padding no-background" layout="column" layout-align="cetner center" >
-  <md-subheader class="md-primary" style="background:none;">Common Tags (Click to add)</md-subheader>
-  <section class="tags" layout="row" layout-fill layout-sm="column" layout-align="center center" flex >
-    <div layout="row" layout-sm="column" layout-align="space-around" flex>
-      <md-button class="md-primary md-default-theme" ng-click="addTag('engineering')">Engineering</md-button>
-      <md-button class="md-primary md-default-theme" ng-click="addTag('programming')">Programming</md-button>
-      <md-button class="md-primary md-default-theme" ng-click="addTag('javascript')">Javascript</md-button>
-      <md-button class="md-primary md-default-theme" ng-click="addTag('volunteering')">Volunteering</md-button>
+<md-toolbar md-scroll-shrink>
+    <div class="md-toolbar-tools">
+      <h3>
+        <span>Prescott Prue</span>
+      </h3>
     </div>
-    <!-- <md-button ng-disabled="true" class="md-primary">Disabled</md-button> -->
-  </section>
-  </br>
-  <md-autocomplete
-      md-search-text="data.searchText"
-      md-items="project in projects | searchTags:data.searchText"
-      md-item-text="project.name"
-      placeholder="Search to filter projects">
-    <!-- <span md-highlight-text="data.searchText">{{project.name}}</span> -->
-    <!-- <span md-highlight-text="searchText" style="font-size:.8em;">{{project.matchingTagsString(searchText)}}</span> -->
-    <!-- <span md-highlight-text="data.searchText" style="font-size:.8em;">{{project.tags | matchingTags:data.searchText}}</span> -->
-    <!-- <span md-highlight-text="searchText" style="font-size:.8em;" ng-repeat="tag in project.tags | matchingTags:searchText">{{tag}}</span> -->
-    <div project-info search-text="data.searchText" tags="project.tags" project="project"></div>
+  </md-toolbar>
+<md-content class="md-padding no-background" layout="column" layout-fill layout-align="cetner">
 
-  </md-autocomplete>
-  </br>
-  </br>
-  </br>
+  <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
+    <md-content class="md-padding" layout="row" layout-fill layout-align="cetner" flex>
+
+
+  <md-content class="md-padding" layout="column" layout-fill layout-align="cetner" flex>
+
+    <md-autocomplete
+        md-search-text="data.searchText"
+        md-items="project in projects | searchTags:data.searchText"
+        md-item-text="project.name"
+        placeholder="Search to filter projects">
+      <!-- <span md-highlight-text="data.searchText">{{project.name}}</span> -->
+      <!-- <span md-highlight-text="searchText" style="font-size:.8em;">{{project.matchingTagsString(searchText)}}</span> -->
+      <!-- <span md-highlight-text="data.searchText" style="font-size:.8em;">{{project.tags | matchingTags:data.searchText}}</span> -->
+      <!-- <span md-highlight-text="searchText" style="font-size:.8em;" ng-repeat="tag in project.tags | matchingTags:searchText">{{tag}}</span> -->
+      <div project-info search-text="data.searchText" tags="project.tags" project="project"></div>
+
+    </md-autocomplete>
+
+  </md-content>
+  <md-select multiple ng-model="selectedTags" placeholder="Common Tags (Click to add)">
+    <md-select-label>{{ multiNeighborhood.length ? multiNeighborhood.join(', ') : 'Choose some common tags' }}</md-select-label>
+    <md-option ng-value="tag" ng-repeat="tag in commonTags" ng-click="">{{ tag }}</md-option>
+  </md-select>
+
+</md-whiteframe>
+
   <md-grid-list
     md-cols-gt-md="8" md-cols-sm="1" md-cols-md="4"
     md-row-height-gt-md="16:12" md-row-height="16:10"

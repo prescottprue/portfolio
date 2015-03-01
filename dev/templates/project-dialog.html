@@ -1,21 +1,23 @@
 
 <md-dialog aria-label="{{project.name}}">
+  <md-toolbar class="md-warn">
+    <div class="md-toolbar-tools">
+      <span class="md-flex">{{project.name}}</span>
+    </div>
+  </md-toolbar>
   <md-content>
-    <md-subheader class="md-sticky-no-effect">{{project.name}}</md-subheader>
-
-      <img style="margin: auto; max-width: 100%;" src="{{project.pages[0].background || project.pages[0].image.url}}">
+    <img style="margin: auto; max-width: 100%;" src="{{project.pages[0].background || project.pages[0].image.url}}">
       <p>
         {{project.pages[0].caption}}
       </p>
-      <div class="gap"></div>
-
+    <div class="gap"></div>
   </md-content>
   <div class="md-actions" layout="row">
     <span flex></span>
-    <md-button ng-click="answer('not useful')">
+    <md-button ng-click="detail(project)">
      View Project Page
     </md-button>
-    <md-button ng-click="answer('useful')" class="md-primary">
+    <md-button ng-click="hide()" class="md-primary">
       Close
     </md-button>
   </div>
