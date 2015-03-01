@@ -1,12 +1,18 @@
 angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial', 'firebase'])
 .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider){
   $stateProvider
-  .state('projects', {
+  .state('navbar', {
+    templateUrl: 'templates/navbar.html',
+    abstract:true
+  })
+  .state('home', {
+    parent:'navbar',
     url: '/',
     templateUrl: 'templates/home.html',
     controller:'MainCtrl'
   })
   .state('project', {
+    parent:'navbar',
     url: '/:pName',
     templateUrl: 'templates/project.html',
     controller:'ProjectCtrl'

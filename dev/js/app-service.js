@@ -1,10 +1,10 @@
 angular.module('portfolioApp')
-.factory('projectService', function($q, $rootScope, Project, $firebase){
+.factory('projectService', function($q, $rootScope, Project, $firebase, $location){
 
   var projectsArray = [
       {
         name:'Basilar',
-        url:'Basilar',
+        url:'basilar',
         tags:['engineering', 'modeling', 'programming', 'parametric'],
         pages:[
           {
@@ -28,7 +28,9 @@ angular.module('portfolioApp')
 
       {
         name:'Pyro',
+        url:'pyro',
         tags:['engineering', 'programming', 'nodejs', 'angularjs', 'javascript'],
+        buttons:[{name:'pyroplatform.com'}],
         pages:[
           {
             background:'img/Pyro/Pyro-Home.png',
@@ -46,6 +48,7 @@ angular.module('portfolioApp')
       },
       {
         name:'Hearthub',
+        url:'hearthub',
         tags:['engineering', 'programming', 'nodejs', 'angularjs', 'javascript', 'api', 'healthcare', 'hackathon'],
         pages:[
           {
@@ -64,10 +67,11 @@ angular.module('portfolioApp')
       },
       {
         name:'Escollate',
+        url:'escollate',
         tags:['engineering', 'programming', 'nodejs', 'angularjs', 'javascript', 'smallbizdev', 'hackathon'],
-        links:[
-          {name:'Challenge Post', link:'http://challengepost.com/software/escollate'},
-          {name:'GitHub', link:'https://github.com/prescottprue/escollate'}
+        buttons:[{name:'Challenge Post', path:'http://challengepost.com/software/escollate'},
+          {name:'GitHub', path:'https://github.com/prescottprue/escollate'},
+          {name:'App Demo', path:'https://github.com/prescottprue/escollate'}
         ],
         pages:[
           {
@@ -102,7 +106,7 @@ angular.module('portfolioApp')
         name:'Wakeboarding Tower',
         url: 'tower',
         tags:['engineering', 'modeling', 'welding'],
-        links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
+        // links:[{name:'Challenge Post', link:'http://challengepost.com/software/escollate'}],
         pages:[
           {
             image:{url:'img/Escollate/HoldingCheck.png', style:'width:500px; border-style:none; background-color:white;'},
@@ -165,8 +169,8 @@ angular.module('portfolioApp')
       if(currentProject){
         return currentProject;
       }
-      return currentProject = _.findWhere(this.projects, params);
-    }
+      return currentProject = _.findWhere(this.projects, {url:$location.path()});
+    },
   }
 })
 .factory('Project', function(){

@@ -1,48 +1,32 @@
-<md-toolbar md-scroll-shrink>
-    <div class="md-toolbar-tools">
-      <h3>
-        <span>Prescott Prue</span>
-      </h3>
-    </div>
-  </md-toolbar>
-<md-content class="md-padding no-background" layout="column" layout-fill layout-align="cetner">
-
+<md-content class="md-padding no-background" layout="column"  layout-align="center">
+  <!-- Search -->
   <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
     <md-content class="md-padding" layout="row" layout-fill layout-align="cetner" flex>
-
-
-  <md-content class="md-padding" layout="column" layout-fill layout-align="cetner" flex>
-
-    <md-autocomplete
-        md-search-text="data.searchText"
-        md-items="project in projects | searchTags:data.searchText"
-        md-item-text="project.name"
-        placeholder="Search to filter projects">
-      <!-- <span md-highlight-text="data.searchText">{{project.name}}</span> -->
-      <!-- <span md-highlight-text="searchText" style="font-size:.8em;">{{project.matchingTagsString(searchText)}}</span> -->
-      <!-- <span md-highlight-text="data.searchText" style="font-size:.8em;">{{project.tags | matchingTags:data.searchText}}</span> -->
-      <!-- <span md-highlight-text="searchText" style="font-size:.8em;" ng-repeat="tag in project.tags | matchingTags:searchText">{{tag}}</span> -->
-      <div project-info search-text="data.searchText" tags="project.tags" project="project"></div>
-
-    </md-autocomplete>
-
-  </md-content>
-  <md-select multiple ng-model="selectedTags" placeholder="Common Tags (Click to add)">
-    <md-select-label>{{ multiNeighborhood.length ? multiNeighborhood.join(', ') : 'Choose some common tags' }}</md-select-label>
-    <md-option ng-value="tag" ng-repeat="tag in commonTags" ng-click="">{{ tag }}</md-option>
-  </md-select>
-
-</md-whiteframe>
-
+      <md-content class="md-padding" layout="column" layout-fill layout-align="cetner" flex>
+        <md-autocomplete
+            md-search-text="data.searchText"
+            md-items="project in projects | searchTags:data.searchText"
+            md-item-text="project.name"
+            placeholder="Search to filter projects">
+          <div project-info search-text="data.searchText" tags="project.tags" project="project"></div>
+        </md-autocomplete>
+      </md-content>
+      <md-select multiple ng-model="selectedTags" placeholder="Common Tags (Click to add)">
+        <md-select-label>{{ selectedTags.length ? selectedTags.join(', ') : 'Choose some common tags' }}</md-select-label>
+        <md-option ng-value="tag" ng-repeat="tag in commonTags" ng-click="">{{ tag }}</md-option>
+      </md-select>
+    </md-content>
+  </md-whiteframe>
+  <!-- Project Images -->
   <md-grid-list
     md-cols-gt-md="8" md-cols-sm="1" md-cols-md="4"
-    md-row-height-gt-md="16:12" md-row-height="16:10"
-    md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
+    md-row-height-gt-md="16:10" md-row-height="16:10"
+    md-gutter-gt-md="20px" md-gutter-gt-sm="8px" md-gutter="4px" style="padding-top:20px;">
     <md-grid-tile ng-repeat="project in projects | searchTags:searchText"
         md-colspan-gt-sm="2"
         md-rowspan-gt-sm="2">
         <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center" ng-click="openProject(project.name)">
-          <div>
+          <div layout-fill style="overflow:hidden;">
             <img ng-src="{{project['pages'][1].background}}" alt="{{project.name}}" style="width:100%;"/>
           </div>
         </md-whiteframe>

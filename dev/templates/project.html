@@ -1,16 +1,19 @@
-<md-toolbar class="md-warn">
-  <div class="md-toolbar-tools">
-    <span class="md-flex">{{project.name}}</span>
-  </div>
-</md-toolbar>
+
 <section layout="row" flex>
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+    <md-toolbar class="md-warn">
+      <div class="md-toolbar-tools">
+        <span class="md-flex">{{project.name}}</span>
+      </div>
+    </md-toolbar>
     <md-content class="md-padding">
       <md-button ng-click="close()" class="md-primary" hide-gt-md>
         Close Sidenav Left
       </md-button>
-      <div hide-md show-gt-md ng-repeat="page in project.pages">
-        {{page}}
+      <div hide-md show-gt-md ng-repeat="button in project.buttons">
+        <md-button  ng-click="close()" class="md-primary">
+          {{button.name}}
+        </md-button>
       </div>
       <md-button  ng-click="close()" class="md-primary" hide-gt-md>
         Close Sidenav Left
