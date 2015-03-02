@@ -4,6 +4,7 @@ angular.module('portfolioApp')
     $scope.data = {searchText:null};
     $scope.projects = projectService.projects;
     $scope.commonTags = ['engineering', 'programming', 'javascript', 'volunteering'];
+    $scope.data.selectedTags = null;
     $scope.openProject = function(name, ev){
       $scope.project = projectService.setCurrentProject({name:name});
       // $state.go('')
@@ -30,13 +31,15 @@ angular.module('portfolioApp')
     };
     $scope.addTag = function (tag){
       if($scope.data.searchText){
-        var tagArray = $scope.data.searchText.split(",");
-        if(tagArray.length > 1) {
-          tagArray = _.without(tagArray, "", " ");
-          console.log('tagArray:', tagArray);
-          tagArray.push(tag);
-          console.log('with push:', tagArray);
-          $scope.data.searchText = tagArray.join(",");
+        if(!$scope.data.selectedTags){
+          $scope.data.selectedTags = $scope.data.searchText.split(",");
+        }
+        if($scope.data.selectedTags.length > 1) {
+          $scope.data.selectedTags = _.without($scope.data.selectedTags, "", " ");
+          console.log('$scope.data.selectedTags:', $scope.data.selectedTags);
+          $scope.data.selectedTags.push(tag);
+          console.log('with push:', $scope.data.selectedTags);
+          $scope.data.searchText = $scope.data.selectedTags.join(",");
         }
       } else {
         $scope.data.searchText = tag + ','

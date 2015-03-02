@@ -1,8 +1,10 @@
 <md-content class="md-padding no-background" layout="column"  layout-align="center">
   <!-- Search -->
-  <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
     <md-content class="md-padding" layout="row" layout-fill layout-align="cetner" flex>
-      <md-content class="md-padding" layout="column" layout-fill layout-align="cetner" flex>
+      <!-- <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center"> -->
+
+      <md-content class="md-padding no-background" layout="column" layout-fill layout-align="cetner" flex
+      style="min-height:190px; padding-top:none;">
         <md-autocomplete
             md-search-text="data.searchText"
             md-items="project in projects | searchTags:data.searchText"
@@ -10,25 +12,24 @@
             placeholder="Search to filter projects">
           <div project-info search-text="data.searchText" tags="project.tags" project="project"></div>
         </md-autocomplete>
+      </br>
       </md-content>
-      <md-select multiple ng-model="selectedTags" placeholder="Common Tags (Click to add)">
+      <md-select multiple ng-model="data.seletedTags" placeholder="Common Tags (Click to add)">
         <md-select-label>{{ selectedTags.length ? selectedTags.join(', ') : 'Choose some common tags' }}</md-select-label>
-        <md-option ng-value="tag" ng-repeat="tag in commonTags" ng-click="">{{ tag }}</md-option>
+        <md-option ng-value="tag" ng-repeat="tag in commonTags" ng-click="addTag(tag)">{{ tag }}</md-option>
       </md-select>
     </md-content>
-  </md-whiteframe>
+  <!-- </md-whiteframe> -->
   <!-- Project Images -->
-  <md-grid-list
+  <md-grid-list class="background-fill"
     md-cols-gt-md="8" md-cols-sm="1" md-cols-md="4"
-    md-row-height-gt-md="16:10" md-row-height="16:10"
-    md-gutter-gt-md="20px" md-gutter-gt-sm="8px" md-gutter="4px" style="padding-top:20px;">
-    <md-grid-tile ng-repeat="project in projects | searchTags:searchText"
+    md-row-height-gt-md="16:12" md-row-height="16:10"
+    md-gutter-gt-md="20px" md-gutter-gt-sm="8px" md-gutter="4px" style="margin-top:-118px; padding-top:30px; ">
+    <md-grid-tile ng-repeat="project in projects | searchTags:data.searchText" layout-align="center center"
         md-colspan-gt-sm="2"
         md-rowspan-gt-sm="2">
-        <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center" ng-click="openProject(project.name)">
-          <div layout-fill style="overflow:hidden;">
+        <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" ng-click="openProject(project.name)">
             <img ng-src="{{project['pages'][1].background}}" alt="{{project.name}}" style="width:100%;"/>
-          </div>
         </md-whiteframe>
     </md-grid-tile>
   </md-grid-list>
