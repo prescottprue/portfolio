@@ -7,7 +7,7 @@
       style="min-height:190px; padding-top:none;">
         <md-autocomplete
             md-search-text="data.searchText"
-            md-items="project in projects | searchTags:data.searchText"
+            md-items="project in projects | search:data.searchText"
             md-item-text="project.name"
             placeholder="Search to filter projects">
           <div project-info search-text="data.searchText" tags="project.tags" project="project"></div>
@@ -25,7 +25,7 @@
     md-cols-gt-md="8" md-cols-sm="1" md-cols-md="4"
     md-row-height-gt-md="16:10" md-row-height="16:10"
     md-gutter-gt-md="20px" md-gutter-gt-sm="8px" md-gutter="4px" style="margin-top:-118px; padding-top:30px; ">
-    <md-grid-tile ng-repeat="project in projects | searchTags:data.searchText" layout-align="center center"
+    <md-grid-tile ng-repeat="project in projects | search:data.searchText" layout-align="center center"
         md-colspan-gt-sm="2"
         md-rowspan-gt-sm="2">
         <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" ng-click="openProject(project.name)">

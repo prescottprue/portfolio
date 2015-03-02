@@ -68,6 +68,46 @@ angular.module('portfolioApp')
     var self = _.extend(this, dataSnap.val());
     return self;
   }
+  Project.prototype.matchesSearch = function(query){
+    var self = this;
+    if(query && _.isString(query)){
+      var letterMatch = new RegExp(query, 'i');
+      if (letterMatch.test(self.name.substring(0, query.length))) {
+          return true;
+      }
+      //Single tag
+      if(itemContainsTag(query)){
+        return true;
+      }
+      return false;
+    }
+    return false;
+
+    function itemContainsTag(tagStr){
+      var qArray = tagStr.split(",");
+      if(qArray.length > 1) {
+        //multiple tags
+        //_.some would show projects that contain any of the tags
+        return _.every(qArray, function(tag){
+          return checkItemForTag(self, tag);
+        });
+      }
+      //Single tag
+      return checkItemForTag(self, query);
+    }
+    function checkItemForTag(item, tagStr) {
+      if(tagStr == "" || tagStr == " ") return true;
+      var letterMatch = new RegExp(tagStr, 'i');
+      if(_.has(item, "tags") && _.isArray(item.tags)) {
+        // _.some finds if item contains tag
+        var containsTag = _.some(item.tags, function(tag){
+          return letterMatch.test(tag.substring(0, tagStr.length));
+        });
+        return containsTag;
+      }
+      return false;
+    }
+  };
   Project.prototype.matchingTagsString = function(query){
     if(query){
       return this.matchingTags(query).join(", ");
@@ -107,6 +147,11 @@ angular.module('portfolioApp')
       return $FirebaseArray.$extendFactory({
         $$added:function(snap){
           return new Project(snap);
+        },
+        matchingProjects:function(qStr){
+          if(qStr && _.isString(qStr)){
+
+          }
         }
       });
     }

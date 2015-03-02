@@ -22,6 +22,16 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial',
      .primaryPalette('blue')
      .accentPalette('pink');
 })
+.filter('search', function(projectService){
+  return function (items, query) {
+    if(query && _.isString){
+      return _.filter(items, function(item){
+        return item.matchesSearch(query);
+      })
+    }
+    return items;
+  };
+})
 .filter('searchName', function($window){
   return function (items, query) {
     var filtered = [];
@@ -75,49 +85,6 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial',
     return items;
   };
 })
-/** Returns the tags of the item that matche the query
- * @params {Array} items Item to search tags of
- * @params {String} tagsStr tags seperated by ", "
- * @returns {Boolean} whether or not the item contains a tag
- */
-// .filter('matchingTags', function(){
-//   /** Returns the tags of the item that matche the query
-//    * @params {Object} item Item to search tags of
-//    * @params {String} tagsStr tags seperated by ", "
-//    * @returns {Boolean} whether or not the item contains a tag
-//    */
-//   function matchingTags(itemTags, qStr) {
-//     if(!itemTags || !qStr || qStr == "" || qStr == " ") return [];
-//     var letterMatch = new RegExp(qStr, 'i');
-//     if(_.isArray(itemTags)) {
-//       // _.some finds if item contains tag
-//       var matchingTags = _.filter(itemTags, function(tag){
-//         return letterMatch.test(tag.substring(0, qStr.length));
-//       });
-//       console.log('returning matching tags:', matchingTags);
-//       return matchingTags;
-//     }
-//     console.log('item tags is not an array', itemTags);
-//     return [];
-//   }
-//   return function (itemTags, query) {
-//     console.log('itemTags:', itemTags, query);
-//     if(query && _.isString(query)){
-//       var qTagsArray = query.split(",");
-//         if(qTagsArray.length > 1) {
-//           //multiple tags
-//           //_.some would show projects that contain any of the tags
-//           return _.filter(qTagsArray, function(tag){
-//             return matchingTags(itemTags, tag);
-//           }).join(", ");
-//         }
-//         //Single tag
-//         return matchingTags(itemTags, query).join(", ");
-//     }
-//     //Query is null
-//     return null;
-//   };
-// })
 .directive('projectInfo', function(){
   return {
     template:'<span md-highlight-text="searchText" style="padding-right:5px;">{{project.name}}</span><span md-highlight-text="searchText" style="font-size:.8em;" ng-repeat="tag in matchingTags track by $index">{{tag}}</span>',
