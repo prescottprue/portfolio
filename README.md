@@ -6,27 +6,14 @@ This application, which is available at [prescottprue.com](http://prescottprue.c
 
   Run `grunt` to start a server locally.
 
-## Projects
+## Dependencies
 
-### Pyro
+* [AngularJS](http://angularjs.org)
+* [Angular Material](https://material.angularjs.org/#/)
 
-[pyrolabs.io](https://pyrolabs.io)
+### Development
 
-Learn programming by building your first app.
-
-### Basilar
-
-Custom controller design brought to life through the power of parametric modeling.
-
-### Misc
-
-Escollate
-Echo
-Wakeboard Tower
-Garbage Bot
-Hearthub
-Dyml
-Kyper
+* [Gruntjs](http://gruntjs.com)
 
 ## License
 

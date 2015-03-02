@@ -70,10 +70,9 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-
 		watch: {
 			main: {
-				files: [ 'Gruntfile.js', 'dev/**' ],
+				files: [ 'Gruntfile.js', 'dev/templates/*.html', 'dev/index.html', 'dev/js/**', 'dev/styles/**' ],
 				options:{
 					livereload:35729
 				}
@@ -81,7 +80,29 @@ module.exports = function(grunt) {
 			theme: {
 				files: [ 'css/theme/source/*.scss', 'css/theme/template/*.scss' ],
 				tasks: 'themes'
+			},
+			bower: {
+				files: [ 'bower.json'],
+				tasks: 'wiredep'
 			}
+		},
+
+		wiredep: {
+
+		  task: {
+
+		    // Point to the files that should be updated when
+		    // you run `grunt wiredep`
+		    src: [
+		      'dev/index.html',   // .html support...
+		    ],
+		    options: {
+		      // See wiredep's configuration documentation for the options
+		      // you may pass:
+
+		      // https://github.com/taptapship/wiredep#configuration
+		    }
+		  }
 		},
     aws_s3:{
       production:{
@@ -146,15 +167,7 @@ module.exports = function(grunt) {
 	});
 
 	// Dependencies
-	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
-	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-	grunt.loadNpmTasks( 'grunt-contrib-watch' );
-	grunt.loadNpmTasks( 'grunt-contrib-connect' );
-  grunt.loadNpmTasks('grunt-aws-s3');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  // grunt.loadNpmTasks('grunt-contrib-compass');
+	require('load-grunt-tasks')(grunt);
 	// Default task
 	grunt.registerTask( 'default', ['connect', 'watch'] );
 
