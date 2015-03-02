@@ -13,14 +13,14 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial',
   })
   .state('project', {
     parent:'navbar',
-    url: '/:pName',
+    url: '/projects/:pName',
     templateUrl: 'components/project/project-index.html',
     controller:'ProjectCtrl'
   })
   .state('contact', {
     parent:'navbar',
     url: '/contact',
-    templateUrl: 'templates/contact.html',
+    templateUrl: 'components/contact/contact-index.html',
     controller:'ContactCtrl'
   })
   $urlRouterProvider.otherwise("/");

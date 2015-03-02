@@ -72,7 +72,7 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			main: {
-				files: [ 'Gruntfile.js', 'dev/templates/*.html', 'dev/index.html', 'dev/js/**', 'dev/styles/**' ],
+				files: [ 'Gruntfile.js', 'dev/templates/*.html', 'dev/index.html', 'dev/js/**', 'dev/styles/**', 'dev/components/**'  ],
 				options:{
 					livereload:35729
 				}
