@@ -1,19 +1,31 @@
 # Personal Portfolio Page
 
-This application, which is available at [prescottprue.com](http://prescottprue.com) is a portfolio page that includes my personal projects.
+  This application, which is available at [prescottprue.com](http://prescottprue.com) is a portfolio page that includes projects I have started or been involved with.
 
 ## Development
 
   Run `grunt` to start a server locally.
 
+## Staging
+
+  [Staging version](https://s3-us-west-2.amazonaws.com/prescottprue.com/staging/1.0.0/index.html) built uploaded via `grunt stage`
+
+**Note:** Uploading requires either a `env.json` file or Path Variable to set S3 Bucket and Key. 
+
+## Project Data
+
+  Project data is stored with a firebase named *Prue* that is located at [prue.firebaseio.com](https://prue.firebaseio.com). Security rules have been implemented to keep project data from being edited by others.
+
 ## Dependencies
 
-* [AngularJS](http://angularjs.org)
-* [Angular Material](https://material.angularjs.org/#/)
+  * [AngularJS](http://angularjs.org)
+  * [Angular Material](https://material.angularjs.org/#/)
+  * [AngularFire](https://www.firebase.com/docs/web/libraries/angular/api.html)
+  * [Firebase](http://firebase.com)
 
 ### Development
 
-* [Gruntjs](http://gruntjs.com)
+* [GruntJS](http://gruntjs.com)
 
 ## License
 
