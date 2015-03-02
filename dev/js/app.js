@@ -125,6 +125,8 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial',
       $scope.$watch('searchText', function(newVal, oldVal){
         $timeout(function(){
           if(angular.isDefined($scope.tags)){
+            //[TODO] Find the fastest method here
+            // $scope.matchingTags = $scope.project.matchingTagsString(newVal); // Seems to be slower than service function
             $scope.matchingTags = projectService.findMatchingTags($scope.tags, newVal);
             // console.log('matching tags:', $scope.matchingTags);
           }

@@ -2,7 +2,11 @@ angular.module('portfolioApp')
   .controller('MainCtrl', function($scope, $mdDialog, projectService){
     console.log('Main controller');
     $scope.data = {searchText:null};
-    $scope.projects = projectService.projects;
+    projectService.getProjects().then(function(loadedProjects){
+      $scope.projects = loadedProjects;
+      console.log('projects loaded:', $scope.projects);
+
+    });
     $scope.commonTags = ['engineering', 'programming', 'javascript', 'volunteering'];
     $scope.data.selectedTags = null;
     $scope.openProject = function(name, ev){
