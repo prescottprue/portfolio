@@ -2,8 +2,7 @@
   <!-- Search -->
     <md-content class="md-padding" layout="row" layout-fill layout-align="cetner" flex>
       <!-- <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center"> -->
-
-      <md-content class="md-padding no-background" layout="column" layout-fill layout-align="cetner" flex
+      <md-content class="md-padding " layout="column" layout-fill layout-align="cetner" flex
       style="min-height:190px; padding-top:none;">
         <md-autocomplete
             md-search-text="data.searchText"
@@ -28,7 +27,7 @@
     <md-grid-tile ng-repeat="project in projects | search:data.searchText" layout-align="center center"
         md-colspan-gt-sm="2"
         md-rowspan-gt-sm="2">
-        <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" ng-click="openProject(project.name)">
+        <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" ng-click="openProject($index)">
             <img ng-src="{{project['pages'][1].background}}" alt="{{project.name}}" style="width:100%;"/>
         </md-whiteframe>
     </md-grid-tile>

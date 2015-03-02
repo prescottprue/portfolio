@@ -1,28 +1,18 @@
 angular.module('portfolioApp')
-  .controller('MainCtrl', function($scope, $mdDialog, projectService){
-    console.log('Main controller');
+  .controller('HomeCtrl', function($scope, $mdDialog, projectService){
+    console.log('Home controller');
     $scope.data = {searchText:null};
     projectService.getProjects().then(function(loadedProjects){
       $scope.projects = loadedProjects;
       console.log('projects loaded:', $scope.projects);
-
     });
     $scope.commonTags = ['engineering', 'programming', 'javascript', 'volunteering'];
     $scope.data.selectedTags = null;
-    $scope.openProject = function(name, ev){
-      $scope.project = projectService.setCurrentProject({name:name});
-      // $state.go('')
-      // $mdDialog.show(
-      //   $mdDialog.alert()
-      //     .title('This is an alert title')
-      //     .content('You can specify some description text in here.')
-      //     .ariaLabel('Password notification')
-      //     .ok('Got it!')
-      //     .targetEvent(ev)
-      // );
+    $scope.openProject = function(ind, ev){
+      $scope.project = projectService.setCurrentProject($scope.projects[ind]);
       $mdDialog.show({
         controller: DialogController,
-        templateUrl: 'templates/project-dialog.html',
+        templateUrl: 'components/home/home-dialog.html',
         targetEvent: ev,
       }).then(function() {
 
@@ -51,10 +41,7 @@ angular.module('portfolioApp')
     };
   })
 
-  .controller('ProjectCtrl', function($scope, $mdDialog, $stateParams, projectService){
-    console.log('Project controller');
-    $scope.project = projectService.getCurrentProject();
-  })
+
   function DialogController($scope, $mdDialog, projectService, $state, $stateParams) {
     $scope.project = projectService.getCurrentProject({name:$stateParams.pName});
     $scope.hide = function() {
