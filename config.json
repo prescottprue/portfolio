@@ -1,5 +1,6 @@
 {
   "port":9000,
   "devFolder":"dev",
-  "distFolder":"dist"
+  "distFolder":"dist",
+  "imageFolder":"images"
 }
