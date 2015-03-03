@@ -1,5 +1,5 @@
 angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial', 'firebase'])
-.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider){
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $locationProvider){
   $stateProvider
   .state('navbar', {
     templateUrl: 'templates/navbar.html',
