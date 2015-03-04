@@ -1,6 +1,8 @@
 angular.module('portfolioApp')
 
-.controller('ProjectCtrl', function($scope, $mdDialog, $stateParams, projectService){
+.controller('ProjectCtrl', function($scope, $mdDialog, $stateParams, projectService, $stateParams){
   console.log('Project controller');
-  $scope.project = projectService.getCurrentProject();
+  projectService.getCurrentProject({url:$stateParams.pName}).then(function(project){
+  	$scope.project = project;
+  })
 })

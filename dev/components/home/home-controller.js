@@ -8,12 +8,12 @@ angular.module('portfolioApp')
     });
     $scope.commonTags = ['engineering', 'programming', 'javascript', 'volunteering'];
     $scope.data.selectedTags = null;
-    $scope.openProject = function(ind, ev){
-      $scope.project = projectService.setCurrentProject($scope.projects[ind]);
+    $scope.openProject = function(key){
+      console.log("open project:", key);
+      $scope.project = projectService.getProject(key);
       $mdDialog.show({
         controller: DialogController,
         templateUrl: 'components/home/home-dialog.html',
-        targetEvent: ev,
       }).then(function() {
 
       }, function() {
@@ -43,7 +43,9 @@ angular.module('portfolioApp')
 
 
   function DialogController($scope, $mdDialog, projectService, $state, $stateParams) {
-    $scope.project = projectService.getCurrentProject({name:$stateParams.pName});
+    projectService.getCurrentProject({url:$stateParams.pName}).then(function(project){
+      $scope.project = project;
+    });
     $scope.hide = function() {
       $mdDialog.hide();
     };
