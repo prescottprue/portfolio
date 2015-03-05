@@ -4,14 +4,15 @@
       <span class="md-flex">{{project.name}}</span>
     </div>
   </md-toolbar>
-  <md-content layout="row">
+    <md-content layout="row">
     <md-content flex="55">
       <p>
-        {{project.pages[0].caption}}
+        {{project.intro || project.description}}
+
       </p>
     </md-content>
     <md-content layout-align="center" layout-padding layout-fill>
-      <img  style="width:100%;" src="{{project.pages[0].background || project.pages[0].image.url}}" flex>
+      <img  style="width:100%;" src="{{project.pictures[0].image.url}}" flex>
     </md-content>
   </md-content>
   <div class="md-actions" layout="row">
