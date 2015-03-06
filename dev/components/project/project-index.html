@@ -17,39 +17,38 @@
         <p>{{project.description}}</p>
       </div>
     <md-list>
-      <md-item ng-repeat="section in project.pictures">
-        <md-item-content ng-if="$first">
+      <md-item ng-repeat="section in project.pictures" layout="column" flex layout-wrap>
+        <!-- <md-item-content ng-if="$first" layout-fill>
           <div class="md-tile-content" layout="row" layout-align="center">
             <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
                  <img style="{{section.image.style || 'max-height:350px; width:auto;'}}" ng-src="{{section.image.url}}" offset="20">
              </md-whiteframe>
           </div>
-        </md-item-content>
-        <md-item-content ng-if="$even && !first">
-          <div class="md-tile-content" layout="row" flex >
-            <div flex="50" layout-padding layout-wrap>
-              <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" flex>
-                <img style="{{section.image.style || 'max-height:500px;'}}" ng-src="{{section.image.url}}">
+        </md-item-content> -->
+        <md-item-content ng-if="$even">
+          <div class="md-tile-content" layout="row" layout-padding layout-wrap layout-fill>
+            <div flex="50" >
+              <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
+                <img style="{{section.image.style || 'min-width:100px; max-height:500px;'}}" ng-src="{{section.image.url}}">
               </md-whiteframe>
             </div>
             <div flex="50" layout-padding>
               <p flex>
-                {{section.caption}}
+                {{section.caption || 'Image Caption'}}
               </p>
             </>
           </div>
         </md-item-content>
-        <md-item-content ng-if="$odd && !first">
-          <div class="md-tile-content" layout="row" flex >
-
+        <md-item-content ng-if="$odd">
+          <div class="md-tile-content" layout="row" layout-padding layout-wrap layout-fill>
             <div flex="50" layout-padding>
               <p flex>
                 {{section.caption}}
               </p>
             </>
           </div>
-          <div flex="50" layout-padding>
-            <md-whiteframe class="md-whiteframe-z1 background-fill" layout layout-align="center center" flex>
+          <div flex="50" layout-padding layout-wrap>
+            <md-whiteframe class="md-whiteframe-z1 background-fill" layout layout-align="center center">
               <img style="{{section.image.style || 'max-width:500px;'}}" ng-src="{{section.image.url}}">
             </md-whiteframe>
           </div>
