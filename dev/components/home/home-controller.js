@@ -1,5 +1,5 @@
 angular.module('portfolioApp')
-  .controller('HomeCtrl', function($scope, $mdDialog, projectService, Project){
+  .controller('HomeCtrl', function($scope, $mdDialog, projectService, Project, $state){
     console.log('Home controller');
     $scope.data = {searchText:null};
     projectService.getProjects().then(function(loadedProjects){
@@ -20,6 +20,11 @@ angular.module('portfolioApp')
       }, function() {
 
       });
+    };
+    $scope.setProject = function(key){
+      console.log("open project:", key);
+      $scope.project = projectService.setCurrentProject(key);
+      $state.go('project', {pName:key});
     };
     $scope.closeProject = function (){
       $scope.currentProject = null;

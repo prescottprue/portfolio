@@ -5,6 +5,7 @@ angular.module('portfolioApp')
   return {
     template:'<span md-highlight-text="searchText" style="padding-right:5px;">{{project.name}}</span><span md-highlight-text="searchText" style="font-size:.8em;" ng-repeat="tag in matchingTags track by $index">{{tag}}</span>',
     controller: function($scope, projectService,$timeout){
+
       $scope.$watch('searchText', function(newVal, oldVal){
         $timeout(function(){
           if(angular.isDefined($scope.tags)){

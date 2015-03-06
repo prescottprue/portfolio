@@ -69,8 +69,11 @@ angular.module('portfolioApp')
       }
       var projectRef = new Firebase(FBURL + "/portfolio/projects/"+pName);
       projectRef.on('value', function(projectSnap){
-        deferred.resolve(new Project(projectSnap));
-      }, function(){}, this);
+        currentProject = new Project(projectSnap)
+        deferred.resolve(currentProject);
+      }, function(err){
+        deferred.reject(err);
+      });
       return deferred.promise;
     },
   }

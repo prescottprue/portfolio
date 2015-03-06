@@ -8,8 +8,9 @@
             md-search-text="data.searchText"
             md-items="project in projects | search:data.searchText"
             md-item-text="project.name"
+            md-selected-item="data.selectedProjects"
             placeholder="Search to filter projects">
-          <div project-info search-text="data.searchText" tags="project.tags" project="project" ng-click="openProject(project.$getRecord($index))"></div>
+          <div project-info search-text="data.searchText" tags="project.tags" project="project"  ></div>
         </md-autocomplete>
       </br>
       </md-content>
