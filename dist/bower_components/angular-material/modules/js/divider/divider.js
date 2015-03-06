@@ -1,1 +1,0 @@
-!function(){"use strict";function a(){}function b(b){return{restrict:"E",link:b,controller:[a]}}angular.module("material.components.divider",["material.core"]).directive("mdDivider",b),b.$inject=["$mdTheming"]}();

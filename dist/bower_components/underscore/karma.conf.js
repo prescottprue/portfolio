@@ -1,1 +1,0 @@
-module.exports=function(a){a.set({basePath:"",frameworks:["qunit"],logLevel:a.LOG_INFO,port:9876,files:["test/vendor/qunit-extras.js","underscore.js","test/*.js"],reporters:["progress"],browsers:["PhantomJS"],singleRun:!0})};

@@ -169,7 +169,6 @@ angular.module('portfolioApp')
 .factory('ProjectFactory', function($firebaseObject, Project, FBURL){
   var ref = new Firebase(FBURL + "/portfolio/projects");
   var extendedProject = $firebaseObject.$extend(Project);
-
   return function(pKey){
     if(pKey){
       ref = ref.child(pKey);

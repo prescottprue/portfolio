@@ -112,15 +112,24 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				// Target-specific file lists and/or options go here.
-				files:[{expand: true, src:['<%= config.distFolder %>/**/*.js']}]
+				files:[{expand: true, src:['<%= config.distFolder %>/components/**/*.js', '<%= config.distFolder %>/js/**/*.js']}]
 			},
 		},
     uglify: {
+
 	    dist: {
+				options: {
+					// mangle: false
+				},
 	      files: [{
 	          expand: true,
 	          cwd: '<%= config.distFolder %>',
-	          src: '**/*.js',
+	          src: 'components/**/*.js',
+	          dest: '<%= config.distFolder %>'
+	      }, {
+	          expand: true,
+	          cwd: '<%= config.distFolder %>',
+	          src: 'js/**/*.js',
 	          dest: '<%= config.distFolder %>'
 	      }]
 	    }

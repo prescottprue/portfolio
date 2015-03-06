@@ -1,1 +1,0 @@
-goog.provide("ng.material.components.swipe"),function(){"use strict";var a=angular.module("material.components.swipe",[]);["SwipeLeft","SwipeRight"].forEach(function(b){var c="md"+b,d="$md."+b.toLowerCase();a.directive(c,["$parse",function(a){function b(b,e,f){var g=a(f[c]);e.on(d,function(a){b.$apply(function(){g(b,{$event:a})})})}return{restrict:"A",link:b}}])})}();

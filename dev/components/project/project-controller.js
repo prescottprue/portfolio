@@ -1,8 +1,9 @@
 angular.module('portfolioApp')
 
-.controller('ProjectCtrl', function($scope, $mdDialog, $stateParams, projectService, $stateParams, $location){
+.controller('ProjectCtrl', function($scope, $mdDialog, $stateParams, projectService, $stateParams, $location, $analytics){
   console.log('Project controller');
   $scope.data = {error:null, loading:true};
+  $analytics.eventTrack('ProjectLoaded', {  category: 'Projects', label: 'Successful loading of controller' });
   projectService.getCurrentProject($stateParams.pKey).then(function(project){
     console.log('project loaded:', project);
     $scope.data.loading = false;
