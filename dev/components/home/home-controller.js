@@ -10,8 +10,8 @@ angular.module('portfolioApp')
     $scope.commonTags = ['engineering', 'programming', 'javascript', 'volunteering'];
     $scope.data.selectedTags = null;
     $scope.openProject = function(ind){
-      console.log("open project:", $scope.projects.$keyAt(ind));
-      $scope.project = Project($scope.projects.$keyAt(ind));
+      console.log("open project:", $scope.projects[ind]);
+      $scope.project = projectService.setCurrentProject($scope.projects[ind]);
       $mdDialog.show({
         controller: DialogController,
         templateUrl: 'components/home/home-dialog.html',
