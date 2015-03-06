@@ -1,1 +1,1 @@
-angular.module("portfolioApp").constant("FBURL","https://prue.firebaseio.com").factory("af",["$firebase","FBURL",function(a,b){function c(){var a=new Firebase(b),c=Array.prototype.slice.call(arguments);return c.length&&(a=a.child(d(c))),a}function d(a){for(var b=0;b<a.length;b++)if(angular.isArray(a[b]))a[b]=d(a[b]);else if("string"!=typeof a[b])throw new Error("Argument "+b+" to firebaseRef is not a string: "+a[b]);return a.join("/")}return function(b,d){return d?a(c(b),d):a(c(b))}}]);
+angular.module("portfolioApp").constant("FBURL","https://prue.firebaseio.com");

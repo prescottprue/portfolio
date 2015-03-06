@@ -1,1 +1,1 @@
-angular.module("portfolioApp").controller("ProjectCtrl",["$scope","$mdDialog","$stateParams","projectService","$stateParams",function(a,b,c,d,c){console.log("Project controller"),d.getCurrentProject({url:c.pName}).then(function(b){a.project=b})}]);
+angular.module("portfolioApp").controller("ProjectCtrl",["$scope","$mdDialog","$stateParams","projectService","$stateParams",function(a,b,c,d,c){console.log("Project controller"),d.getCurrentProject(c.pName).then(function(b){console.log("project:",b),a.project=b})}]);

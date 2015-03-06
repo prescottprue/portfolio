@@ -13,7 +13,7 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial',
   })
   .state('project', {
     parent:'navbar',
-    url: '/projects/:pName',
+    url: '/projects/:pKey',
     templateUrl: 'components/project/project-index.html',
     controller:'ProjectCtrl'
   })

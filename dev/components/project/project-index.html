@@ -34,7 +34,15 @@
   <md-content flex class="md-padding">
     <div layout="column" layout-fill layout-align="center center">
     <md-list>
+      <md-item>
+        <md-item-content layout="row" flex>
+          <md-button mg-no-ink class="md-primary" ng-repeat="link in project.links" ng-href="{{link.path}}">
+            {{link.name}}
+          </md-button>
+        </md-item-content>
+      </md-item>
       <md-item ng-repeat="section in project.pictures">
+
         <md-item-content ng-if="$first">
           <div class="md-tile-content" layout="row" layout-align="center">
             <img style="{{section.image.style}}" ng-src="{{section.image.url}}" flex="60" offset="20">
