@@ -9,9 +9,12 @@
   <md-content flex class="md-padding" layout-fill>
     <div layout="column" layout-fill layout-align="center center">
       <div layout="row" layout-fill layout-align="space-around center">
-        <md-button mg-no-ink class="md-warn" ng-repeat="link in project.links" ng-href="{{link.path}}">
+        <md-button mg-no-ink class="md-warn" ng-repeat="link in project.links" href="{{link.path}}">
           {{link.name}}
         </md-button>
+      </div>
+      <div layout="column" layout-fill layout-align="space-around center">
+        <p>{{project.description}}</p>
       </div>
     <md-list>
       <md-item ng-repeat="section in project.pictures">

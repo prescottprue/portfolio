@@ -162,11 +162,11 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'test', [ 'build', 'connect:dist', 'watch' ] );
 
 	grunt.registerTask('images', ['aws_s3:images']);
-	
+
 	grunt.registerTask( 'build', ['copy', 'ngAnnotate', 'uglify:dist', 'htmlmin:dist', 'cssmin' ] );
 
   grunt.registerTask( 'stage', [ 'build', 'aws_s3:staging' ] );
 
-  grunt.registerTask( 'release', [ 'aws_s3:production', 'uglify:dist' ] );
+  grunt.registerTask( 'release', [ 'build','uglify:dist','aws_s3:production'  ] );
 
 };
