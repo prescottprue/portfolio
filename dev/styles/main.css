@@ -11,7 +11,8 @@
   background: none !important;
 }
 .background-fill {
-  background:rgb(97, 97, 97);
+  background:rgb(97, 97, 97) !important;
+  background-color:rgb(97, 97, 97) !important;
 }
 .social{
   margin-top:30px;

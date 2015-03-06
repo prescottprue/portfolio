@@ -20,17 +20,23 @@
       </md-select>
     </md-content>
   <!-- </md-whiteframe> -->
-  <!-- Project Images -->
-  <md-grid-list class="background-fill"
-    md-cols-gt-md="8" md-cols-sm="1" md-cols-md="4"
-    md-row-height-gt-md="16:10" md-row-height="16:10"
-    md-gutter-gt-md="20px" md-gutter-gt-sm="8px" md-gutter="4px" style="margin-top:-118px; padding-top:30px; ">
-    <md-grid-tile ng-repeat="project in projects | search:data.searchText" layout-align="center center"
-        md-colspan-gt-sm="2"
-        md-rowspan-gt-sm="2">
-        <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" ng-click="openProject($index)">
-            <img ng-src="{{project['pictures'][1].image.url}}" alt="{{project.name}}" style="width:100%;"/>
-        </md-whiteframe>
-    </md-grid-tile>
-  </md-grid-list>
+  <md-content class="background-fill" ng-show="data.loading" layout="row" layout-align="space-around" style="margin-top:-118px; padding-top:100px; height:200px;">
+    <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+  </md-content>
+
+    <!-- Project Images -->
+    <md-grid-list class="background-fill" ng-show="!data.loading"
+      md-cols-gt-md="8" md-cols-sm="2" md-cols-md="4"
+      md-row-height-gt-md="16:9" md-row-height="16:9"
+      md-gutter-gt-md="30px" md-gutter-gt-sm="20px" md-gutter="30px" style="margin-top:-118px; padding-top:30px;">
+      <md-grid-tile ng-repeat="project in projects | search:data.searchText" layout-align="center center"
+          md-colspan-gt-sm="2"
+          md-colspan-sm="2"
+          md-rowspan-sm="2"
+          md-rowspan-gt-sm="2" layout-wrap>
+          <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" ng-click="openProject($index)" flex>
+              <img ng-src="{{project['pictures'][1].image.url}}" alt="{{project.name}}" style="width:100%;"/>
+          </md-whiteframe>
+      </md-grid-tile>
+    </md-grid-list>
 </md-content>

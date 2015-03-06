@@ -1,12 +1,11 @@
 angular.module('portfolioApp')
   .controller('HomeCtrl', function($scope, $mdDialog, projectService, $state){
     console.log('Home controller');
-    $scope.data = {searchText:null};
-    $scope.data.selectedTags = null;
-    $scope.data.error = null;
+    $scope.data = {searchText:null, loading:true, error:null, selectedTags:null};
     $scope.commonTags = ['engineering', 'programming', 'javascript', 'volunteering'];
     projectService.getProjects().then(function(loadedProjects){
       $scope.projects = loadedProjects;
+      $scope.data.loading = false;
       console.log('projects loaded:', $scope.projects);
     });
     $scope.openProject = function(ind){
