@@ -1,0 +1,1 @@
+function MenuProvider(a){function b(){}return a("$mdMenu").setDefaults({methods:["placement"],options:b})}goog.provide("ng.material.components.menu"),angular.module("material.components.menu",[]).factory("$mdMenu",MenuProvider),MenuProvider.$inject=["$$interimElementProvider"];

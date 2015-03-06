@@ -1,69 +1,94 @@
-angular.module('portfolioApp', ['picardy.fontawesome'])
-// .directive('slide', function(){
-//   return{
-//     template:'<section class="reveal_section"></section>',
-//     link:function(){
-//
-//     }
-//   }
-// })
-.directive('portfolio', function() {
-  return {
-    scope: {
-      projects: '=projects'
-    },
-    link: function(scope, elem, attrs) {
-      for (var i = 0; i < scope.projects.length; i++) {
-        var section = angular.element("<section>");
-        if(scope.projects[i].hasOwnProperty('background')){ //Project has background
-          section.attr('data-background', scope.projects[i].background);
-        }
-        //Include content from url if there are not pages
-        if(scope.projects[i].hasOwnProperty('contentUrl') && !scope.projects[i].hasOwnProperty('pages')){ //content url exists and pages dont
-          console.log('loading from url:', scope.projects[i].contentUrl);
-          section.addClass('reveal_section');
-          var contentElement = angular.element('<div>');
-          contentElement.attr('ng-include', scope.projects[i].contentUrl);
-          console.log('element:', contentElement);
-          section.append(contentElement);
-        }
-        //Include content from content param (in html) if there are not pages
-        if (scope.projects[i].hasOwnProperty('content') && !scope.projects[i].hasOwnProperty('pages')){ //content not pages
-          var content = angular.element(scope.projects[i].content);
-          section.append(content);
-        }
-        //Build Project pages
-        if(scope.projects[i].hasOwnProperty('pages')){ // Project contains pages
-          var pages = scope.projects[i].pages;
-          if (pages.length == 1) { //There is only one page
-            var content = angular.element("<h2>").html(scope.projects[i].name); //Project Name Element
-            section.append(content);
-          } else { //There are multiple pages
-            for (var j = 0; j < pages.length; j++) { //Loop through pages
-              var subSection = angular.element('<section>');
-              subSection.addClass('reveal_section');
-              if(pages[j].hasOwnProperty('background')) { //Page has background
-                subSection.attr('data-background', pages[j].background);
-              }
-              if(pages[j].hasOwnProperty('image')) { //Page has image
-                var img = angular.element('<img>');
-                img.attr('src', pages[j].image.url);
-                if(pages[j].image.hasOwnProperty('style')){
-                  img.attr('style', pages[j].image.style);
-                  subSection.append(img);
-                }
-              }
-              section.append(subSection); //Append page to project
-            }
-          }
-        }
-        elem.parent().append(section); //Append Project to slides
-      }
-      Reveal.initialize({
-        loop: false,
-        controls:false,
-        transition: Reveal.getQueryHash().transition || 'none'
-      });
-    }
-  }
+angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial', 'firebase'])
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $locationProvider){
+  $stateProvider
+  .state('navbar', {
+    templateUrl: 'templates/navbar.html',
+    abstract:true
+  })
+  .state('home', {
+    parent:'navbar',
+    url: '/',
+    templateUrl: 'components/home/home-index.html',
+    controller:'HomeCtrl'
+  })
+  .state('project', {
+    parent:'navbar',
+    url: '/projects/:pKey',
+    templateUrl: 'components/project/project-index.html',
+    controller:'ProjectCtrl'
+  })
+  .state('contact', {
+    parent:'navbar',
+    url: '/contact',
+    templateUrl: 'components/contact/contact-index.html',
+    controller:'ContactCtrl'
+  })
+  $urlRouterProvider.otherwise("/");
+  $mdThemingProvider.theme('default')
+     .primaryPalette('blue')
+     .accentPalette('red')
+     .warnPalette('indigo')
 })
+.filter('search', function(projectService){
+  return function (items, query) {
+    if(query && _.isString){
+      return _.filter(items, function(item){
+        return item.matchesSearch(query);
+      })
+    }
+    return items;
+  };
+})
+// .filter('searchName', function($window){
+//   return function (items, query) {
+//     var filtered = [];
+//     var letterMatch = new RegExp(query, 'i');
+//     var filtered = $window._.filter(items, function(item){
+//       if (letterMatch.test(item.name.substring(0, query.length))) {
+//           return true;
+//       }
+//       return false;
+//     })
+//
+//
+//     return filtered;
+//   };
+// })
+// .filter('searchTags', function($window){
+//   /** Check item parameters for a given tag
+//    * @params {Object} item Item to search tags of
+//    * @params {String} tagsStr tags seperated by ", "
+//    * @returns {Boolean} whether or not the item contains a tag
+//    */
+//   function checkItemForTag(item, tagStr) {
+//     if(tagStr == "" || tagStr == " ") return true;
+//     var letterMatch = new RegExp(tagStr, 'i');
+//     if(_.has(item, "tags") && _.isArray(item.tags)) {
+//       // _.some finds if item contains tag
+//       var containsTag = _.some(item.tags, function(tag){
+//         return letterMatch.test(tag.substring(0, tagStr.length));
+//       });
+//       return containsTag;
+//     }
+//     return false;
+//   }
+//
+//   return function (items, query) {
+//     if(query && _.isString(query)){
+//       var tagsArray = query.split(",");
+//       return _.filter(items, function(item){
+//         if(tagsArray.length > 1) {
+//           //multiple tags
+//           //_.some would show projects that contain any of the tags
+//           return _.every(tagsArray, function(tag){
+//             return checkItemForTag(item, tag);
+//           });
+//         }
+//         //Single tag
+//         return checkItemForTag(item, query);
+//       });
+//     }
+//     //Query is null
+//     return items;
+//   };
+// })

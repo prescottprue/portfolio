@@ -1,43 +1,9 @@
-/* global module:false */
 module.exports = function(grunt) {
 	// Project configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		config: grunt.file.readJSON('config.json'),
-		uglify: {
-			options: {
-				banner: '<%= meta.banner %>\n'
-			},
-			build: {
-				src: 'js/reveal.js',
-				dest: 'js/reveal.min.js'
-			}
-		},
-
-		cssmin: {
-			compress: {
-				files: {
-					'css/reveal.min.css': [ 'css/reveal.css' ]
-				}
-			}
-		},
-
-		// sass: {
-		// 	main: {
-		// 		files: {
-		// 			'css/theme/default.css': 'css/theme/source/default.scss',
-		// 			'css/theme/beige.css': 'css/theme/source/beige.scss',
-		// 			'css/theme/night.css': 'css/theme/source/night.scss',
-		// 			'css/theme/serif.css': 'css/theme/source/serif.scss',
-		// 			'css/theme/simple.css': 'css/theme/source/simple.scss',
-		// 			'css/theme/sky.css': 'css/theme/source/sky.scss',
-		// 			'css/theme/moon.css': 'css/theme/source/moon.scss',
-		// 			'css/theme/solarized.css': 'css/theme/source/solarized.scss',
-		// 			'css/theme/blood.css': 'css/theme/source/blood.scss'
-		// 		}
-		// 	}
-		// },
-
+		env: grunt.file.readJSON('env.json') || process.env,
 		jshint: {
 			options: {
 				curly: false,
@@ -58,40 +24,55 @@ module.exports = function(grunt) {
 					unescape: false
 				}
 			},
-			files: [ 'Gruntfile.js', 'js/reveal.js' ]
+			files: [ 'Gruntfile.js', '<%= config.devFolder %>/components/**/*.js' ]
 		},
-
 		connect: {
-			server: {
+			dev: {
 				options: {
-					port: '<%= config.port %>',
-					base: './dev/',
+					port: '<%= config.port %>' || 9000,
+					base: './<%= config.devFolder %>/' || './dev/',
+					livereload:true
+				}
+			},
+			dist: {
+				options: {
+					port: '<%= config.port %>' || 9000,
+					base: './<%= config.devFolder %>/' || './dev/',
 					livereload:true
 				}
 			}
 		},
-
 		watch: {
 			main: {
-				files: [ 'Gruntfile.js', 'dev/js/reveal.js', 'dev/styles/main.css', 'dev/index.html', 'dev/js/app.js', 'dev/js/app-controller.js' ],
-				tasks: 'default',
+				files: [ 'Gruntfile.js', '<%= config.devFolder %>/templates/*.html', '<%= config.devFolder %>/index.html', '<%= config.devFolder %>/js/**', '<%= config.devFolder %>/styles/**', '<%= config.devFolder %>/components/**'  ],
 				options:{
-					reload:true
+					livereload:35729
 				}
 			},
-			theme: {
-				files: [ 'css/theme/source/*.scss', 'css/theme/template/*.scss' ],
-				tasks: 'themes'
+			bower: {
+				files: [ 'bower.json'],
+				tasks: 'wiredep'
+			},
+			images: {
+				files: [ '<%= config.devFolder %>/img/**'],
+				tasks: 'aws_s3:images'
 			}
 		},
+		wiredep: {
+		  main: {
+		    src: ['<%= config.devFolder %>/index.html']
+		  }
+		},
     aws_s3:{
+			options:{
+				accessKeyId:'<%= env.AWSAccessKeyId %>' || process.env.AWS_ACCESS_KEY_ID, //Set these or have path variable
+				secretAccessKey: '<%= env.AWSSecretKey %>' || process.env.AWS_SECRET_ACCESS_KEY,
+				uploadConcurrency: 30
+			},
       production:{
         options: {
-          accessKeyId: '<%= config.AWSAccessKeyId %>',
-          secretAccessKey: '<%= config.AWSSecretKey %>',
-          bucket:'prescottprue.com',
-          uploadConcurrency: 30,
-          region:'us-west-2'
+          bucket:'<%= env.S3Bucket %>',
+					region:'us-west-2'
         },
         files:[
           {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''},
@@ -99,26 +80,48 @@ module.exports = function(grunt) {
         ]
       },
       staging:{
-        options: {
-          accessKeyId: '<%= config.AWSAccessKeyId %>',
-          secretAccessKey: '<%= config.AWSSecretKey %>',
-          bucket:'prescottprue.com',
-          uploadConcurrency: 30,
-          region:'us-west-2'
-        },
+				options: {
+					bucket:'<%= env.S3Bucket %>',
+					region:'us-west-2'
+				},
         files:[
-          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''},
-          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: 'staging/<%= pkg.version %>'}
+					// {'action': 'upload', expand: true, cwd: '<%= config.distFolder %>/', src: ['**'], dest: 'staging'},
+				{'action': 'upload', expand: true, cwd: '<%= config.distFolder %>', src: ['**'], dest: 'staging/<%= pkg.version %>'}
         ]
-      }
+      },
+			images:{
+				options: {
+					bucket:'<%= env.S3CDNBucket %>',
+				},
+				files:[
+					{'action': 'upload', expand: true, cwd: '<%= config.imageFolder %>', src: ['**'], dest: 'portfolio' , differential:true}
+				]
+			}
     },
+		copy:{
+			dist: {
+				files: [
+					{expand: true, cwd: './<%= config.devFolder %>/', src:'**', dest: '<%= config.distFolder %>/'},
+					// {expand: true, cwd: './<%= config.devFolder %>/docs', src:'**', dest: '<%= config.distFolder %>/docs'}
+				],
+			}
+		},
+		ngAnnotate:{
+			options: {
+				// Task-specific options go here.
+			},
+			dist: {
+				// Target-specific file lists and/or options go here.
+				files:[{expand: true, src:['<%= config.distFolder %>/**/*.js']}]
+			},
+		},
     uglify: {
 	    dist: {
 	      files: [{
 	          expand: true,
-	          cwd: 'dev/js',
+	          cwd: '<%= config.distFolder %>',
 	          src: '**/*.js',
-	          dest: 'dist/js'
+	          dest: '<%= config.distFolder %>'
 	      }]
 	    }
 	  },
@@ -129,7 +132,7 @@ module.exports = function(grunt) {
 	        collapseWhitespace: true
 	      },
 	      files: {                                   // Dictionary of files
-	        'dist/index.html': 'dev/index.html'   // 'destination': 'source'
+	        '<%= config.distFolder %>/index.html': '<%= config.devFolder %>/index.html'   // 'destination': 'source'
 	      }
 	    },
 	  },
@@ -137,42 +140,33 @@ module.exports = function(grunt) {
 		  target: {
 		    files: [{
 		      expand: true,
-		      cwd: 'dev/styles',
+		      cwd: '<%= config.devFolder %>/styles',
 		      src: ['**/*.css', '!**/*.min.css'],
-		      dest: 'dist/styles',
+		      dest: '<%= config.distFolder %>/styles',
 		    }]
 		  }
 		}
-
 	});
 
 	// Dependencies
-	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
-	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-	grunt.loadNpmTasks( 'grunt-contrib-watch' );
-	grunt.loadNpmTasks( 'grunt-contrib-connect' );
-  grunt.loadNpmTasks('grunt-aws-s3');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  // grunt.loadNpmTasks('grunt-contrib-compass');
+	require('load-grunt-tasks')(grunt);
 	// Default task
-	grunt.registerTask( 'default', ['connect', 'watch'] );
+	grunt.registerTask( 'default', ['connect:dev', 'watch'] );
 
 	// Theme task
 	grunt.registerTask( 'themes', [ 'sass' ] );
 
 	// Serve presentation locally
-	grunt.registerTask( 'serve', [ 'connect', 'watch' ] );
+	grunt.registerTask( 'serve', [ 'connect:dev', 'watch' ] );
 
-	grunt.registerTask( 'build', [ 'uglify:dist', 'htmlmin:dist', 'cssmin' ] );
+	grunt.registerTask( 'test', [ 'build', 'connect:dist', 'watch' ] );
 
-  grunt.registerTask( 'stage', [ 'htmlmin:dist', 'cssmin', 'uglify:dist', 'aws_s3:staging' ] );
+	grunt.registerTask('images', ['aws_s3:images']);
 
-  grunt.registerTask( 'release', [ 'aws_s3:production', 'uglify:dist' ] );
+	grunt.registerTask( 'build', ['copy', 'ngAnnotate', 'uglify:dist', 'htmlmin:dist', 'cssmin' ] );
 
+  grunt.registerTask( 'stage', [ 'build', 'aws_s3:staging' ] );
 
-	// Run tests
-	grunt.registerTask( 'test', [ 'jshint' ] );
+  grunt.registerTask( 'release', [ 'build','uglify:dist','aws_s3:production'  ] );
 
 };

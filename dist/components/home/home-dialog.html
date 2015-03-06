@@ -1,0 +1,26 @@
+<md-dialog aria-label="{{project.name}}">
+  <md-toolbar class="md-accent">
+    <div class="md-toolbar-tools">
+      <span class="md-flex">{{project.name}}</span>
+    </div>
+  </md-toolbar>
+    <md-content layout="row">
+    <md-content flex="55">
+      <p>
+        {{project.intro || project.description}}
+      </p>
+    </md-content>
+    <md-content layout-align="center" layout-padding layout-fill>
+      <img  style="width:100%;" src="{{project.pictures[0].image.url}}" flex>
+    </md-content>
+  </md-content>
+  <div class="md-actions" layout="row">
+    <span flex></span>
+    <md-button ng-click="detail(project)">
+     View Project Page
+    </md-button>
+    <md-button ng-click="cancel()" class="md-primary">
+      Close
+    </md-button>
+  </div>
+</md-dialog>
