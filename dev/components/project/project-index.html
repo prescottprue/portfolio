@@ -1,4 +1,4 @@
-<md-toolbar class="md-warn" >
+<md-toolbar class="md-accent" >
   <div class="md-toolbar-tools">
     <span flex></span>
     <span class="md-flex">{{project.name}}</span>
@@ -6,43 +6,15 @@
   </div>
 </md-toolbar>
 <section layout="row" flex>
-
-  <!-- <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
-    <md-toolbar class="md-warn">
-      <div class="md-toolbar-tools">
-        <span class="md-flex">{{project.name}}</span>
-      </div>
-    </md-toolbar>
-
-    <md-content class="md-padding">
-      <md-button ng-click="close()" class="md-primary" hide-gt-md>
-        Close Sidenav Left
-      </md-button>
-      <div hide-md show-gt-md ng-repeat="button in project.buttons">
-        <md-button  ng-click="close()" class="md-primary">
-          {{button.name}}
-        </md-button>
-      </div>
-      <md-button  ng-click="close()" class="md-primary" hide-gt-md>
-        Close Sidenav Left
-      </md-button>
-      <p hide-md show-gt-md>
-
-      </p>
-    </md-content>
-  </md-sidenav> -->
   <md-content flex class="md-padding">
     <div layout="column" layout-fill layout-align="center center">
+      <div layout="row" layout-fill layout-align="space-around center">
+        <md-button mg-no-ink class="md-warn" ng-repeat="link in project.links" ng-href="{{link.path}}">
+          {{link.name}}
+        </md-button>
+      </div>
     <md-list>
-      <md-item>
-        <md-item-content layout="row" flex>
-          <md-button mg-no-ink class="md-primary" ng-repeat="link in project.links" ng-href="{{link.path}}">
-            {{link.name}}
-          </md-button>
-        </md-item-content>
-      </md-item>
       <md-item ng-repeat="section in project.pictures">
-
         <md-item-content ng-if="$first">
           <div class="md-tile-content" layout="row" layout-align="center">
             <img style="{{section.image.style}}" ng-src="{{section.image.url}}" flex="60" offset="20">
@@ -61,4 +33,29 @@
     </md-list>
   </div>
   </md-content>
+
+    <!-- <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+      <md-toolbar class="md-warn">
+        <div class="md-toolbar-tools">
+          <span class="md-flex">{{project.name}}</span>
+        </div>
+      </md-toolbar>
+
+      <md-content class="md-padding">
+        <md-button ng-click="close()" class="md-primary" hide-gt-md>
+          Close Sidenav Left
+        </md-button>
+        <div hide-md show-gt-md ng-repeat="button in project.buttons">
+          <md-button  ng-click="close()" class="md-primary">
+            {{button.name}}
+          </md-button>
+        </div>
+        <md-button  ng-click="close()" class="md-primary" hide-gt-md>
+          Close Sidenav Left
+        </md-button>
+        <p hide-md show-gt-md>
+
+        </p>
+      </md-content>
+    </md-sidenav> -->
 </section>

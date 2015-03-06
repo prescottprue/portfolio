@@ -47,7 +47,6 @@ angular.module('portfolioApp')
     },
     getProject: function(ind){
       var deferred = $q.defer();
-
       if(!syncArray){
         this.getProjects().then(function(projectArray){
           deferred.resolve(projectArray.$getRecord(ind));
@@ -67,9 +66,12 @@ angular.module('portfolioApp')
       if(currentProject){
         deferred.resolve(currentProject);
       }
+      if(pName && syncArray){
+        syncArray.$getRecord(pName);
+      }
       var projectRef = new Firebase(FBURL + "/portfolio/projects/"+pName);
       projectRef.on('value', function(projectSnap){
-        currentProject = new Project(projectSnap)
+        currentProject = new Project(projectSnap);
         deferred.resolve(currentProject);
       }, function(err){
         deferred.reject(err);

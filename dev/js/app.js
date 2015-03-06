@@ -26,7 +26,8 @@ angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial',
   $urlRouterProvider.otherwise("/");
   $mdThemingProvider.theme('default')
      .primaryPalette('blue')
-     .accentPalette('pink');
+     .accentPalette('red')
+     .warnPalette('indigo')
 })
 .filter('search', function(projectService){
   return function (items, query) {
