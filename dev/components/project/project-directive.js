@@ -1,6 +1,7 @@
 angular.module('portfolioApp')
 
 .directive('projectInfo', function(){
+  // [TODO] Make this not be a watcher
   return {
     template:'<span md-highlight-text="searchText" style="padding-right:5px;">{{project.name}}</span><span md-highlight-text="searchText" style="font-size:.8em;" ng-repeat="tag in matchingTags track by $index">{{tag}}</span>',
     controller: function($scope, projectService,$timeout){

@@ -1,16 +1,17 @@
 angular.module('portfolioApp')
-  .controller('HomeCtrl', function($scope, $mdDialog, projectService){
+  .controller('HomeCtrl', function($scope, $mdDialog, projectService, Project){
     console.log('Home controller');
     $scope.data = {searchText:null};
     projectService.getProjects().then(function(loadedProjects){
       $scope.projects = loadedProjects;
       console.log('projects loaded:', $scope.projects);
+      // console.log('first project', ProjectFactory());
     });
     $scope.commonTags = ['engineering', 'programming', 'javascript', 'volunteering'];
     $scope.data.selectedTags = null;
-    $scope.openProject = function(key){
-      console.log("open project:", key);
-      $scope.project = projectService.getProject(key);
+    $scope.openProject = function(ind){
+      console.log("open project:", $scope.projects.$keyAt(ind));
+      $scope.project = Project($scope.projects.$keyAt(ind));
       $mdDialog.show({
         controller: DialogController,
         templateUrl: 'components/home/home-dialog.html',
@@ -43,7 +44,7 @@ angular.module('portfolioApp')
 
 
   function DialogController($scope, $mdDialog, projectService, $state, $stateParams) {
-    projectService.getCurrentProject({url:$stateParams.pName}).then(function(project){
+    projectService.getProject($stateParams.pName).then(function(project){
       $scope.project = project;
     });
     $scope.hide = function() {

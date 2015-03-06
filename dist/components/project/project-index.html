@@ -1,10 +1,19 @@
+<md-toolbar class="md-warn" >
+  <div class="md-toolbar-tools">
+    <span flex></span>
+    <span class="md-flex">{{project.name}}</span>
+    <span flex></span>
+  </div>
+</md-toolbar>
 <section layout="row" flex>
-  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+
+  <!-- <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
     <md-toolbar class="md-warn">
       <div class="md-toolbar-tools">
         <span class="md-flex">{{project.name}}</span>
       </div>
     </md-toolbar>
+
     <md-content class="md-padding">
       <md-button ng-click="close()" class="md-primary" hide-gt-md>
         Close Sidenav Left
@@ -21,16 +30,21 @@
 
       </p>
     </md-content>
-  </md-sidenav>
+  </md-sidenav> -->
   <md-content flex class="md-padding">
     <div layout="column" layout-fill layout-align="center center">
     <md-list>
-      <md-item ng-repeat="page in project.pages">
-        <md-item-content>
-          <div class="md-tile-content" layout="column">
-            <img style="margin: auto; max-width: 100%;" ng-src="{{page.background || page.image.url}}">
-            <p>
-              {{page.caption}}
+      <md-item ng-repeat="section in project.pictures">
+        <md-item-content ng-if="$first">
+          <div class="md-tile-content" layout="row" layout-align="center">
+            <img style="{{section.image.style}}" ng-src="{{section.image.url}}" flex="60" offset="20">
+          </div>
+        </md-item-content>
+        <md-item-content ng-if="!$first">
+          <div class="md-tile-content" layout="row">
+            <img style="{{section.image.style}}" ng-src="{{section.image.url}}" flex="60">
+            <p flex="40">
+              {{section.caption}}
             </p>
           </div>
           <md-divider ng-if="!$last"></md-divider>
