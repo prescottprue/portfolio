@@ -75,7 +75,7 @@ module.exports = function(grunt) {
 					region:'us-west-2'
         },
         files:[
-          {'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: ''},
+			{'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: '', differential:true},
           // {'action': 'upload', expand: true, cwd: 'dist/', src: ['**'], dest: '<%= pkg.version %>'},
         ]
       },
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
 				},
         files:[
 					// {'action': 'upload', expand: true, cwd: '<%= config.distFolder %>/', src: ['**'], dest: 'staging'},
-				{'action': 'upload', expand: true, cwd: '<%= config.distFolder %>', src: ['**'], dest: 'staging/<%= pkg.version %>'}
+				{'action': 'upload', expand: true, cwd: '<%= config.distFolder %>', src: ['**'], dest: 'staging/<%= pkg.version %>', differential:true}
         ]
       },
 			images:{

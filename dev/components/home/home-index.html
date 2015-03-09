@@ -1,9 +1,9 @@
 <md-content class="md-padding no-background" layout="column"  layout-align="center">
   <!-- Search -->
-    <md-content class="md-padding" layout="row" layout-fill layout-align="cetner" flex>
+    <md-content class="md-padding" layout="row" layout-sm="column" layout-fill layout-align="center" flex>
       <!-- <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center"> -->
-      <md-content class="md-padding" layout="column" layout-fill layout-align="cetner" flex
-      style="min-height:190px; padding-top:none;">
+      <md-content class="md-padding" layout="column" layout-fill flex
+      style="min-height:190px; padding-top:none;" flex-order-sm="2">
         <md-autocomplete
             md-search-text="data.searchText"
             md-items="project in projects | search:data.searchText"
@@ -14,7 +14,7 @@
         </md-autocomplete>
       </br>
       </md-content>
-      <md-select multiple ng-model="data.seletedTags" placeholder="Common Tags (Click to add)">
+      <md-select class="md-padding" layout-margin multiple ng-model="data.seletedTags" placeholder="Common Tags (Click to add)" flex-order-sm="1">
         <md-select-label>{{ selectedTags.length ? selectedTags.join(', ') : 'Choose some common tags' }}</md-select-label>
         <md-option ng-value="tag" ng-repeat="tag in commonTags" ng-click="addTag(tag)">{{ tag }}</md-option>
       </md-select>
