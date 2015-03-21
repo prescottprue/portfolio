@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 	// Project configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -72,7 +72,7 @@ module.exports = function(grunt) {
       production:{
         options: {
           bucket:'<%= env.S3Bucket %>',
-					region:'us-west-2'
+					region:'us-east-1'
         },
         files:[
 			{'action': 'upload', expand: true, cwd: 'dev/', src: ['**'], dest: '', differential:true},
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
       staging:{
 				options: {
 					bucket:'<%= env.S3Bucket %>',
-					region:'us-west-2'
+					region:'us-east-1'
 				},
         files:[
 					// {'action': 'upload', expand: true, cwd: '<%= config.distFolder %>/', src: ['**'], dest: 'staging'},
@@ -92,6 +92,7 @@ module.exports = function(grunt) {
 			images:{
 				options: {
 					bucket:'<%= env.S3CDNBucket %>',
+					region:'us-east-1'
 				},
 				files:[
 					{'action': 'upload', expand: true, cwd: '<%= config.imageFolder %>', src: ['**'], dest: 'portfolio' , differential:true}

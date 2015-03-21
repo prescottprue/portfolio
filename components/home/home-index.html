@@ -1,0 +1,44 @@
+
+<md-content class="md-padding no-background" layout="column" layout-align="center">
+  <!-- Search -->
+    <md-content class="md-padding" layout="row" layout-sm="column">
+      <!-- <md-whiteframe class="md-whiteframe-z2" layout layout-align="center center"> -->
+      <md-content class="md-padding" layout="column" layout-fill flex
+      style="min-height:190px;" flex-order-sm="2">
+        <md-autocomplete
+            md-search-text="data.searchText"
+            md-items="project in projects | search:data.searchText"
+            md-item-text="project.name"
+            md-selected-item="data.selectedProjects"
+            placeholder="Search to filter projects">
+          <div project-info search-text="data.searchText" tags="project.tags" project="project"  ></div>
+        </md-autocomplete>
+      </br>
+      </md-content>
+      <md-select class="md-padding no-background" layout-margin multiple ng-model="data.seletedTags" placeholder="Common Tags (Click to add)" flex-order-sm="1" style="padding-top:12px;">
+        <md-select-label>{{ selectedTags.length ? selectedTags.join(', ') : 'Choose some common tags' }}</md-select-label>
+        <md-option ng-value="tag" ng-repeat="tag in commonTags" ng-click="addTag(tag)">{{ tag }}</md-option>
+      </md-select>
+    </md-content>
+  <!-- </md-whiteframe> -->
+  <div class="background-fill" ng-if="data.loading" ng-show="data.loading" layout="row" layout-align="space-around" style="margin-top:-118px; padding-top:100px; height:200px;">
+    <md-progress-circular class="md-hue-2" md-mode="indeterminate"></md-progress-circular>
+  </div>
+  <div class="background-fill md-padding" >
+    <!-- Project Images -->
+    <md-grid-list class="background-fill" ng-show="!data.loading"
+      md-cols-gt-md="8" md-cols-sm="2" md-cols-md="4"
+      md-row-height-gt-md="16:9" md-row-height="16:9"
+      md-gutter-gt-md="30px" md-gutter-gt-sm="20px" md-gutter="30px" style="margin-top:-118px; padding-top:30px;">
+      <md-grid-tile ng-repeat="project in projects | search:data.searchText" layout-align="center"
+          md-colspan-gt-sm="2"
+          md-colspan-sm="2"
+          md-rowspan-sm="2"
+          md-rowspan-gt-sm="2" layout-wrap>
+          <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" ng-click="openProject($index)" flex>
+              <img ng-src="{{project['pictures'][1].image.url}}" alt="{{project.name}}" style="width:100%;"/>
+          </md-whiteframe>
+      </md-grid-tile>
+    </md-grid-list>
+  </div>
+</md-content>

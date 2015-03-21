@@ -1,12 +1,13 @@
 angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial', 'firebase','angulartics', 'angulartics.google.analytics'])
 .run(function(){
 })
-.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $locationProvider, $analyticsProvider){
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $locationProvider, $analyticsProvider, $httpProvider){
 
 
       // $analyticsProvider.firstPageview(true); /* Records pages that don't use $state or $route */
       $analyticsProvider.withAutoBase(true);  /* Records full path */
       $analyticsProvider.virtualPageviews(true);
+      // $httpProvider.defaults.withCredentials = true;
   $stateProvider
   .state('navbar', {
     templateUrl: 'templates/navbar.html',
