@@ -1,18 +1,17 @@
 angular.module('portfolioApp')
-.factory('projectService', function($q, $rootScope, Project, ProjectFactory, $location, ProjectsArray, FBURL){
+.factory('projectService', function ($q, $rootScope, Project, ProjectFactory, $location, ProjectsArray, CONST){
     var currentProject = null;
     var syncArray = null;
   return {
     projects: ProjectsArray,
     getProjects:function() {
       var deferred = $q.defer();
-      console.log('projectsARray', ProjectsArray)
-      ProjectsArray.$loaded().then(function(){
+      ProjectsArray.$loaded().then(function (){
         syncArray = ProjectsArray;
         deferred.resolve(ProjectsArray);
-      }, function(err){
+      }, function (err){
         deferred.reject(err);
-      })
+      });
       return deferred.promise;
     },
     findMatchingTags:function(itemTags, qStr){
@@ -21,7 +20,7 @@ angular.module('portfolioApp')
         var letterMatch = new RegExp(qStr, 'i');
         if(_.isArray(itemTags)) {
           // _.some finds if item contains tag
-          var matchingTags = _.filter(itemTags, function(tag){
+          var matchingTags = _.filter(itemTags, function (tag){
             return letterMatch.test(tag.substring(0, qStr.length));
           });
           // console.log('returning matching tags:', matchingTags);
@@ -35,7 +34,7 @@ angular.module('portfolioApp')
           if(qTagsArray.length > 1) {
             //multiple tags
             //_.some would show projects that contain any of the tags
-            return _.map(qTagsArray, function(tag){
+            return _.map(qTagsArray, function (tag){
               return matchingTags(itemTags, tag);
             }).join(", ");
           }
@@ -48,7 +47,7 @@ angular.module('portfolioApp')
     getProject: function(ind){
       var deferred = $q.defer();
       if(!syncArray){
-        this.getProjects().then(function(projectArray){
+        this.getProjects().then(function (projectArray){
           deferred.resolve(projectArray.$getRecord(ind));
         });
       }
@@ -56,7 +55,6 @@ angular.module('portfolioApp')
         deferred.resolve(currentProject);
       }
       return deferred.promise;
-
     },
     setCurrentProject:function(projectObj){
       return currentProject = projectObj;
@@ -69,11 +67,11 @@ angular.module('portfolioApp')
       if(pName && syncArray){
         syncArray.$getRecord(pName);
       }
-      var projectRef = new Firebase(FBURL + "/portfolio/projects/"+pName);
-      projectRef.on('value', function(projectSnap){
+      var projectRef = new Firebase(CONST.FBURL() + "/portfolio/projects/"+pName);
+      projectRef.on('value', function (projectSnap){
         currentProject = new Project(projectSnap);
         deferred.resolve(currentProject);
-      }, function(err){
+      }, function (err){
         deferred.reject(err);
       });
       return deferred.promise;
@@ -166,8 +164,8 @@ angular.module('portfolioApp')
 
     return Project;
 })
-.factory('ProjectFactory', function($firebaseObject, Project, FBURL){
-  var ref = new Firebase(FBURL + "/portfolio/projects");
+.factory('ProjectFactory', function($firebaseObject, Project, CONST){
+  var ref = new Firebase(CONST.FBURL() + "/portfolio/projects");
   var extendedProject = $firebaseObject.$extend(Project);
   return function(pKey){
     if(pKey){
@@ -178,20 +176,20 @@ angular.module('portfolioApp')
     return new extendedProject(ref);
   }
 })
-.factory('ProjectsArray', function($firebaseArray, Project, FBURL){
-      var extendedArray = $firebaseArray.$extend({
-        $$added:function(snap){
-          return new Project(snap);
-        },
-        matchingProjects:function(qStr){
-          if(qStr && _.isString(qStr)){
-            var projectsArray = [];
-            angular.forEach(this.$list, function(proj){
-              proj.matchesSearch(qStr) ? projectsArray.push(proj) : null;
-            })
-          }
-        }
-      });
-    var ref = new Firebase(FBURL + "/portfolio/projects").orderByChild('importance');
-		return new extendedArray(ref);
+.factory('ProjectsArray', function($firebaseArray, Project, CONST){
+  var extendedArray = $firebaseArray.$extend({
+    $$added:function(snap){
+      return new Project(snap);
+    },
+    matchingProjects:function(qStr){
+      if(qStr && _.isString(qStr)){
+        var projectsArray = [];
+        angular.forEach(this.$list, function(proj){
+          proj.matchesSearch(qStr) ? projectsArray.push(proj) : null;
+        });
+      }
+    }
+  });
+  var ref = new Firebase(CONST.FBURL() + "/portfolio/projects").orderByChild('importance');
+	return new extendedArray(ref);
 })
