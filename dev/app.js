@@ -1,42 +1,5 @@
 angular.module('portfolioApp', ['ui.router','picardy.fontawesome', 'ngMaterial', 'firebase','angulartics', 'angulartics.google.analytics'])
-.run(function(){
-})
-.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $locationProvider, $analyticsProvider){
 
-
-      // $analyticsProvider.firstPageview(true); /* Records pages that don't use $state or $route */
-      $analyticsProvider.withAutoBase(true);  /* Records full path */
-      $analyticsProvider.virtualPageviews(true);
-  $stateProvider
-  .state('navbar', {
-    templateUrl: 'templates/navbar.html',
-    abstract:true
-  })
-  .state('home', {
-    parent:'navbar',
-    url: '/',
-    templateUrl: 'components/home/home-index.html',
-    controller:'HomeCtrl'
-  })
-  .state('project', {
-    parent:'navbar',
-    url: '/projects/:pKey',
-    templateUrl: 'components/project/project-index.html',
-    controller:'ProjectCtrl'
-  })
-  .state('contact', {
-    parent:'navbar',
-    url: '/contact',
-    templateUrl: 'components/contact/contact-index.html',
-    controller:'ContactCtrl'
-  })
-  $urlRouterProvider.otherwise("/");
-  $mdThemingProvider.theme('default')
-     .primaryPalette('blue')
-     .accentPalette('red')
-     .warnPalette('indigo')
-
-})
 .filter('search', function(projectService){
   return function (items, query) {
     if(query && _.isString){

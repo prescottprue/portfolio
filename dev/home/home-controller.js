@@ -1,6 +1,6 @@
 angular.module('portfolioApp')
-  .controller('HomeCtrl', function($scope, $mdDialog, projectService, $state){
-    console.log('Home controller');
+  .controller('HomeCtrl', function ($scope, $mdDialog, projectService, $state){
+    console.log('HomeCtrl');
     $scope.data = {searchText:null, loading:true, error:null, selectedTags:null};
     $scope.commonTags = ['engineering', 'programming', 'javascript', 'volunteering'];
     projectService.getProjects().then(function(loadedProjects){
@@ -13,10 +13,10 @@ angular.module('portfolioApp')
       $scope.project = projectService.setCurrentProject($scope.projects[ind]);
       $mdDialog.show({
         controller: DialogController,
-        templateUrl: 'components/home/home-dialog.html',
+        templateUrl: 'home/home-dialog.html',
       }).then(function() {
         $scope.data.error = null;
-      }, function(err) {
+      }, function (err) {
         $scope.data.error = err;
       });
     };
@@ -41,7 +41,7 @@ angular.module('portfolioApp')
           $scope.data.searchText = $scope.data.selectedTags.join(",");
         }
       } else {
-        $scope.data.searchText = tag + ','
+        $scope.data.searchText = tag + ',';
       }
     };
   })
