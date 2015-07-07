@@ -1,6 +1,6 @@
 angular.module('portfolioApp')
 
-.controller('ProjectCtrl', function ($scope, $mdDialog, $stateParams, projectService, $stateParams, $location, $analytics){
+.controller('ProjectCtrl', function ($scope, $mdDialog, $stateParams, projectService, $stateParams, $location, $analytics, $window){
   console.log('Project controller');
   $scope.data = {error:null, loading:true};
   $analytics.eventTrack('ProjectLoaded', {  category: 'Projects', label: 'Successful loading of controller' });
@@ -11,6 +11,6 @@ angular.module('portfolioApp')
   });
   $scope.openLink = function(path){
     console.log('opening link:', path);
-    $location.$path(path);
+    $window.open(path, '_blank');
   };
 })

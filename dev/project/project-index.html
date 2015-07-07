@@ -16,7 +16,7 @@
       <div layout="column" layout-fill layout-align="space-around" ng-if="project.links">
         <h3 class="md-title">Links</h3>
         <div layout="row" layout-fill layout-align="space-around center">
-          <md-button mg-no-ink class="md-warn" ng-repeat="link in project.links" ng-href="{{link.path}}">
+          <md-button mg-no-ink class="md-primary" ng-repeat="link in project.links" ng-href="{{link.path}}">
             {{link.name}}
           </md-button>
         </div>
@@ -24,11 +24,11 @@
       <!-- Team -->
       <div layout="column" layout-fill layout-align="space-around">
         <h3 class="md-title">Team</h3>
-        <div layout="row" layout-fill layout-align="space-around center">
-          <md-list>
+          <md-list layout="row" layout-align="space-around">
             <!-- <md-subheader class="md-no-sticky">Team</md-subheader> -->
-            <md-list-item class="md-2-line" ng-repeat="(index, member) in project.team">
-              <img ng-src="{{member.icon.url}}" class="md-avatar" alt="{{member.name}}" ng-if="member.icon"/>
+            <md-list-item class="md-2-line" ng-repeat="(index, member) in project.team" ng-click="openLink(member.url)">
+              <img ng-src="{{member.icon.url || 'https://lh4.googleusercontent.com/-gCdInJnSQYQ/AAAAAAAAAAI/AAAAAAAAAV8/ZCZZKSgTLEg/photo.jpg'}}" class="md-avatar" alt="{{member.name}}"/>
+
               <div class="md-list-item-text compact">
                 <h3>{{member.name}}</h3>
                 <!-- <p>{{member.email}}</p> -->
@@ -39,16 +39,13 @@
 <!--           <md-button mg-no-ink class="md-warn" ng-repeat="member in project.team" ng-href="member.path">
             {{member.name}}
           </md-button> -->
-        </div>
       </div>
       <md-list>
         <md-item ng-repeat="section in project.pictures">
-          <md-item-content ng-if="$even" layout="row" layout-wrap>
-              <div flex="50"  layout-padding>
-                <md-whiteframe class="md-whiteframe-z1" layout-align="center center">
-                  <img ng-src="{{section.image.url}}" layout-fill>
-                </md-whiteframe>
-              </div>
+          <md-item-content ng-if="$even" layout="row"  layout-padding layout-wrap>
+              <md-whiteframe class="md-whiteframe-z1" flex="50">
+                <img ng-src="{{section.image.url}}" layout-fill>
+              </md-whiteframe>
               <div flex="50" layout-padding layout-fill>
                 <p>
                   {{section.caption || 'Image Caption'}}
@@ -56,16 +53,14 @@
               </div>
           </md-item-content>
           <md-item-content ng-if="$odd" layout="row" layout-padding layout-wrap>
-              <div flex="50" layout-padding layout-fill>
-                <p>
-                  {{section.caption || 'Image Caption'}}
-                </p>
-              </div>
-              <div flex="50" layout-padding>
-                <md-whiteframe class="md-whiteframe-z1" layout-align="center center">
-                  <img ng-src="{{section.image.url}}" layout-fill>
-                </md-whiteframe>
-              </div>
+            <div flex="50" layout-padding layout-fill>
+              <p>
+                {{section.caption || 'Image Caption'}}
+              </p>
+            </div>
+            <md-whiteframe class="md-whiteframe-z1" flex="50" layout-fill>
+              <img ng-src="{{section.image.url}}" layout-fill>
+            </md-whiteframe>
           </md-item-content>
           <md-divider ng-if="!$last"></md-divider>
         </md-item>
@@ -77,7 +72,7 @@
           <!-- TODO: Display icon if it exists -->
           <div ng-repeat="tech in project.technologies"  layout-padding>
             <a href="{{tech.link}}" ng-if="tech.icon">
-              <img ng-src="{{tech.icon.url}}" style="{{tech.icon.style || 'width:150px'}}">
+              <img ng-src="{{tech.icon.url}}" style="{{tech.icon.style || 'width:125px'}}">
             </a>
             <md-button mg-no-ink class="md-warn" ng-href="{{tech.link}}" ng-if="!tech.icon">
               {{tech.name}}

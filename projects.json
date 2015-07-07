@@ -8,9 +8,10 @@
     "dates": {"start":1435348689413, "current":true},
     "tags":["engineering", "modeling", "programming", "parametric" ],
     "team":[
-      {"name":"Mel van Londen", "url":"github.com/mvanlonden", "icon":{"url":"https://avatars2.githubusercontent.com/u/1718791?v=3&s=400"}}
+      {"name":"Mel van Londen", "url":"https://github.com/mvanlonden", "icon":{"url":"https://avatars2.githubusercontent.com/u/1718791?v=3&s=400"}}
     ],
     "technologies":[
+      {"name":"Autodesk Inventor", "link":"http://www.autodesk.com/products/inventor/overview", "icon":{"url":"http://www.3cengineers.com/media/k2/items/cache/69bc9c3e85c501b0a6208cc7a55abbf9_Generic.jpg"}},
       {"name":"AngularJS", "link":"https://angularjs.org/", "icon":{"url":"https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"}},
       {"name":"NodeJS", "link":"http://joyent.com", "icon":{"url":"http://amartam.com/images/nodejs2.png"}}
     ],
@@ -55,11 +56,11 @@
     ],
     "name" : "DYML",
     "team":[
-      {"name":"Anurag Gupta", "url":"https://www.linkedin.com/in/anuragmdmba"},
-      {"name":"Mel van Londen", "url":"http://github.com/mvanlonden", "icon":{"url":"https://avatars2.githubusercontent.com/u/1718791?v=3&s=400"}},
-      {"name":"Juhee Kim"},
-      {"name":"Hok-Hei Tam"},
-      {"name":"Adarsha Bajracharya"}
+      {"name":"Anurag Gupta", "url":"https://www.linkedin.com/in/anuragmdmba", "icon":{"url":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/8/000/227/0eb/0d44f3d.jpg"}},
+      {"name":"Mel van Londen", "url":"https://github.com/mvanlonden", "icon":{"url":"https://avatars2.githubusercontent.com/u/1718791?v=3&s=400"}},
+      {"name":"Juhee Kim", "url":"https://www.linkedin.com/in/kimjuhee", "icon":{"url":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAAsAAAAJDU1OWJhNzM2LTZiYTYtNDU0OC04Y2M5LWEwNTdjMDNiZjUyYQ.jpg"}},
+      {"name":"Hok-Hei Tam", "url":"https://www.linkedin.com/pub/hok-hei-tam/52/801/878", "icon":{"url":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/005/07d/1c1/05bc32a.jpg"}},
+      {"name":"Adarsha Bajracharya", "url":"https://www.linkedin.com/pub/adarsha-bajracharya/69/49/688"}
     ],
     "pictures" : [ 
       {
@@ -109,9 +110,9 @@
     ],
     "team":[
       {"name":"Mel van Londen", "url":"http://github.com/mvanlonden", "role":"Front End Developer", "icon":{"url":"https://avatars2.githubusercontent.com/u/1718791?v=3&s=400"}},
-      {"name":"Sinan Bolel", "url":"https://www.linkedin.com/in/sinanbolel", "role":"Front End Developer"},
-      {"name":"Dylan Santoriello", "url":"https://www.linkedin.com/pub/dylan-santoriello/83/49a/999", "role": "Logo Design/Branding"},
-      {"name":"Bogdan Ivan", "url":"https://www.linkedin.com/pub/bogdan-ivan/10/184/6b6"}
+      {"name":"Sinan Bolel", "url":"https://www.linkedin.com/in/sinanbolel", "role":"Front End Developer", "icon":{"url":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/005/067/092/366d0ce.jpg"}},
+      {"name":"Dylan Santoriello", "url":"https://www.linkedin.com/pub/dylan-santoriello/83/49a/999", "role": "Logo Design/Branding", "icon":{"url":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAITAAAAJDQxM2EyN2NjLTY3MDktNGI3Ny04YTM2LTgzZjhlNjU4MjRkMA.jpg"}},
+      {"name":"Bogdan Ivan", "url":"https://www.linkedin.com/pub/bogdan-ivan/10/184/6b6", "icon":{"url":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/005/09c/141/23ccb9b.jpg"}}
     ],
     "technologies":[
       {"name":"AngularJS", "link":"https://angularjs.org/", "icon":{"url":"https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"}},
@@ -163,17 +164,20 @@
       } 
     ],
     "name" : "Waco Gate Designer",
-    "pictures" : [ {
-      "caption" : "The graphical user interface (on the left) allows users to create a new gate design by entering options/dimensions. The Gate Designer automatically creates a rendering (on the right) of the 3D modeled gate after creation.",
-      "image" : {
-        "url" : "https://s3.amazonaws.com/prue-cdn/portfolio/GateDesigner/GateGUI.png"
-      }
-    }, {
-      "caption" : "The design of liquid control gates requires a large amount of engineering calculation that had to be automated through relationship algorithms which my team and I crafted from scratch based on the calumniation of our whole engineering department's experience with gate engineering.",
-      "image" : {
-        "url" : "https://s3.amazonaws.com/prue-cdn/portfolio/GateDesigner/GateGUI.png"
-      }
-    } ],
+    "pictures" : [ 
+      {
+        "caption" : "The graphical user interface (on the left) allows users to create a new gate design by entering options/dimensions. The Gate Designer automatically creates a rendering (on the right) of the 3D modeled gate after creation.",
+        "image" : {
+          "url" : "https://s3.amazonaws.com/prue-cdn/portfolio/GateDesigner/GateGUI.png"
+        }
+      }, 
+      {
+        "caption" : "The design of liquid control gates requires a large amount of engineering calculation that had to be automated through relationship algorithms which my team and I crafted from scratch based on the calumniation of our whole engineering department's experience with gate engineering.",
+        "image" : {
+          "url" : "https://s3.amazonaws.com/prue-cdn/portfolio/GateDesigner/GateGUI.png"
+        }
+      } 
+    ],
     "role" : "CAD Engineer/Automated 3D Modeling Software Engineer",
     "tags" : [ "engineering", "modeling", "waco", "parametric" ]
   },
@@ -220,8 +224,8 @@
     "inspiration":"Sensors are becoming ever more popular, especially when it comes to healthcare. Startups and Major companies are building new devices faster than hospital staff can even make use of them, mostly due to the lack of standardization. As a developer of a hospital device/sensor you must build your own home base and handle complicated data formatting and communications, which makes providing insights to healthcare staff very difficult.",
     "solution":"Hearthub consists of both Hardware, which is optional, and an API, which can either run on a hearthub home base or a seperate server. This system provides data collected by devices within the hospital in a unified fashion for quick decision making by hospital staff. Hardware/Sensor developers can use the hearthub client API within their device to simplifiy interacting with and storing data related to healthcare.",
     "team":[
-      {"name":"Mel van Londen", "url":"http://github.com/mvanlonden", "icon":{"url":"https://avatars2.githubusercontent.com/u/1718791?v=3&s=400"}}, 
-      {"name":"Damien Choizit", "url":"https://www.linkedin.com/in/damienchoizit"}
+      {"name":"Mel van Londen", "url":"https://github.com/mvanlonden", "icon":{"url":"https://avatars2.githubusercontent.com/u/1718791?v=3&s=400"}}, 
+      {"name":"Damien Choizit", "url":"https://www.linkedin.com/in/damienchoizit", "icon":{"url":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/4/005/025/3db/2544d8d.jpg"}}
     ],
     "technologies":[
       {"name":"NodeJS", "link":"http://joyent.com", "icon":{"url":"http://amartam.com/images/nodejs2.png"}}
@@ -269,7 +273,7 @@
     "inspiration":"Setting up a development environment should not require advanced computer knowledge.",
     "solution":"Cloud based development platform",
     "team":[
-      {"name":"Mel van Londen", "url":"http://github.com/mvanlonden", "icon":{"url":"https://avatars2.githubusercontent.com/u/1718791?v=3&s=400"}}
+      {"name":"Sinan Bolel", "url":"https://www.linkedin.com/in/sinanbolel", "role":"Co-Founder/Front End Developer", "icon":{"url":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/005/067/092/366d0ce.jpg"}}
     ],
     "technologies":[
       {"name":"AngularJS", "link":"https://angularjs.org/", "icon":{"url":"https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"}},
