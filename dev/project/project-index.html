@@ -25,9 +25,20 @@
       <div layout="column" layout-fill layout-align="space-around">
         <h3 class="md-title">Team</h3>
         <div layout="row" layout-fill layout-align="space-around center">
-          <md-button mg-no-ink class="md-warn" ng-repeat="member in project.team" ng-href="member.path">
+          <md-list>
+            <!-- <md-subheader class="md-no-sticky">Team</md-subheader> -->
+            <md-list-item class="md-2-line" ng-repeat="(index, member) in project.team">
+              <img ng-src="{{member.icon.url}}" class="md-avatar" alt="{{member.name}}" ng-if="member.icon"/>
+              <div class="md-list-item-text compact">
+                <h3>{{member.name}}</h3>
+                <!-- <p>{{member.email}}</p> -->
+                <p>{{member.role || "Team Member"}}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+<!--           <md-button mg-no-ink class="md-warn" ng-repeat="member in project.team" ng-href="member.path">
             {{member.name}}
-          </md-button>
+          </md-button> -->
         </div>
       </div>
       <md-list>
@@ -62,17 +73,16 @@
       <!-- Technologies -->
       <div layout="column" ng-if="project.technologies">
         <h3 class="md-title">Technologies</h3>
-        <div layout="row" layout-fill layout-align="center">
+        <div layout="row" layout-fill layout-align="space-around center">
           <!-- TODO: Display icon if it exists -->
-          <div ng-repeat="tech in project.technologies">
+          <div ng-repeat="tech in project.technologies"  layout-padding>
             <a href="{{tech.link}}" ng-if="tech.icon">
-              <img ng-src="{{tech.icon.url}}">
+              <img ng-src="{{tech.icon.url}}" style="{{tech.icon.style || 'width:150px'}}">
             </a>
             <md-button mg-no-ink class="md-warn" ng-href="{{tech.link}}" ng-if="!tech.icon">
               {{tech.name}}
             </md-button>
           </div>
-
         </div>
       </div>
   </md-content>
