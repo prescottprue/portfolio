@@ -1,5 +1,5 @@
 angular.module('portfolioApp')
-.factory('projectService', function ($q, $rootScope, Project, ProjectFactory, $location, ProjectsArray, CONST){
+.factory('projectService', function ($q, $rootScope, Project, ProjectFactory, $location, ProjectsArray, ENV){
     var currentProject = null;
     var syncArray = null;
   return {
@@ -67,7 +67,7 @@ angular.module('portfolioApp')
       if(pName && syncArray){
         syncArray.$getRecord(pName);
       }
-      var projectRef = new Firebase(CONST.FBURL() + "/portfolio/projects/"+pName);
+      var projectRef = new Firebase(ENV.FBURL() + "/portfolio/projects/"+pName);
       projectRef.on('value', function (projectSnap){
         currentProject = new Project(projectSnap);
         deferred.resolve(currentProject);
@@ -164,8 +164,8 @@ angular.module('portfolioApp')
 
     return Project;
 })
-.factory('ProjectFactory', function($firebaseObject, Project, CONST){
-  var ref = new Firebase(CONST.FBURL() + "/portfolio/projects");
+.factory('ProjectFactory', function($firebaseObject, Project, ENV){
+  var ref = new Firebase(ENV.FBURL() + "/portfolio/projects");
   var extendedProject = $firebaseObject.$extend(Project);
   return function(pKey){
     if(pKey){
@@ -176,7 +176,7 @@ angular.module('portfolioApp')
     return new extendedProject(ref);
   }
 })
-.factory('ProjectsArray', function($firebaseArray, Project, CONST){
+.factory('ProjectsArray', function($firebaseArray, Project, ENV){
   var extendedArray = $firebaseArray.$extend({
     $$added:function(snap){
       return new Project(snap);
@@ -190,6 +190,6 @@ angular.module('portfolioApp')
       }
     }
   });
-  var ref = new Firebase(CONST.FBURL() + "/portfolio/projects").orderByChild('importance');
+  var ref = new Firebase(ENV.FBURL() + "/portfolio/projects").orderByChild('importance');
 	return new extendedArray(ref);
 })

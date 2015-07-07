@@ -1,6 +1,6 @@
 var app = angular.module('portfolioApp')
 
-.service("CONST", ['$location', '$log', function ($location, $log){
+.service("ENV", ['$location', '$log', function ($location, $log){
 	return {
 		FBURL:function(){
 			var url = "https://prue.firebaseio.com";

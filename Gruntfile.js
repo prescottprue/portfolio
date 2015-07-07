@@ -49,10 +49,10 @@ module.exports = function(grunt) {
 					livereload:35729
 				}
 			},
-			bower: {
-				files: [ 'bower.json'],
-				tasks: 'wiredep'
-			},
+			// bower: {
+			// 	files: [ 'bower.json'],
+			// 	tasks: 'wiredep'
+			// },
 			images: {
 				files: [ '<%= config.devFolder %>/img/**'],
 				tasks: 'aws_s3:images'

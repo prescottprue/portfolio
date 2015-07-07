@@ -1,5 +1,5 @@
 angular.module('portfolioApp')
-
+//Parameters that match within project (used with auto)
 .directive('projectInfo', function(){
   // [TODO] Make this not be a watcher
   return {
