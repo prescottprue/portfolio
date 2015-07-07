@@ -47,6 +47,11 @@
 .social .fa-envelope:hover {
   color:#1985a1;
 }
+.md-chip {
+  height:20px !important;
+  line-height:20px !important;
+  font-family: 'Helvetica Neue', sans-serif;
+}
 /*
 .color1 { background: #dcdcdd; }
 .color2 { background: #c5c3c6; }

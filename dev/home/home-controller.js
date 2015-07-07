@@ -2,7 +2,7 @@ angular.module('portfolioApp')
   .controller('HomeCtrl', function ($scope, $mdDialog, projectService, $state){
     console.log('HomeCtrl');
     $scope.data = {searchText:null, loading:true, error:null, selectedTags:null};
-    $scope.commonTags = ['engineering', 'programming', 'javascript', 'volunteering'];
+    $scope.commonTags = ['engineering', 'programming', 'javascript'];
     projectService.getProjects().then(function(loadedProjects){
       $scope.projects = loadedProjects;
       $scope.data.loading = false;
@@ -38,7 +38,7 @@ angular.module('portfolioApp')
           console.log('$scope.data.selectedTags:', $scope.data.selectedTags);
           $scope.data.selectedTags.push(tag);
           console.log('with push:', $scope.data.selectedTags);
-          $scope.data.searchText = $scope.data.selectedTags.join(",");
+          $scope.data.searchText = $scope.data.selectedTags.join(", ");
         }
       } else {
         $scope.data.searchText = tag + ',';

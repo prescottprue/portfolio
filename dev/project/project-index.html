@@ -7,8 +7,7 @@
   </div>
 </md-toolbar>
 <section layout="row" flex>
-  <md-content flex class="md-padding" layout-fill>
-    <div layout="column" layout-fill layout-align="center center">
+  <md-content class="md-padding" layout-fill>
       <div layout="column" layout-fill layout-align="space-around" ng-if="project.inspiration">
         <h3 class="md-title">Inspiration</h3>
         <p>{{project.inspiration}}</p>
@@ -32,51 +31,49 @@
         </div>
       </div>
       <md-list>
-        <md-item ng-repeat="section in project.pictures" layout="column" flex layout-wrap>
-          <md-item-content ng-if="$even">
-            <div class="md-tile-content" layout="row" layout-padding layout-wrap layout-fill>
-              <div flex="50" >
-                <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center">
-                  <img ng-style="{{section.image.style || 'min-width:100px; max-height:500px;'}}" ng-src="{{section.image.url}}">
+        <md-item ng-repeat="section in project.pictures">
+          <md-item-content ng-if="$even" layout="row" layout-wrap>
+              <div flex="50"  layout-padding>
+                <md-whiteframe class="md-whiteframe-z1" layout-align="center center">
+                  <img ng-src="{{section.image.url}}" layout-fill>
                 </md-whiteframe>
               </div>
-              <div flex="50" layout-padding>
-                <p flex>
+              <div flex="50" layout-padding layout-fill>
+                <p>
                   {{section.caption || 'Image Caption'}}
                 </p>
               </div>
-            </div>
           </md-item-content>
-          <md-item-content ng-if="$odd">
-            <div class="md-tile-content" layout="row" layout-padding layout-wrap layout-fill>
-              <div flex="50" layout-padding>
-                <p flex>
-                  {{section.caption}}
+          <md-item-content ng-if="$odd" layout="row" layout-padding layout-wrap>
+              <div flex="50" layout-padding layout-fill>
+                <p>
+                  {{section.caption || 'Image Caption'}}
                 </p>
               </div>
-            </div>
-            <div flex="50" layout-padding layout-wrap>
-              <md-whiteframe class="md-whiteframe-z1 background-fill" layout layout-align="center center">
-                <img ng-style="{{section.image.style || 'max-width:500px;'}}" ng-src="{{section.image.url}}">
-              </md-whiteframe>
-            </div>
+              <div flex="50" layout-padding>
+                <md-whiteframe class="md-whiteframe-z1" layout-align="center center">
+                  <img ng-src="{{section.image.url}}" layout-fill>
+                </md-whiteframe>
+              </div>
           </md-item-content>
           <md-divider ng-if="!$last"></md-divider>
         </md-item>
       </md-list>
       <!-- Technologies -->
-      <div layout="column" layout-fill layout-align="space-around" ng-if="project.links">
+      <div layout="column" ng-if="project.technologies">
         <h3 class="md-title">Technologies</h3>
-        <div layout="row" layout-fill layout-align="space-around center">
+        <div layout="row" layout-fill layout-align="center">
           <!-- TODO: Display icon if it exists -->
           <div ng-repeat="tech in project.technologies">
-            <a href="{{tech.link}}"><img ng-src="{{tech.icon.url}}"></a>
+            <a href="{{tech.link}}" ng-if="tech.icon">
+              <img ng-src="{{tech.icon.url}}">
+            </a>
+            <md-button mg-no-ink class="md-warn" ng-href="{{tech.link}}" ng-if="!tech.icon">
+              {{tech.name}}
+            </md-button>
           </div>
-          <md-button mg-no-ink class="md-warn" ng-repeat="tech in project.technologies" ng-href="tech.path" ng-if="!tech.icon">
-            {{tech.name}}
-          </md-button>
+
         </div>
       </div>
-    </div>
   </md-content>
 </section>
