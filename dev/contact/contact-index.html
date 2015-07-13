@@ -1,37 +1,34 @@
-
 <md-content class="md-padding no-background" layout="column"  layout-align="center">
-
-      <md-whiteframe class="md-whiteframe-z2" layout="column" layout-align="center">
-        <md-content class="md-padding">
-          <md-content class="social" layout="row" layout-align="center center" ng-cloak>
-              <!-- <iframe src="https://ghbtns.com/github-btn.html?user=prescottprue&type=follow&count=false&size=large" frameborder="0" scrolling="0" width="260px" height="30px" style="padding:none;"></iframe> -->
-              <span>
-                <a href="https://github.com/prescottprue" ><i class="fa fa-github icon-social icon-social"></i></a>
-              </span>
-              <span>
-                <a href="mailto:prescottprue@gmail.com" ><i class="fa fa-envelope icon-social"></i></a>
-              </span>
-              <span>
-                <a href="https://www.linkedin.com/in/prescottprue"><i class="fa fa-linkedin-square icon-social"></i></a>
-              </span>
-          </md-content>
-
-          <md-content layout="row" layout-align="center center"><h2>or</h2></md-content>
-            <md-content layout="column">
-              <form name="userForm">
-                <div layout="column" layout-sm="column">
-                  <md-input-container flex>
-                    <label>Email</label>
-                    <input ng-model="message.email" placeholder="your.email@example.com">
-                  </md-input-container>
-                  <md-input-container flex>
-                    <label>Message</label>
-                    <textarea ng-model="message.body" columns="1" ></textarea>
-                  </md-input-container>
-                </div>
-              </form>
-            </md-content>
-          </md-content>
-        </md-whiteframe>
-
+  <md-whiteframe class="md-whiteframe-z2" layout-align="center">
+    <md-content class="md-padding" layout="column">
+      <div class="social" layout="row" layout-align="center center" ng-cloak>
+        <!-- <iframe src="https://ghbtns.com/github-btn.html?user=prescottprue&type=follow&count=false&size=large" frameborder="0" scrolling="0" width="260px" height="30px" style="padding:none;"></iframe> -->
+        <span>
+          <a href="https://github.com/prescottprue" ><i class="fa fa-github icon-social icon-social"></i></a>
+        </span>
+        <span>
+          <a href="mailto:prescottprue@gmail.com" ><i class="fa fa-envelope icon-social"></i></a>
+        </span>
+        <span>
+          <a href="https://www.linkedin.com/in/prescottprue"><i class="fa fa-linkedin-square icon-social"></i></a>
+        </span>
+      </div>
+      <div layout="row" layout-align="center center"><h2>or</h2></div>
+      <div layout="row" layout-align="center" flex>
+        <form name="userForm" flex="50" layout="column" layout-align="center">
+            <md-input-container >
+              <label>Your Email</label>
+              <input ng-model="message.email" required>
+            </md-input-container>
+            <md-input-container>
+              <label>Message</label>
+              <textarea ng-model="message.body" required></textarea>
+            </md-input-container>
+            <div layout="row" layout-align="center">
+              <md-button class="md-raised md-primary" ng-click="sendMessage()" flex="30">Send</md-button>
+            </div>
+        </form>
+      </div>
+    </md-content>
+  </md-whiteframe>
 </md-content>
