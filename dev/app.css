@@ -25,11 +25,11 @@ body {
 }
 .no-background {
   background-color:none;
-  background: none !important;
+  background: none;
 }
 .background-fill {
-  background:rgb(97, 97, 97) !important;
-  background-color:rgb(97, 97, 97) !important;
+  background:rgb(97, 97, 97);
+  background-color:rgb(97, 97, 97);
 }
 .social{
   margin-top:30px;
@@ -79,7 +79,9 @@ body {
 .project-links {
   margin-bottom:40px !important;
 }
-
+.white-bg {
+  background-color:rgb(255,255,255) !important;
+}
 /*
 .color1 { background: #dcdcdd; }
 .color2 { background: #c5c3c6; }
