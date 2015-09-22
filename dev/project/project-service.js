@@ -164,6 +164,7 @@ angular.module('portfolioApp')
 
     return Project;
 })
+
 .factory('ProjectFactory', function($firebaseObject, Project, ENV){
   var ref = new Firebase(ENV.FBURL() + "/portfolio/projects");
   var extendedProject = $firebaseObject.$extend(Project);
@@ -171,8 +172,6 @@ angular.module('portfolioApp')
     if(pKey){
       ref = ref.child(pKey);
     }
-    console.log('trying to load project with pname', pKey);
-
     return new extendedProject(ref);
   }
 })
