@@ -1,41 +1,31 @@
-# Personal Portfolio Page
+# portfolio
 
-  This application, which is available at [prescottprue.com](http://prescottprue.com) is a portfolio page that includes projects I have started or been involved with. The project information is stored in Firebase so that viewers have real-time project information!
+[![NPM version][npm-image]][npm-url]
+[![NPM downloads][npm-downloads-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Dependency Status][daviddm-image]][daviddm-url]
+[![License][license-image]][license-url]
+[![Code Style][code-style-image]][code-style-url]
 
 ## Getting Started
 
-1. Clone this repository: `git clone git@github.com:prescottprue/portfolio.git`
-2. Navigate into it and run `npm install`.
-3. Run `bower install` for front end dependencies.
-4. Run `grunt` to start the development server.
+1. Install through npm:
 
-## Development
+  `npm install portfolio --save`
 
-  Run `grunt` to start a server locally that auto-reloads when dev files are changed.
+## API Documentation
 
-## Staging
+### [Docs Page](http://prescottprue.github.com/portfolio)
 
-  [Staging version](https://s3-us-west-2.amazonaws.com/prescottprue.com/staging/1.0.0/index.html) built uploaded via `grunt stage`
 
-**Note:** Uploading requires either a `env.json` file or Path Variable to set S3 Bucket and Key.
-
-## Project Data
-
-  Project data is stored with a firebase named *Prue* that is located at [prue.firebaseio.com](https://prue.firebaseio.com). Security rules have been implemented to keep project data from being edited by others.
-
-## Planning
-
-* Move Images to CDN
-* Implement FireAdmin for admin login
-* Simple Edit Page for Project Data (Bound data from firebase for realtime content editing!)
-
-## Dependencies
-
-  * [AngularJS](http://angularjs.org)
-  * [Angular Material](https://material.angularjs.org/#/)
-  * [AngularFire](https://www.firebase.com/docs/web/libraries/angular/api.html)
-  * [Firebase](http://firebase.com)
-
-### Development
-
-* [GruntJS](http://gruntjs.com)
+[npm-image]: https://img.shields.io/npm/v/portfolio.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/portfolio
+[npm-downloads-image]: https://img.shields.io/npm/dm/portfolio.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/prescottprue/portfolio/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/prescottprue/portfolio
+[daviddm-image]: https://img.shields.io/david/prescottprue/portfolio.svg?style=flat-square
+[daviddm-url]: https://david-dm.org/prescottprue/portfolio
+[license-image]: https://img.shields.io/npm/l/portfolio.svg?style=flat-square
+[license-url]: https://github.com/prescottprue/portfolio/blob/master/LICENSE
+[code-style-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
+[code-style-url]: http://standardjs.com/
