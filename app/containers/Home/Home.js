@@ -4,11 +4,16 @@ import './Home.scss'
 
 export default class Home extends Component {
   render () {
+    const projects = [{ name: 'project1' }, { name: 'project2' }]
+    const projectsList = projects.map(project => {
+      return (
+        <div>{ project.name }</div>
+      )
+    })
     return (
       <div className='Home'>
         <h2>Welcome to portfolio</h2>
-        <p>Example application built with React and Redux. </p>
-        <Link to="/cars">Cars List Example</Link>
+        { projectsList }
       </div>
     )
   }
