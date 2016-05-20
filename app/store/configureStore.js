@@ -1,15 +1,15 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import rootReducer from '../reducers'
-import { reduxReactRouter } from 'redux-router'
+// import { reduxReactRouter } from 'redux-router'
 import thunkMiddleware from 'redux-thunk'
 import createHistory from 'history/lib/createBrowserHistory'
 
 const createStoreWithMiddleware = compose(
   // Save for redux middleware
   applyMiddleware(thunkMiddleware),
-  reduxReactRouter({
-    createHistory
-  }),
+  // reduxReactRouter({
+  //   createHistory
+  // }),
   typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
 )(createStore)
 

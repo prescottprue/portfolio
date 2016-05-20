@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line
 import ReactDOM from 'react-dom'
-import { reduxReactRouter } from 'redux-router'
 import createRoutes from './router'
 import { Provider } from 'react-redux'
-import { browserHistory } from 'react-router'
-import { createHistory } from 'history'
 import configureStore from './store/configureStore'
+import { browserHistory } from 'react-router'
 
-const initialState = { cars: [ { name: 'First Car', type: 'Tesla', hp: 600 } ] }
+let initialData = {}
 
-const store = configureStore(initialState, reduxReactRouter, createHistory)
+const initialState = window.__INITIAL_STATE__ || initialData
+
+const store = configureStore(initialState, browserHistory)
 
 let rootElement = document.getElementById('root')
 
