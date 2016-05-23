@@ -2,9 +2,28 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import Rebase from 're-base'
 import Paper from 'material-ui/lib/paper'
+import GridList from 'material-ui/lib/grid-list/grid-list'
+import GridTile from 'material-ui/lib/grid-list/grid-tile'
+import IconButton from 'material-ui/lib/icon-button'
+import MoreButton from 'react-material-icons/icons/navigation/more-horiz'
 import './Projects.scss'
 
 let base = Rebase.createClass('https://prue.firebaseio.com/portfolio')
+
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    width: '100%'
+  },
+  gridList: {
+    // width: 100%,
+    // height: 500,
+    overflowY: 'auto',
+    marginTop: 20
+  }
+}
 
 export default class Projects extends Component {
   constructor (props) {
@@ -14,31 +33,40 @@ export default class Projects extends Component {
     }
   }
   componentDidMount () {
-    base.bindToState('projects', {
+    this.ref = base.bindToState('projects', {
       context: this,
       state: 'projects',
       asArray: true
     })
   }
+  componentWillUnmount () {
+    base.removeBinding(this.ref)
+  }
 
   render () {
     console.log('projects:', this.state.projects)
-    const projects = this.state.projects.map((project, i) =>
-      (
-        <Paper className='Projects-Project' key={`Project-${i}`}>
-          <div className='Projects-Project-Img'>
-            <img src={ project.pictures[0].image.url } style={{ maxWidth: '400px', maxHeight: '400px'}}/>
-          </div>
-          <div className='Projects-Project-Meta'>
-            <span className='Projects-Project-Name'>{ project.name }</span>
-            <span className='Projects-Project-Intro'>{ project.intro }</span>
-          </div>
-        </Paper>
-      )
-    )
     return (
       <div className='Projects'>
-        { projects }
+        <GridList cellHeight={300} padding={40} cols={2} style={styles.gridList}>
+          {this.state.projects.map((project, i) => (
+            <Paper zDepth={1} key={`Project-${i}`} style={{ height: '300px'}}>
+              <GridTile
+                title={ project.name }
+                subtitle={<span><b>{ project.intro }</b></span>}
+                actionIcon={
+                  <Link to={`/${project.name.toLowerCase()}`}>
+                    <IconButton>
+                      <MoreButton color={'white'} />
+                    </IconButton>
+                  </Link>
+                }
+              >
+                <img src={project.pictures[1].image.url} style={{maxWidth: '80%', marginLeft: '10%', height: '300px'}} />
+              </GridTile>
+            </Paper>
+
+          ))}
+        </GridList>
       </div>
     )
   }
