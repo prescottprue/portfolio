@@ -54,14 +54,13 @@ class Project extends Component {
               <div className='Project-Name'>
                 <span>{ project.name }</span>
               </div>
-              { project.role ?
-                <div className='Project-Role'>
-                  Role: { project.role }
-                </div>
-              : null }
-              <div className='Project-Links'>
-                { links }
-              </div>
+              { project.role
+                ? <div className='Project-Role'>
+                    Role: { project.role }
+                  </div>
+                : null
+              }
+
               <div className='Project-Description'>
                 { project.description }
               </div>

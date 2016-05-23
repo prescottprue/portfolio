@@ -1,7 +1,5 @@
-# portfolio
+# Prescott Prue Portfolio
 
-[![NPM version][npm-image]][npm-url]
-[![NPM downloads][npm-downloads-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
 [![License][license-image]][license-url]
@@ -9,18 +7,9 @@
 
 ## Getting Started
 
-1. Install through npm:
+1. Install through npm: `npm install portfolio --save`
+2. Run Dev Server: `npm start`
 
-  `npm install portfolio --save`
-
-## API Documentation
-
-### [Docs Page](http://prescottprue.github.com/portfolio)
-
-
-[npm-image]: https://img.shields.io/npm/v/portfolio.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/portfolio
-[npm-downloads-image]: https://img.shields.io/npm/dm/portfolio.svg?style=flat-square
 [travis-image]: https://img.shields.io/travis/prescottprue/portfolio/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/prescottprue/portfolio
 [daviddm-image]: https://img.shields.io/david/prescottprue/portfolio.svg?style=flat-square
