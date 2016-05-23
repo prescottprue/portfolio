@@ -11,3 +11,13 @@ $editorBackground: $darkGray;
 $success: #c8e6c9;
 $error: #ffa3a3;
 $navbar: rgb(33,150,243);
+.Row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.Col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

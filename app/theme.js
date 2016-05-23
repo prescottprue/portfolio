@@ -22,6 +22,6 @@ export default {
     pickerHeaderColor: Colors.pinkA200
   },
   appBar: {
-    height: '30px'
+    height: 20
   }
 }

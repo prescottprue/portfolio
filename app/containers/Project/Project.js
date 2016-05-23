@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import Avatar from 'material-ui/lib/avatar'
 import Rebase from 're-base'
 import { find } from 'lodash'
 import IconButton from 'material-ui/lib/icon-button'
@@ -32,21 +33,40 @@ class Project extends Component {
   render () {
     const { name } = this.props
     const project = this.state.projects ? find(this.state.projects, { key: name }) : {}
-    const links = (project && project.links) ? project.links.map((link, i) => (
+    const { links, technologies, team } = project || {}
+
+    const linksList = links ? project.links.map((link, i) => (
       <div className='Project-Links-Link' key={ `Project-Links-Link-${i}`}>
         <a href={ link.path }>{ link.name }</a>
       </div>
     )) : <div></div>
-    const technologies = (project && project.technologies) ? project.technologies.map((technology, i) => (
+
+    const technologiesList = technologies ? technologies.map((technology, i) => (
       <div className='Project-Technology' key={`Project-Technology-${i}`}>
         <a href={ technology.link }>
-          { technology.icon ?
-            <img className='Project-Technology-Icon' src={ technology.icon.url } />
-          : null }
+          {
+            technology.icon
+              ? <img className='Project-Technology-Icon' src={ technology.icon.url } />
+              : null
+          }
           <div className='Project-Technology-Name'><span>{ technology.name }</span></div>
         </a>
       </div>
     )) : <div></div>
+
+    const teamList = team ? team.map((person, i) => {
+      const avatar = (person.icon && person.icon.url)
+        ? <Avatar src={ person.icon.url } />
+        : <Avatar>{ person.name.charAt(0).toUpperCase() }</Avatar>
+      return (
+        <div className='Project-Team-Member' key={`Team-Member-${i}`}>
+          { avatar }
+          <span className='Project-Team-Member-Name'>{ person.name }</span>
+          <span className='Project-Team-Member-Role'>{ person.role }</span>
+        </div>
+      )
+    }) : <div></div>
+
     return (
       <div className='Project'>
           { project ? (
@@ -56,19 +76,29 @@ class Project extends Component {
               </div>
               { project.role
                 ? <div className='Project-Role'>
-                    Role: { project.role }
+                    { project.role }
                   </div>
                 : null
               }
-
+              {
+                links
+                ? (
+                  <div className='Project-Links'>
+                    { linksList }
+                  </div>
+                )
+                : null
+              }
               <div className='Project-Description'>
                 { project.description }
               </div>
-              {/*<div>
-                { project.team }
-              </div>*/}
+              <div className='Project-Label'><span>Team</span></div>
+              <div className='Project-Team'>
+                { teamList }
+              </div>
+              <div className='Project-Label'><span>Technologies</span></div>
               <div className='Project-Technologies'>
-                { technologies }
+                { technologiesList }
               </div>
             </div>
           ) : null }
