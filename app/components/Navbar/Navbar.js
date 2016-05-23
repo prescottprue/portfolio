@@ -47,8 +47,8 @@ export default class Navbar extends Component {
     )
     return (
       <AppBar
-        title={<Link className="Navbar-Brand" to='/'>Prescott Prue</Link>}
-        className="Navbar"
+        title={<Link className="Navbar-Brand" to='/' style={{ color: 'white'}}>Prescott Prue</Link>}
+        className='Navbar'
         showMenuIconButton={ false }
         iconElementRight={ rightMenu }
       />
