@@ -37,10 +37,12 @@ export default class Navbar extends Component {
 
   render() {
     const rightMenu = (
-      <div className="Navbar-Main-Menu">
+      <div className="Navbar-Buttons">
+      <IconButton tooltip="personal github">
         <a href="https://github.com/prescottprue">
           <Octicon mega name="mark-github" style={{color: 'white'}}/>
         </a>
+      </IconButton>
       </div>
     )
     return (

@@ -8,7 +8,7 @@ export default {
   zIndex: zIndex,
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary1Color: Colors.blueGrey500,
+    primary1Color: Colors.lightBlue500,
     primary2Color: Colors.blueGrey700,
     primary3Color: Colors.blueGrey100,
     accent1Color: Colors.pinkA200,
@@ -20,5 +20,8 @@ export default {
     borderColor: Colors.grey400,
     disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
     pickerHeaderColor: Colors.pinkA200
+  },
+  appBar: {
+    height: '30px'
   }
 }
