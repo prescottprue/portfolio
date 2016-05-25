@@ -60,7 +60,7 @@ class Project extends Component {
         : <Avatar>{ person.name.charAt(0).toUpperCase() }</Avatar>
       return (
         <div className='Project-Team-Member' key={`Team-Member-${i}`}>
-          { avatar }
+          <a href={ person.url }>{ avatar }</a>
           <span className='Project-Team-Member-Name'>{ person.name }</span>
           <span className='Project-Team-Member-Role'>{ person.role }</span>
         </div>
@@ -74,9 +74,12 @@ class Project extends Component {
               <div className='Project-Name'>
                 <span>{ project.name }</span>
               </div>
+              <div className='Project-Intro'>
+                <span>{ project.intro }</span>
+              </div>
               { project.role
                 ? <div className='Project-Role'>
-                    { project.role }
+                    <span>Role: { project.role }</span>
                   </div>
                 : null
               }
@@ -92,14 +95,31 @@ class Project extends Component {
               <div className='Project-Description'>
                 { project.description }
               </div>
-              <div className='Project-Label'><span>Team</span></div>
-              <div className='Project-Team'>
-                { teamList }
-              </div>
-              <div className='Project-Label'><span>Technologies</span></div>
-              <div className='Project-Technologies'>
-                { technologiesList }
-              </div>
+              {
+                team
+                ? (
+                  <div>
+                    <div className='Project-Label'><span>Team</span></div>
+                    <div className='Project-Team'>
+                      { teamList }
+                    </div>
+                  </div>
+                )
+                : null
+              }
+              {
+                technologies
+                ? (
+                  <div>
+                    <div className='Project-Label'><span>Technologies</span></div>
+                    <div className='Project-Technologies'>
+                      { technologiesList }
+                    </div>
+                  </div>
+                )
+                : null
+              }
+
             </div>
           ) : null }
       </div>

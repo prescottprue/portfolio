@@ -25,33 +25,47 @@ const styles = {
 export default class ProjectsTiles extends Component {
   constructor (props) {
     super(props)
+    this.state =  { windowWidth: window.innerWidth }
   }
 
   static propTypes = {
-    projects: PropTypes.array.isRequired
+    projects: PropTypes.array.isRequired,
+    onClick: PropTypes.func
   };
 
-  render (){
+
+  handleResize = (e) => {
+    this.setState({ windowWidth: window.innerWidth })
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.handleResize)
+  }
+
+  render () {
     return (
       <div className='ProjectsTiles'>
-        <GridList cellHeight={300} padding={40} style={styles.gridList}>
+        <GridList cellHeight={300} padding={30} cols={ (this.state && this.state.windowWidth) >= 767 ? 2 : 1 } style={styles.gridList}>
           {this.props.projects.map((project, i) => (
-            <Paper zDepth={1} key={`Project-${i}`} style={{ height: '300px' }}>
-              <GridTile
-                title={ project.name }
-                subtitle={<span><b>{ project.intro }</b></span>}
-                actionIcon={
-                  <Link to={`/projects/${project.name.toLowerCase()}`}>
-                    <IconButton>
-                      <MoreButton color={'white'} />
-                    </IconButton>
-                  </Link>
-                }
-              >
-                <img src={project.pictures[1].image.url} style={{maxWidth: '80%', marginLeft: '10%', height: '300px'}} />
-              </GridTile>
+              <Paper className='ProjectTiles-Tile' zDepth={1} key={`Project-${i}`} style={{ height: '300px' }} onClick={ this.props.onClick }>
+                <GridTile
+                  title={ project.name }
+                  subtitle={<span>{ project.intro }</span>}
+                  actionIcon={
+                    <Link to={`/projects/${project.key}`}>
+                      <IconButton>
+                        <MoreButton color={'white'} />
+                      </IconButton>
+                    </Link>
+                  }
+                >
+                  <img className='ProjectTiles-Tile-Img' src={project.pictures[1].image.url} />
+                </GridTile>
             </Paper>
-
           ))}
         </GridList>
       </div>

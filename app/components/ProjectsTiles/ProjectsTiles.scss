@@ -1,3 +1,8 @@
-.ProjectsTitles {
-
+.ProjectsTiles {
+  &-Tile {
+    cursor: pointer;
+    &-Img {
+      width: 80%;
+    }
+  }
 }

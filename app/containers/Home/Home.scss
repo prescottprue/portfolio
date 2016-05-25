@@ -3,4 +3,8 @@
   flex-direction: column;
   align-items: center;
   padding: 3rem;
+  background-color: rgba(203,203,210,.15);
+  &-Intro {
+    padding: 2rem;
+  }
 }
