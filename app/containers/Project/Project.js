@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import Avatar from 'material-ui/lib/avatar'
 import Rebase from 're-base'
 import { find } from 'lodash'
 import IconButton from 'material-ui/lib/icon-button'
+import Paper from 'material-ui/lib/paper'
+import Technologies from '../../components/Technologies/Technologies'
+import Team from '../../components/Team/Team'
+
 import './Project.scss'
 
 let base = Rebase.createClass('https://prue.firebaseio.com/portfolio')
@@ -41,34 +44,8 @@ class Project extends Component {
       </div>
     )) : <div></div>
 
-    const technologiesList = technologies ? technologies.map((technology, i) => (
-      <div className='Project-Technology' key={`Project-Technology-${i}`}>
-        <a href={ technology.link }>
-          {
-            technology.icon
-              ? <img className='Project-Technology-Icon' src={ technology.icon.url } />
-              : null
-          }
-          <div className='Project-Technology-Name'><span>{ technology.name }</span></div>
-        </a>
-      </div>
-    )) : <div></div>
-
-    const teamList = team ? team.map((person, i) => {
-      const avatar = (person.icon && person.icon.url)
-        ? <Avatar src={ person.icon.url } />
-        : <Avatar>{ person.name.charAt(0).toUpperCase() }</Avatar>
-      return (
-        <div className='Project-Team-Member' key={`Team-Member-${i}`}>
-          <a href={ person.url }>{ avatar }</a>
-          <span className='Project-Team-Member-Name'>{ person.name }</span>
-          <span className='Project-Team-Member-Role'>{ person.role }</span>
-        </div>
-      )
-    }) : <div></div>
-
     return (
-      <div className='Project'>
+        <Paper className='Project'>
           { project ? (
             <div>
               <div className='Project-Name'>
@@ -99,10 +76,10 @@ class Project extends Component {
                 team
                 ? (
                   <div>
-                    <div className='Project-Label'><span>Team</span></div>
-                    <div className='Project-Team'>
-                      { teamList }
+                    <div className='Project-Label'>
+                      <span>Team</span>
                     </div>
+                    <Team list={ team } />
                   </div>
                 )
                 : null
@@ -112,9 +89,7 @@ class Project extends Component {
                 ? (
                   <div>
                     <div className='Project-Label'><span>Technologies</span></div>
-                    <div className='Project-Technologies'>
-                      { technologiesList }
-                    </div>
+                    <Technologies list={ technologies } />
                   </div>
                 )
                 : null
@@ -122,7 +97,7 @@ class Project extends Component {
 
             </div>
           ) : null }
-      </div>
+        </Paper>
     )
   }
 }

@@ -19,7 +19,10 @@ export default class Home extends Component {
     this.ref = base.bindToState('projects', {
       context: this,
       state: 'projects',
-      asArray: true
+      asArray: true,
+      queries: {
+        orderByChild: 'importance'
+      }
     })
   }
   componentWillUnmount () {
@@ -29,7 +32,12 @@ export default class Home extends Component {
     return (
       <div className='Home'>
         <Paper className='Home-Intro'>
-          <span>My name is Prescott Prue and I engineer systems that handle repetitive system tasks so that users can focus on what actually matters. Whether it involves a 3D modeling automation system, or a software development platform, I aim to bring customization for all regardless of personal/professional experience.</span>
+          <span>
+            My name is Prescott Prue and I engineer systems that handle repetitive system tasks so that users can focus on what actually matters. Whether it involves a 3D modeling automation system, or a software development platform, I aim to bring customization for all regardless of personal/professional experience.
+          </span>
+          <span>
+            Below are some of my recent projects. Click the icon in the lower right corner for more information.
+          </span>
         </Paper>
         <ProjectsTiles projects={ this.state.projects }/>
       </div>

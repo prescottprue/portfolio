@@ -1,0 +1,23 @@
+.Technologies {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-basis: 70%;
+  margin-bottom: 3rem;
+  &-Technology {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &-Icon {
+      width: 80px;
+    }
+    &-Name {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      color: black;
+      text-align: center;
+    }
+  }
+}
