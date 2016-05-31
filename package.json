@@ -1,6 +1,6 @@
 {
   "name": "prue-portfolio",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "bin/server.js",
   "scripts": {
     "build": "npm run clean && npm run build-bundle && npm run build-server && npm run build-copy",
@@ -38,6 +38,7 @@
     "re-base": "^1.5.1",
     "react": "0.14.7",
     "react-dom": "0.14.7",
+    "react-image-gallery": "^0.6.3",
     "react-material-icons": "^1.0.1",
     "react-octicon": "^2.0.0",
     "react-redux": "4.4.5",

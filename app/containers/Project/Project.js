@@ -8,7 +8,8 @@ import IconButton from 'material-ui/lib/icon-button'
 import Paper from 'material-ui/lib/paper'
 import Technologies from '../../components/Technologies/Technologies'
 import Team from '../../components/Team/Team'
-
+import RaisedButton from 'material-ui/lib/raised-button'
+import ImageGallery from 'react-image-gallery'
 import './Project.scss'
 
 let base = Rebase.createClass('https://prue.firebaseio.com/portfolio')
@@ -34,13 +35,23 @@ class Project extends Component {
   }
 
   render () {
+    let pictures
     const { name } = this.props
     const project = this.state.projects ? find(this.state.projects, { key: name }) : {}
     const { links, technologies, team } = project || {}
-
+    if (project && project.pictures) {
+      pictures = project.pictures.map(obj => { return { original: `/${obj.image.url}`, thumbnail: `/${obj.image.url}`, description: obj.caption } })
+    }
+    console.log('pictures:', pictures)
     const linksList = links ? project.links.map((link, i) => (
       <div className='Project-Links-Link' key={ `Project-Links-Link-${i}`}>
-        <a href={ link.path }>{ link.name }</a>
+        <a href={ link.path }>
+          <RaisedButton
+            primary={ true }
+            label={ link.name }
+            style={{margin: 12}}
+          />
+        </a>
       </div>
     )) : <div></div>
 
@@ -72,6 +83,17 @@ class Project extends Component {
               <div className='Project-Description'>
                 { project.description }
               </div>
+              {
+                pictures
+                ? (
+                  <ImageGallery
+                    ref={i => this._imageGallery = i}
+                    items={ pictures }
+                    slideOnThumbnailHover={ true }
+                  />
+                )
+                : null
+              }
               {
                 team
                 ? (
