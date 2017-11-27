@@ -9,12 +9,9 @@ import RaisedButton from 'material-ui/RaisedButton'
 import ImageGallery from 'react-image-gallery'
 import './Project.scss'
 
-export const Project = ({ projects }) => {
+export const Project = ({ project, name }) => {
   let pictures
-  const { name } = this.props
-  const project = this.state.projects
-    ? find(this.state.projects, { key: name })
-    : {}
+
   const { links, technologies, team } = project || {}
   if (project && project.pictures) {
     pictures = project.pictures.map(obj => {
@@ -57,7 +54,6 @@ export const Project = ({ projects }) => {
           <div className="Project-Description">{project.description}</div>
           {pictures ? (
             <ImageGallery
-              ref={i => (this._imageGallery = i)}
               items={pictures}
               slideOnThumbnailHover
             />

@@ -57,7 +57,7 @@ export default class Navbar extends Component {
   render() {
     return (
       <AppBar
-        title="Prescott Prue"
+        title={<Link className="Navbar-Brand" to='/' style={{ color: 'white'}}>Prescott Prue</Link>}
         showMenuIconButton={false}
         iconElementRight={
           <div className="Navbar-Buttons">

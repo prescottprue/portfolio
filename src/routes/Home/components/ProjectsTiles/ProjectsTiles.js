@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import Paper from 'material-ui/Paper'
+import { map } from 'lodash'
 import { GridList, GridTile } from 'material-ui/GridList'
 import IconButton from 'material-ui/IconButton'
 import MoreButton from 'material-ui/svg-icons/navigation/more-horiz'
@@ -53,11 +54,11 @@ export default class ProjectsTiles extends Component {
           cols={(this.state && this.state.windowWidth) >= 767 ? 2 : 1}
           style={styles.gridList}
         >
-          {this.props.projects.map((project, i) => (
+          {map(this.props.projects, (project, key) => (
             <Paper
               className="ProjectTiles-Tile"
               zDepth={1}
-              key={`Project-${i}`}
+              key={`Project-${key}`}
               style={{ height: '300px' }}
               onClick={this.props.onClick}
             >
@@ -65,7 +66,7 @@ export default class ProjectsTiles extends Component {
                 title={project.name}
                 subtitle={<span>{project.intro}</span>}
                 actionIcon={
-                  <Link to={`/projects/${project.key}`}>
+                  <Link to={`/projects/${key}`}>
                     <IconButton>
                       <MoreButton color={'white'} />
                     </IconButton>

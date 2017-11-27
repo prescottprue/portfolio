@@ -1,7 +1,7 @@
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import ProjectRoute from './Project'
-// import NotFoundRoute from './NotFound'
+import NotFoundRoute from './NotFound'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -11,9 +11,9 @@ export const createRoutes = store => ({
   component: CoreLayout,
   indexRoute: Home,
   childRoutes: [
-    ProjectRoute
+    ProjectRoute,
     /* Place all Routes above here so NotFoundRoute can act as a 404 page */
-    // NotFoundRoute
+    NotFoundRoute(store)
   ]
 })
 

@@ -1,5 +1,6 @@
 import Project from './components/ProjectPage'
 
 export default {
-  component: Project
+  component: Project,
+  path: 'projects/:projectId'
 }

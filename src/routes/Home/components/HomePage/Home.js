@@ -43,7 +43,7 @@ export default class Home extends Component {
             right corner for more information.
           </span>
         </Paper>
-        <ProjectsTiles projects={this.state.projects} />
+        <ProjectsTiles projects={this.props.projects} />
       </div>
     )
   }
