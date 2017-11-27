@@ -1,0 +1,12 @@
+@import "../../../../styles/_variables";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  background-color: $grayBackground;
+}
+.intro {
+  padding: 2rem;
+}
