@@ -1,19 +1,37 @@
+dist: trusty
+
+sudo: false
+
 language: node_js
 
 node_js:
-- 5.9.0
+ - 6.11.5 # runtime used within Firebase functions
 
-sudo: false
+notifications:
+  email:
+    on_failure: change
+    on_success: change
 
 branches:
   only:
     - master
+    - stage
+    - prod
 
-script: npm run build
+cache:
+  bundler: true
+  directories:
+    - node_modules # NPM packages
 
-deploy:
-  skip_cleanup: true
-  provider: heroku
-  api_key:
-    secure: $HEROKU
-  app: prue-stg
+install:
+  - npm set progress=false
+  - npm i
+  - npm i -g firebase-ci
+
+script:
+  - firebase-ci createConfig
+  - npm run lint
+  - npm run build
+
+after_success:
+  - firebase-ci deploy -s # deploy without CI actions since createConfig is called earlier

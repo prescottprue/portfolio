@@ -1,0 +1,12 @@
+// @import "../../variables";
+
+.Home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  // background-color: $grayBackground;
+  &-Intro {
+    padding: 2rem;
+  }
+}

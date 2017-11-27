@@ -1,0 +1,42 @@
+{
+  "projects": {
+    "master": "prue-29a00",
+    "prod": "prue-29a00"
+  },
+  "ci": {
+    "createConfig": {
+      "master": {
+        "version": "${npm_package_version}",
+        "env": "development",
+        "firebase": {
+          "apiKey": "AIzaSyB5JAennkcBV0qYAyk5ewuActwOrZdSsWo",
+          "authDomain": "prue-29a00.firebaseapp.com",
+          "databaseURL": "https://prue-29a00.firebaseio.com",
+          "projectId": "prue-29a00",
+          "storageBucket": "prue-29a00.appspot.com"
+        },
+        "reduxFirebase": {
+          "userProfile": "users",
+          "enableLogging": false,
+          "updateProfileOnLogin": false
+        }
+      },
+      "prod": {
+        "version": "${npm_package_version}",
+        "env": "production",
+        "firebase": {
+          "apiKey": "AIzaSyB5JAennkcBV0qYAyk5ewuActwOrZdSsWo",
+          "authDomain": "prue-29a00.firebaseapp.com",
+          "databaseURL": "https://prue-29a00.firebaseio.com",
+          "projectId": "prue-29a00",
+          "storageBucket": "prue-29a00.appspot.com"
+        },
+        "reduxFirebase": {
+          "userProfile": "users",
+          "enableLogging": false,
+          "updateProfileOnLogin": false
+        }
+      }
+    }
+  }
+}
