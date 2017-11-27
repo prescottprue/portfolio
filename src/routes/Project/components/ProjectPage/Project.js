@@ -7,7 +7,7 @@ import Technologies from '../Technologies'
 import Team from '../Team'
 import RaisedButton from 'material-ui/RaisedButton'
 import ImageGallery from 'react-image-gallery'
-import './Project.scss'
+import classes from './Project.scss'
 
 export const Project = ({ project, name }) => {
   let pictures
@@ -22,10 +22,9 @@ export const Project = ({ project, name }) => {
       }
     })
   }
-  console.log('pictures:', pictures)
   const linksList = links ? (
     project.links.map((link, i) => (
-      <div className="Project-Links-Link" key={`Project-Links-Link-${i}`}>
+      <div className={classes['Links-Link']} key={`Project-Links-Link-${i}`}>
         <a href={link.path}>
           <RaisedButton primary label={link.name} style={{ margin: 12 }} />
         </a>
@@ -36,31 +35,28 @@ export const Project = ({ project, name }) => {
   )
 
   return (
-    <Paper className="Project">
+    <Paper className={classes.container}>
       {project ? (
         <div>
-          <div className="Project-Name">
+          <div className={classes.Name}>
             <span>{project.name}</span>
           </div>
-          <div className="Project-Intro">
+          <div className={classes.Intro}>
             <span>{project.intro}</span>
           </div>
           {project.role ? (
-            <div className="Project-Role">
+            <div className={classes.Role}>
               <span>Role: {project.role}</span>
             </div>
           ) : null}
-          {links ? <div className="Project-Links">{linksList}</div> : null}
-          <div className="Project-Description">{project.description}</div>
+          {links ? <div className={classes.Links}>{linksList}</div> : null}
+          <div className={classes.Description}>{project.description}</div>
           {pictures ? (
-            <ImageGallery
-              items={pictures}
-              slideOnThumbnailHover
-            />
+            <ImageGallery items={pictures} slideOnThumbnailHover />
           ) : null}
           {team ? (
             <div>
-              <div className="Project-Label">
+              <div className={classes.Label}>
                 <span>Team</span>
               </div>
               <Team list={team} />
@@ -68,7 +64,7 @@ export const Project = ({ project, name }) => {
           ) : null}
           {technologies ? (
             <div>
-              <div className="Project-Label">
+              <div className={classes.Label}>
                 <span>Technologies</span>
               </div>
               <Technologies list={technologies} />

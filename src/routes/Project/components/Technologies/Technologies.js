@@ -1,32 +1,26 @@
-import React, { Component, PropTypes } from 'react'
-import './Technologies.scss'
+import React from 'react'
+import PropTypes from 'prop-types'
+import classes from './Technologies.scss'
 
-export default class Technologies extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  static propTypes = {
-    list: PropTypes.array.isRequired
-  }
-
-  render() {
-    const technologies = this.props.list.map((technology, i) => (
+export const Technologies = ({ list }) => (
+  <div className={classes.container}>
+    {list.map((technology, i) => (
       <a
-        className="Technologies-Technology"
+        className={classes.technology}
         key={`Technologies-Technology-${i}`}
         href={technology.link}
-        style={{ textAlign: 'center' }}
-      >
+        style={{ textAlign: 'center' }}>
         {technology.icon ? (
-          <img
-            className="Technologies-Technology-Icon"
-            src={technology.icon.url}
-          />
+          <img className={classes.technologyIcon} src={technology.icon.url} />
         ) : null}
-        <span className="Technologies-Technology-Name">{technology.name}</span>
+        <span className={classes.technologyName}>{technology.name}</span>
       </a>
-    ))
-    return <div className="Technologies">{technologies}</div>
-  }
+    ))}
+  </div>
+)
+
+Technologies.propTypes = {
+  list: PropTypes.array.isRequired
 }
+
+export default Technologies

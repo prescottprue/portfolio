@@ -1,50 +1,32 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router'
+import React from 'react'
+import PropTypes from 'prop-types'
 import ProjectsTiles from '../ProjectsTiles'
 import Paper from 'material-ui/Paper'
-import './Home.scss'
+import classes from './Home.scss'
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      projects: []
-    }
-  }
+export const Home = ({ projects }) => (
+  <div className={classes.container}>
+    <Paper className={classes.intro}>
+      <span>
+        My name is Prescott Prue and I engineer systems that handle
+        repetitive system tasks so that users can focus on what actually
+        matters. Whether it involves a 3D modeling automation system, or a
+        software development platform, I aim to bring customization for all
+        regardless of personal/professional experience.
+      </span>
+      <br />
+      <br />
+      <span>
+        Below are some of my recent projects. Click the icon in the lower
+        right corner for more information.
+      </span>
+    </Paper>
+    <ProjectsTiles projects={projects} />
+  </div>
+)
 
-  // componentDidMount () {
-  //   this.ref = base.bindToState('projects', {
-  //     context: this,
-  //     state: 'projects',
-  //     asArray: true,
-  //     queries: {
-  //       orderByChild: 'importance'
-  //     }
-  //   })
-  // }
-  // componentWillUnmount () {
-  //   base.removeBinding(this.ref)
-  // }
-  render() {
-    return (
-      <div className="Home">
-        <Paper className="Home-Intro">
-          <span>
-            My name is Prescott Prue and I engineer systems that handle
-            repetitive system tasks so that users can focus on what actually
-            matters. Whether it involves a 3D modeling automation system, or a
-            software development platform, I aim to bring customization for all
-            regardless of personal/professional experience.
-          </span>
-          <br />
-          <br />
-          <span>
-            Below are some of my recent projects. Click the icon in the lower
-            right corner for more information.
-          </span>
-        </Paper>
-        <ProjectsTiles projects={this.props.projects} />
-      </div>
-    )
-  }
+Home.propTypes = {
+  projects: PropTypes.object
 }
+
+export default Home

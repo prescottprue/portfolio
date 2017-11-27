@@ -29,7 +29,7 @@ export default class ProjectsTiles extends Component {
   }
 
   static propTypes = {
-    projects: PropTypes.array.isRequired,
+    projects: PropTypes.object.isRequired,
     onClick: PropTypes.func
   }
 

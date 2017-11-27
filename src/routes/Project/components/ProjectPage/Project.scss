@@ -1,6 +1,6 @@
 // @import "../../../node_modules/react-image-gallery/src/image-gallery";
 
-.Project {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -9,52 +9,53 @@
   margin-top: 5%;
   padding: 3rem;
   padding-top: 1rem;
-  &-Label {
-    font-size: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-  &-Name {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-  }
-  &-Role {
-    font-size: 1rem;
-    margin-top: .5rem;
-    margin-bottom: 1rem;
-  }
-  &-Links {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    &-Link {
-      color: black;
-      font-size: 1.2rem;
-    }
-  }
-  &-Description {
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-  }
 
-  &-Team {
-    margin-bottom: 2rem;
+}
+.Label {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.Name {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+.Role {
+  font-size: 1rem;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+}
+.Links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  &-Link {
+    color: black;
+    font-size: 1.2rem;
+  }
+}
+.Description {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.Team {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  &Member {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    &-Member {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      &-Name {
-        font-size: 1rem;
-      }
-      &-Role {
-        font-size: .7rem;
-      }
+    flex-direction: column;
+    align-items: center;
+    &Name {
+      font-size: 1rem;
+    }
+    &Role {
+      font-size: .7rem;
     }
   }
 }
