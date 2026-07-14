@@ -1,10 +1,7 @@
+node_modules/
+.wrangler/
+.dev.vars*
+.env*
 *.log
-**/*.log
 .DS_Store
-**/.DS_Store
-**/dist
-**/node_modules
-coverage
-src/config.js
-functions/etc
-functions/dist
+worker-configuration.d.ts
