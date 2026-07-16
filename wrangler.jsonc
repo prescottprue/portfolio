@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-07-01",
+  "account_id": "625fc2846420b53a668827c146544aad",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  },
+  "send_email": [{ "name": "EMAIL" }],
+  "observability": { "enabled": true }
+}

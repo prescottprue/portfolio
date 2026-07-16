@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scott Prue</title>
+    <meta name="description" content="Scott Prue — get in touch." />
+    <link rel="canonical" href="https://prue.io/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/fonts/GeneralSans-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <meta property="og:title" content="Scott Prue" />
+    <meta property="og:description" content="Get in touch." />
+    <meta property="og:url" content="https://prue.io/" />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <main>
+      <h1>Scott Prue</h1>
+
+      <p class="links">
+        <a href="https://github.com/prescottprue">GitHub</a>
+      </p>
+
+      <details id="contact">
+        <summary role="button">Contact Scott</summary>
+        <form method="POST" action="/api/contact" id="contact-form">
+          <label>
+            Name
+            <input name="name" required maxlength="200" autocomplete="name" />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" required maxlength="320" autocomplete="email" />
+          </label>
+          <label>
+            Message
+            <textarea name="message" required maxlength="5000"></textarea>
+          </label>
+          <label class="hp" aria-hidden="true">
+            Company
+            <input name="company" tabindex="-1" autocomplete="off" />
+          </label>
+          <button type="submit">Send</button>
+          <p class="form-status" role="status" id="form-status"></p>
+        </form>
+      </details>
+
+      <footer>&copy; Scott Prue</footer>
+    </main>
+
+    <script>
+      const form = document.getElementById("contact-form");
+      const status = document.getElementById("form-status");
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const button = form.querySelector("button");
+        button.disabled = true;
+        status.textContent = "Sending…";
+        status.classList.remove("error");
+        try {
+          const res = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || "Something went wrong.");
+          form.reset();
+          status.textContent = "Thanks — your message is on its way.";
+        } catch (err) {
+          status.classList.add("error");
+          status.innerHTML =
+            (err.message || "Something went wrong.") +
+            ' You can also email <a href="mailto:prescottprue@gmail.com">prescottprue@gmail.com</a>.';
+        } finally {
+          button.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
