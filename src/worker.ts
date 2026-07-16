@@ -36,7 +36,7 @@ function respond(request: Request, ok: boolean, error?: string): Response {
     return Response.json(ok ? { ok: true } : { ok: false, error }, { status: ok ? 200 : 400 });
   }
   if (ok) {
-    return new Response(null, { status: 303, headers: { Location: "/thanks.html" } });
+    return new Response(null, { status: 303, headers: { Location: "/thanks" } });
   }
   return new Response(
     `<!doctype html><meta charset="utf-8"><title>Message not sent</title>
